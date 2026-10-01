@@ -1,11 +1,13 @@
+@use '@/styles/_tokens.scss';
+
 @mixin body-medium {
     font-size: 14px;
     line-height: 150%;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-family);
 }
 
 @mixin body-small {
     font-size: 12px;
     line-height: 150%;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-family);
 }
