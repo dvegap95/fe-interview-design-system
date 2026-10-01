@@ -1,0 +1,23 @@
+:root {
+    // spacing tokens
+    --spacing-0: 0;
+    --spacing-4xs: 2px;
+    --spacing-3xs: 4px;
+    --spacing-2xs: 8px;
+    --spacing-xs: 12px;
+    --spacing-s: 16px;
+    --spacing-m: 24px;
+    --spacing-l: 32px;
+    --spacing-xl: 40px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+    --spacing-4xl: 80px;
+
+    // color tokens
+    --color-inverse: #1B2134;
+    --color-outline: #D3D3DC;
+    
+    // text
+    --color-text-on-inverse: #FFFFFF;
+    --color-text-on-neutral: #1B2134;
+}

@@ -1,0 +1,11 @@
+@mixin body-medium {
+    font-size: 14px;
+    line-height: 150%;
+    font-family: 'Inter', sans-serif;
+}
+
+@mixin body-small {
+    font-size: 12px;
+    line-height: 150%;
+    font-family: 'Inter', sans-serif;
+}
