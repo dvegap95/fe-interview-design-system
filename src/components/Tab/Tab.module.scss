@@ -2,29 +2,48 @@
 @use '@/styles/_tokens.scss';
 
 .tab {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
+    width: fit-content;
+    position: relative;
+    box-sizing: border-box;
+    gap: var(--spacing-2xs);
 
     @include body-medium;
+    font-weight: 700;
+
+
+    &:focus-visible {
+        outline: 2px solid var(--color-outline-focus);
+        outline-offset: 2px;
+    }
+
+
+    &,
+    &.size-sm {
+        height: 42px;
+    }
+
+    &.size-md {
+        height: 50px;
+    }
 
     &.pill {
-        font-weight: 700;
 
-        box-sizing: border-box;
         border-radius: 100px;
+
+        &::after {
+            display: none;
+        }
 
         &,
         &.size-sm {
-            height: 42px;
             padding: var(--spacing-0) var(--spacing-xs);
-            gap: var(--spacing-2xs);
         }
 
         &.size-md {
-            height: 50px;
             padding: var(--spacing-4xs) var(--spacing-s);
-            gap: var(--spacing-2xs);
         }
 
         color: var(--color-text-on-neutral);
@@ -40,10 +59,6 @@
             border-color: var(--color-outline);
         }
 
-        &:focus-visible {
-            outline: 2px solid var(--color-outline-focus);
-            outline-offset: 2px;
-        }
 
         &.selected {
             background-color: var(--color-surface-inverse);
@@ -56,6 +71,38 @@
 
             &:active {
                 background-color: var(--color-surface-inverse-active);
+            }
+        }
+    }
+
+    &.outline {
+        border-radius: var(--spacing-4xs); // chosen over 2xs spec to match the appearance
+        padding-bottom: 3px;
+
+        &::after {
+            content: '';
+            display: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-outline-hover);
+            border-radius: 100px;
+        }
+
+        &:hover,
+        &:active,
+        &:focus-visible {
+            &::after {
+                display: inline-block;
+            }
+        }
+
+        &.selected {
+            &::after {
+                display: inline-block;
+                background-color: var(--color-surface-inverse);
             }
         }
     }

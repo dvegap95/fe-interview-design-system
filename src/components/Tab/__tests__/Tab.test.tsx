@@ -9,11 +9,19 @@ describe('Tab', () => {
         expect(tab).toBeInTheDocument();
         expect(tab).toHaveTextContent('Tab Text');
     });
-    it('should render with variant pill', () => {
-        render(<Tab variant="pill">Tab Text</Tab>);
+    it.each(['pill', 'outline'])('should render with variant %s', (variant) => {
+        render(<Tab variant={variant as 'pill' | 'outline'}>Tab Text</Tab>);
+        const tab = screen.getByRole('tab');
+        expect(tab).toBeInTheDocument();
+        expect(tab).toHaveTextContent('Tab Text');
+        expect(tab).toHaveClass(styles[variant]);
+    });
+    it('should default to pill md not selected', () => {
+        render(<Tab>Tab Text</Tab>);
         const tab = screen.getByRole('tab');
         expect(tab).toBeInTheDocument();
         expect(tab).toHaveTextContent('Tab Text');
         expect(tab).toHaveClass(styles.pill);
+        expect(tab).not.toHaveClass(styles.selected);
     });
 });

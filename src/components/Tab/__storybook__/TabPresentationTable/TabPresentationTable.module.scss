@@ -1,0 +1,18 @@
+.tabPresentationTable {
+    display: flex;
+    flex-direction: row;
+    gap: 45px;
+}
+
+.tabPresentationColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: space-around;
+    align-items: center;
+
+    .headerName {
+        margin: 0 -30%;
+        white-space: nowrap;
+    }
+}

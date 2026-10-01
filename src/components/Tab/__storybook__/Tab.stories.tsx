@@ -4,37 +4,36 @@ import Tab from '../Tab';
 const meta = {
   title: 'Components/Tab',
   component: Tab,
-  tags: ['autodocs'],
 } satisfies Meta<typeof Tab>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const DefaultPill: Story = {
   args: {
     children: 'Label',
   },
 };
 
-export const Selected: Story = {
+export const SelectedPill: Story = {
   args: {
     children: 'Label',
     selected: true,
   },
 };
 
-export const DefaultSm: Story = {
+export const DefaultOutline: Story = {
   args: {
     children: 'Label',
-    size: 'sm',
+    variant: 'outline',
   },
 };
 
-export const SelectedSm: Story = {
+export const SelectedOutline: Story = {
   args: {
     children: 'Label',
-    size: 'sm',
+    variant: 'outline',
     selected: true,
   },
 };
