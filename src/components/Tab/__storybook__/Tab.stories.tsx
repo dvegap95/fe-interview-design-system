@@ -4,12 +4,7 @@ import Tab from '../Tab';
 const meta = {
   title: 'Components/Tab',
   component: Tab,
-//   argTypes: {
-//     variant: {
-//       control: 'select',
-//       options: ['primary', 'secondary', 'danger'],
-//     },
-//   },
+  tags: ['autodocs'],
 } satisfies Meta<typeof Tab>;
 
 export default meta;
@@ -19,5 +14,27 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: 'Label',
+  },
+};
+
+export const Selected: Story = {
+  args: {
+    children: 'Label',
+    selected: true,
+  },
+};
+
+export const DefaultSm: Story = {
+  args: {
+    children: 'Label',
+    size: 'sm',
+  },
+};
+
+export const SelectedSm: Story = {
+  args: {
+    children: 'Label',
+    size: 'sm',
+    selected: true,
   },
 };
