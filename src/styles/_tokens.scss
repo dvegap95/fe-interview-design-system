@@ -1,8 +1,8 @@
 :root {
-    // font tokens
+    // font
     --font-family: Inter, system-ui, sans-serif;
 
-    // spacing tokens
+    // spacing 
     --spacing-0: 0;
     --spacing-4xs: 2px;
     --spacing-3xs: 4px;
@@ -16,9 +16,14 @@
     --spacing-3xl: 64px;
     --spacing-4xl: 80px;
 
-    // color tokens
+    // color 
     --color-inverse: #1B2134;
+    --color-surface-hover: #F6F6FA;
+    --color-surface-active: #F1F1F7;
+
     --color-outline: #D3D3DC;
+    --color-outline-hover: #C4C5CF;
+    --color-outline-focus: #000000;
     
     // text
     --color-text-on-inverse: #FFFFFF;
