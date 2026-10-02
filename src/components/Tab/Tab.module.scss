@@ -2,6 +2,17 @@
 @use '@/styles/_tokens.scss';
 
 .tab {
+    // override default button styles
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    text-decoration: inherit;
+
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,7 +20,6 @@
     position: relative;
     box-sizing: border-box;
     gap: var(--spacing-2xs);
-    cursor: pointer;
 
     @include body-medium;
     font-weight: 700;
@@ -64,7 +74,7 @@
         &.selected {
             background-color: var(--color-surface-inverse);
             color: var(--color-text-on-inverse);
-            border: none;
+            border-color: transparent;
 
             &:hover {
                 background-color: var(--color-surface-inverse-hover);
