@@ -1,11 +1,12 @@
 import { {{pascalCase name}}Props } from "./types";
 import use{{pascalCase name}} from "./use{{pascalCase name}}";
+import { cn } from "@/lib/utils";
 
 import styles from './{{pascalCase name}}.module.scss';
 
 export default function {{pascalCase name}}(
-    { children, id }: {{pascalCase name}}Props
+    { children, id, className }: {{pascalCase name}}Props
 ) {
     use{{pascalCase name}}({});
-    return <div className={styles['{{camelCase name}}']} id={id}>{children}</div>;
+    return <div className={cn(className, styles['{{camelCase name}}'])} id={id}>{children}</div>;
 };

@@ -1,8 +1,6 @@
-import { ReactNode } from "react";
+import { BaseComponentProps } from "@/types/baseComponentTypes";
 
-export type {{pascalCase name}}Props = {
-    children?: ReactNode;
-    id?: string;
+export type {{pascalCase name}}Props = BaseComponentProps & {
 };
 
 export type Use{{pascalCase name}}Props = Omit<{{pascalCase name}}Props, 'children'>;

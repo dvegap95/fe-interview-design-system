@@ -1,11 +1,9 @@
-import { ReactNode } from "react";
+import { BaseComponentProps } from "@/types/baseComponentTypes";
 
-export type TabProps = {
-    children: ReactNode;
+export type TabProps = BaseComponentProps & {
     variant?: 'pill' | 'outline';
     selected?: boolean;
     size?: 'sm' | 'md'; // sm = mobile:True
-    id?: string;
 };
 
 export type UseTabProps = Omit<TabProps, 'children'>;
