@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import Tab from '../Tab';
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import Tab from "../Tab";
 
 const meta = {
-  title: 'Components/Tab',
+  title: "Components/Tab",
   component: Tab,
 } satisfies Meta<typeof Tab>;
 
@@ -12,28 +12,28 @@ type Story = StoryObj<typeof meta>;
 
 export const DefaultPill: Story = {
   args: {
-    children: 'Label',
+    children: "Label",
   },
 };
 
 export const SelectedPill: Story = {
   args: {
-    children: 'Label',
+    children: "Label",
     selected: true,
   },
 };
 
 export const DefaultUnderline: Story = {
   args: {
-    children: 'Label',
-    variant: 'underline',
+    children: "Label",
+    variant: "underline",
   },
 };
 
 export const SelectedUnderline: Story = {
   args: {
-    children: 'Label',
-    variant: 'underline',
+    children: "Label",
+    variant: "underline",
     selected: true,
   },
 };

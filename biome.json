@@ -16,7 +16,7 @@
     "indentWidth": 2,
     "lineEnding": "lf",
     "lineWidth": 100,
-    "attributePosition": "auto",
+    "attributePosition": "multiline",
     "bracketSpacing": true
   },
   "linter": {
@@ -27,7 +27,9 @@
   },
   "javascript": {
     "formatter": {
-      "quoteStyle": "double"
+      "quoteStyle": "double",
+      "attributePosition": "multiline",
+      "expand": "always"
     }
   },
   "assist": {

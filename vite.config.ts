@@ -5,14 +5,18 @@ import { defineConfig } from "vitest/config";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+  ],
   resolve: {
     alias: {
       "@": resolve(import.meta.dirname, "src"),
     },
   },
   test: {
-    include: ["src/**/__tests__/*.test.{js,ts,tsx}"],
+    include: [
+      "src/**/__tests__/*.test.{js,ts,tsx}",
+    ],
     globals: true, //https://vitest.dev/guide/migration.html#globals-as-a-default
     environment: "jsdom",
     setupFiles: "./src/setupTests.ts",
