@@ -33,10 +33,17 @@ export function TabsContextProvider(props: TabsContextProviderProps) {
   return <TabsContext.Provider value={contextValue}>{props.children}</TabsContext.Provider>;
 }
 
-export function Tabs({ children, variant, size, ...props }: TabsProps) {
-  const { tabListContext } = useTabs({
+export function Tabs({
+  children,
+  variant,
+  size,
+  autoScrollBehavior = "smooth",
+  ...props
+}: TabsProps) {
+  const { tabListContext, listRef } = useTabs({
     variant,
     size,
+    autoScrollBehavior,
   });
   const className = cn(
     props.className,
@@ -50,6 +57,14 @@ export function Tabs({ children, variant, size, ...props }: TabsProps) {
         role="tablist"
         {...props}
         className={className}
+        ref={(node) => {
+          listRef.current = node;
+          if (typeof props.ref === "function") {
+            props.ref(node);
+          } else if (props.ref) {
+            props.ref.current = node;
+          }
+        }}
       >
         {children}
       </div>

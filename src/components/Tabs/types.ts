@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { ComponentPropsWithRef, ReactNode } from "react";
 import type { BaseComponentProps } from "@/types/baseComponentTypes";
 
 export type TabsContextType = {
@@ -18,10 +18,11 @@ export type TabsContextProviderProps = {
   defaultActiveTab?: string;
 };
 
-export type TabsProps = HTMLAttributes<HTMLDivElement> &
+export type TabsProps = ComponentPropsWithRef<"div"> &
   BaseComponentProps & {
     variant?: "pill" | "underline";
     size?: "sm" | "md";
+    autoScrollBehavior?: ScrollIntoViewOptions["behavior"] | "none";
   };
 
 export type TabsWithContextProps = BaseComponentProps & TabsContextProviderProps & TabsProps;

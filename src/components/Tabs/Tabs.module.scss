@@ -5,6 +5,8 @@
 .tabs {
     display: flex;
     flex-direction: row;
+    overflow-x: auto;
+    padding: 4px;
 
     &,
     &.variant-pill {

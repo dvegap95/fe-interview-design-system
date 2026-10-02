@@ -89,3 +89,26 @@ export const UnderlineSm: Story = {
   },
 };
 
+export const Overflow: Story = {
+  args: {
+    children: (
+      <>
+        <Tab value="tab1">Tab 1</Tab>
+        <Tab value="tab2">Tab 2</Tab>
+        <Tab value="tab3">Tab 3</Tab>
+        <Tab value="tab4">Tab 4</Tab>
+        <Tab value="tab5">Tab 5</Tab>
+        <Tab value="tab6">Tab 6</Tab>
+        <Tab value="tab7">Tab 7</Tab>
+        <Tab value="tab8">Tab 8</Tab>
+        <Tab value="tab9">Tab 9</Tab>
+      </>
+    ),
+    variant: "pill",
+    size: "md",
+    defaultActiveTab: "tab8",
+  },
+  globals: {
+    viewport: "small",
+  },
+};

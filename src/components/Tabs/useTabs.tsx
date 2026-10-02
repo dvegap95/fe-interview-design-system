@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useOptionalTabsContext } from "./Tabs";
 import type {
   TabListContextType,
   TabsContextType,
@@ -24,13 +25,37 @@ export function useTabsContextProvider(props: UseTabsContextProviderProps): Tabs
   return contextValue;
 }
 
-export function useTabs({ variant, size }: UseTabsProps) {
-  const tabListContext = useMemo<TabListContextType>(() => ({
-    variant,
-    size,
-  }), [variant, size]);
+export function useTabs({ variant, size, autoScrollBehavior }: UseTabsProps) {
+  const listRef = useRef<HTMLDivElement>(null);
+  const hasMountedRef = useRef(false);
+  const tabsContext = useOptionalTabsContext();
+
+  useLayoutEffect(() => {
+    if(autoScrollBehavior === "none") return;
+    const list = listRef.current;
+    if (!list || !tabsContext?.activeTab) return;
+    const tab = list.querySelector<HTMLElement>(`[role="tab"][aria-selected="true"]`);
+    if (!tab) return;
+    tab.scrollIntoView({
+      behavior: hasMountedRef.current ? "smooth" : "instant",
+      inline: "center",
+    });
+    hasMountedRef.current = true;
+  }, [tabsContext?.activeTab, autoScrollBehavior]);
+
+  const tabListContext = useMemo<TabListContextType>(
+    () => ({
+      variant,
+      size,
+    }),
+    [
+      variant,
+      size,
+    ],
+  );
   return {
     tabListContext,
+    listRef,
   };
 }
 
