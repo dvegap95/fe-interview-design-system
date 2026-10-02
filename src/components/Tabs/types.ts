@@ -6,6 +6,11 @@ export type TabsContextType = {
   setActiveTab: (tab: string) => void;
 };
 
+export type TabListContextType = {
+  variant?: "pill" | "underline";
+  size?: "sm" | "md";
+};
+
 export type TabsContextProviderProps = {
   children?: ReactNode;
   activeTab?: string;
@@ -14,9 +19,13 @@ export type TabsContextProviderProps = {
 };
 
 export type TabsProps = HTMLAttributes<HTMLDivElement> &
-  BaseComponentProps;
+  BaseComponentProps & {
+    variant?: "pill" | "underline";
+    size?: "sm" | "md";
+  };
 
-export type TabsWithContextProps = BaseComponentProps & TabsContextProviderProps;
+export type TabsWithContextProps = BaseComponentProps & TabsContextProviderProps & TabsProps;
 
 export type UseTabsContextProviderProps = Omit<TabsContextProviderProps, "children">;
+export type UseTabsProps = Omit<TabsProps, "children">;
 export type UseTabsWithContextProps = Omit<TabsWithContextProps, "children">;

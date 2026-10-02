@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { TabsContextProvider } from "@/components/Tabs";
+import { Tabs, TabsContextProvider } from "@/components/Tabs";
 import { CONFLICT_WARNING } from "../constants";
 import Tab from "../Tab";
 import styles from "../Tab.module.scss";
@@ -33,7 +33,7 @@ describe("Tab", () => {
     expect(tab).toBeSelected();
   });
 
-  describe("controlled vs uncontrolled conflicts", () => {
+  describe("props vs context conflicts", () => {
     it.each<{
       value: string;
       description: string;
@@ -93,6 +93,39 @@ describe("Tab", () => {
           name: "Tab2",
         }),
       ).toBeSelected();
+    });
+
+    it("should prioritize variants and sizes provided through props over the onesprovided through context", () => {
+      render(
+        <Tabs
+          variant="pill"
+          size="sm"
+        >
+          <Tab variant="underline">Tab1</Tab>
+          <Tab size="md">Tab2</Tab>
+        </Tabs>,
+      );
+      const tab1 = screen.getByRole("tab", {
+        name: "Tab1",
+      });
+      // stated underline overrides context pill
+      expect(tab1).toHaveClass(styles.underline);
+      expect(tab1).not.toHaveClass(styles.pill);
+
+      // context size since no size was provided through props
+      expect(tab1).toHaveClass(styles["size-sm"]);
+      expect(tab1).not.toHaveClass(styles["size-md"]);
+
+      const tab2 = screen.getByRole("tab", {
+        name: "Tab2",
+      });
+      // context pill since no variant was provided through props
+      expect(tab2).toHaveClass(styles.pill);
+      expect(tab2).not.toHaveClass(styles.underline);
+
+      // stated size overrides context size
+      expect(tab2).toHaveClass(styles["size-md"]);
+      expect(tab2).not.toHaveClass(styles["size-sm"]);
     });
   });
 });

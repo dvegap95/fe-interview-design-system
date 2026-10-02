@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import Tab from "@/components/Tab/Tab";
-import TabsWithContext from "../Tabs";
+import { TabsWithContext } from "../Tabs";
 import type { TabsWithContextProps } from "../types";
 
 const meta = {
@@ -13,30 +13,25 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const DEFAULT_CHILDREN = (
+  <>
+    <Tab value="tab1">Label</Tab>
+    <Tab value="tab2">Label</Tab>
+    <Tab value="tab3">Label</Tab>
+    <Tab value="tab4">Label</Tab>
+  </>
+);
+
 export const Uncontrolled: Story = {
   args: {
-    children: (
-      <>
-        <Tab value="tab1">Tab1</Tab>
-        <Tab value="tab2">Tab2</Tab>
-        <Tab value="tab3">Tab3</Tab>
-        <Tab value="tab4">Tab4</Tab>
-      </>
-    ),
+    children: DEFAULT_CHILDREN,
     defaultActiveTab: "tab1",
   },
 };
 
 export const Controlled: Story = {
   args: {
-    children: (
-      <>
-        <Tab value="tab1">Tab1</Tab>
-        <Tab value="tab2">Tab2</Tab>
-        <Tab value="tab3">Tab3</Tab>
-        <Tab value="tab4">Tab4</Tab>
-      </>
-    ),
+    children: DEFAULT_CHILDREN,
     activeTab: "tab3",
   },
 };
@@ -54,13 +49,43 @@ const ControlledTemplate = (args: TabsWithContextProps) => {
 export const ControlledWired: Story = {
   render: ControlledTemplate,
   args: {
-    children: (
-      <>
-        <Tab value="tab1">Tab1</Tab>
-        <Tab value="tab2">Tab2</Tab>
-        <Tab value="tab3">Tab3</Tab>
-        <Tab value="tab4">Tab4</Tab>
-      </>
-    ),
+    children: DEFAULT_CHILDREN,
   },
 };
+
+export const PillMd: Story = {
+  args: {
+    children: DEFAULT_CHILDREN,
+    variant: "pill",
+    size: "md",
+    defaultActiveTab: "tab2",
+  },
+};
+
+export const UnderlineMd: Story = {
+  args: {
+    children: DEFAULT_CHILDREN,
+    variant: "underline",
+    size: "md",
+    defaultActiveTab: "tab2",
+  },
+};
+
+export const PillSm: Story = {
+  args: {
+    children: DEFAULT_CHILDREN,
+    variant: "pill",
+    size: "sm",
+    defaultActiveTab: "tab2",
+  },
+};
+
+export const UnderlineSm: Story = {
+  args: {
+    children: DEFAULT_CHILDREN,
+    variant: "underline",
+    size: "sm",
+    defaultActiveTab: "tab2",
+  },
+};
+

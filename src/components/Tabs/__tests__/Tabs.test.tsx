@@ -2,7 +2,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { type ReactNode, useState } from "react";
 import Tab from "@/components/Tab/Tab";
-import TabsWithContext, { TabsContextProvider } from "../Tabs";
+import tabStyles from "@/components/Tab/Tab.module.scss";
+import { TabsContextProvider, TabsWithContext } from "../Tabs";
 
 const ControlledTabWrapper = ({
   children,
@@ -170,6 +171,48 @@ describe("TabsWithContext", () => {
           name: "Tab2",
         }),
       ).not.toBeSelected();
+    });
+  });
+
+  describe("variants", () => {
+    it.each([
+      [
+        "pill",
+        "md",
+      ],
+      [
+        "pill",
+        "sm",
+      ],
+      [
+        "underline",
+        "md",
+      ],
+      [
+        "underline",
+        "sm",
+      ],
+    ])("should render tabs with specified variant and size for tabs", (variant, size) => {
+      render(
+        <TabsWithContext
+          variant={variant as "pill" | "underline"}
+          size={size as "sm" | "md"}
+        >
+          <Tab value="tab1">Tab1</Tab>
+          <Tab value="tab2">Tab2</Tab>
+        </TabsWithContext>,
+      );
+
+      expect(
+        screen.getByRole("tab", {
+          name: "Tab1",
+        }),
+      ).toHaveClass(tabStyles[variant], tabStyles[`size-${size}`]);
+      expect(
+        screen.getByRole("tab", {
+          name: "Tab2",
+        }),
+      ).toHaveClass(tabStyles[variant], tabStyles[`size-${size}`]);
     });
   });
 });

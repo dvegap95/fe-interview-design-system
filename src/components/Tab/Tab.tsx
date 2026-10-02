@@ -5,24 +5,25 @@ import useTab from "./useTab";
 
 export default function Tab({
   children,
-  variant = "pill",
+  variant,
   selected = false,
-  size = "md",
+  size,
   id,
   value,
   ...props
 }: TabProps) {
-  const { isSelected, handleClick } = useTab({
-    variant,
+  const { isSelected, handleClick, computedVariant, computedSize } = useTab({
     selected,
     value,
+    variant,
+    size,
   });
   const className = cn(
     props.className,
     styles.tab,
-    styles[variant],
+    styles[computedVariant],
     isSelected && styles.selected,
-    styles[`size-${size}`],
+    styles[`size-${computedSize}`],
   );
   return (
     <button
