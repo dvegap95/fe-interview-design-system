@@ -21,8 +21,8 @@ export default function Tab({
   const className = cn(
     props.className,
     styles.tab,
-    styles[computedVariant],
     isSelected && styles.selected,
+    styles[`variant-${computedVariant}`],
     styles[`size-${computedSize}`],
   );
   return (

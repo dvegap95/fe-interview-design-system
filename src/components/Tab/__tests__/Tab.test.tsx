@@ -18,12 +18,12 @@ describe("Tab", () => {
   ])("should render with variant %s", (variant) => {
     render(<Tab variant={variant}>Tab Text</Tab>);
     const tab = screen.getByRole("tab");
-    expect(tab).toHaveClass(styles[variant as string]);
+    expect(tab).toHaveClass(styles[`variant-${variant}`]);
   });
   it("should default to pill md not selected", () => {
     render(<Tab>Tab Text</Tab>);
     const tab = screen.getByRole("tab");
-    expect(tab).toHaveClass(styles.pill);
+    expect(tab).toHaveClass(styles["variant-pill"], styles["size-md"]);
     expect(tab).not.toBeSelected();
   });
   it("should be selected and render with selected styles if selected is true", () => {
@@ -109,7 +109,7 @@ describe("Tab", () => {
         name: "Tab1",
       });
       // stated underline overrides context pill
-      expect(tab1).toHaveClass(styles.underline);
+      expect(tab1).toHaveClass(styles["variant-underline"]);
       expect(tab1).not.toHaveClass(styles.pill);
 
       // context size since no size was provided through props
@@ -120,7 +120,7 @@ describe("Tab", () => {
         name: "Tab2",
       });
       // context pill since no variant was provided through props
-      expect(tab2).toHaveClass(styles.pill);
+      expect(tab2).toHaveClass(styles["variant-pill"]);
       expect(tab2).not.toHaveClass(styles.underline);
 
       // stated size overrides context size

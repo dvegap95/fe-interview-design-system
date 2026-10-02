@@ -3,8 +3,31 @@
 
 
 .tabs {
-    // TODO: implement styles from design
     display: flex;
     flex-direction: row;
-    gap: 16px;
+
+    &,
+    &.variant-pill {
+
+        &,
+        &.size-md {
+            gap: var(--spacing-xs);
+        }
+
+        &.size-sm {
+            gap: var(--spacing-2xs);
+        }
+    }
+
+    &.variant-underline {
+
+        &,
+        &.size-md {
+            gap: var(--spacing-2xl);
+        }
+
+        &.size-sm {
+            gap: var(--spacing-l);
+        }
+    }
 }

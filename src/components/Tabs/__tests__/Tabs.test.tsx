@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { type ReactNode, useState } from "react";
 import Tab from "@/components/Tab/Tab";
 import tabStyles from "@/components/Tab/Tab.module.scss";
+import tabsStyles from "@/components/Tabs/Tabs.module.scss";
 import { TabsContextProvider, TabsWithContext } from "../Tabs";
 
 const ControlledTabWrapper = ({
@@ -207,13 +208,24 @@ describe("TabsWithContext", () => {
         screen.getByRole("tab", {
           name: "Tab1",
         }),
-      ).toHaveClass(tabStyles[variant], tabStyles[`size-${size}`]);
+      ).toHaveClass(tabStyles[`variant-${variant}`], tabStyles[`size-${size}`]);
       expect(
         screen.getByRole("tab", {
           name: "Tab2",
         }),
-      ).toHaveClass(tabStyles[variant], tabStyles[`size-${size}`]);
+      ).toHaveClass(tabStyles[`variant-${variant}`], tabStyles[`size-${size}`]);
     });
+
+    it("should render tab list with specified variant and size", () => {
+      render(
+        <TabsWithContext variant="pill" size="sm">
+          <Tab value="tab1">Tab1</Tab>
+          <Tab value="tab2">Tab2</Tab>
+        </TabsWithContext>,
+      );
+      expect(screen.getByRole("tablist")).toHaveClass(tabsStyles["variant-pill"], tabsStyles["size-sm"]);
+    });
+
   });
 });
 

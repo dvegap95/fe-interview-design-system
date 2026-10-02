@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext } from "react";
 import { cn } from "@/lib/utils";
 import styles from "./Tabs.module.scss";
 import type {
@@ -33,17 +33,23 @@ export function TabsContextProvider(props: TabsContextProviderProps) {
   return <TabsContext.Provider value={contextValue}>{props.children}</TabsContext.Provider>;
 }
 
-export function Tabs({ children, className, variant, size, ...props }: TabsProps) {
+export function Tabs({ children, variant, size, ...props }: TabsProps) {
   const { tabListContext } = useTabs({
     variant,
     size,
   });
+  const className = cn(
+    props.className,
+    styles.tabs,
+    styles[`variant-${variant}`],
+    styles[`size-${size}`],
+  );
   return (
     <TabListContext.Provider value={tabListContext}>
       <div
         role="tablist"
         {...props}
-        className={cn(className, styles.tabs)}
+        className={className}
       >
         {children}
       </div>
