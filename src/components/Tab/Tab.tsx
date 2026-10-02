@@ -9,5 +9,5 @@ export default function Tab(
 ) {
     const { isSelected } = useTab({ variant, selected });
     const className = cn(props.className, styles.tab, styles[variant], isSelected && styles.selected, styles[`size-${size}`]);
-    return <div role="tab" className={className} tabIndex={0} id={id}>{children}</div>;
+    return <div role="tab" className={className} tabIndex={0} id={id} aria-selected={isSelected}>{children}</div>;
 };
