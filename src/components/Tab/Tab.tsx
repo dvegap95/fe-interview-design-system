@@ -1,5 +1,5 @@
 import { TabProps } from "./types";
-import { useTab } from "./useTab";
+import useTab from "./useTab";
 import { cn } from "@/lib/utils";
 
 import styles from './Tab.module.scss';

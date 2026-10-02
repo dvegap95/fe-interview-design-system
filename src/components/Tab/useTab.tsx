@@ -1,6 +1,6 @@
 import { UseTabProps } from "./types";
 
-export const useTab = ({ selected = false }: UseTabProps) => {
+export default function useTab ({ selected = false }: UseTabProps) {
     return {
         isSelected: selected,
     };
