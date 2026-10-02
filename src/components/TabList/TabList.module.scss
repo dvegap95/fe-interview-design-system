@@ -1,0 +1,9 @@
+@use '@/styles/typography' as *;
+@use '@/styles/_tokens.scss';
+
+.tabListLayout {
+    // TODO: implement styles from design
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
