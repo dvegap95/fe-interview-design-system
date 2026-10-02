@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import Badge from "@/components/Badge/Badge";
 import Tab from "../Tab";
 
 const meta = {
@@ -35,5 +36,14 @@ export const SelectedUnderline: Story = {
     children: "Label",
     variant: "underline",
     selected: true,
+  },
+};
+
+export const WithBadge: Story = {
+  args: {
+    children: "Label",
+    slots: {
+      end: <Badge variant="positive">BADGE</Badge>,
+    },
   },
 };

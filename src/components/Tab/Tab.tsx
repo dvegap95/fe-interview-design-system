@@ -10,6 +10,7 @@ export default function Tab({
   size,
   id,
   value,
+  slots,
   ...props
 }: TabProps) {
   const { isSelected, handleClick, computedVariant, computedSize } = useTab({
@@ -36,6 +37,7 @@ export default function Tab({
       className={className}
     >
       {children}
+      {slots?.end && <span className={styles.endSlot}>{slots.end}</span>}
     </button>
   );
 }

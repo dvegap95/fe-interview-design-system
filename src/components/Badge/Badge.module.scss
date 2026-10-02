@@ -1,0 +1,33 @@
+@use '@/styles/typography' as *;
+@use '@/styles/_tokens.scss';
+
+.badge {
+    @include body-small;
+    color: var(--color-text-on-neutral);
+    font-weight: 700;
+    display: inline-flex;
+
+    &,
+    &.size-sm {
+        padding: var(--spacing-4xs) var(--spacing-3xs);
+        border-radius: 8px;
+    }
+
+    &.size-md {
+        padding: var(--spacing-3xs) var(--spacing-2xs);
+        border-radius: 12px;
+    }
+
+    &,
+    &.variant-neutral {
+        background-color: var(--color-surface-high);
+    }
+
+    &.variant-positive {
+        background-color: var(--color-surface-positive);
+    }
+
+    &.variant-negative {
+        background-color: var(--color-surface-negative);
+    }
+}

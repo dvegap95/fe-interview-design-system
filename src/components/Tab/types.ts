@@ -6,6 +6,9 @@ export type TabProps = ComponentPropsWithRef<"button"> & BaseComponentProps & {
   selected?: boolean;
   size?: "sm" | "md"; // sm = mobile:True
   value?: string;
+  slots?: {
+    end?: React.ReactNode;
+  };
 };
 
 export type UseTabProps = Omit<TabProps, "children">;
