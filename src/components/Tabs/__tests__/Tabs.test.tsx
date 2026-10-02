@@ -1,5 +1,5 @@
 import Tab from "@/components/Tab/Tab";
-import TabList, { TabListContextProvider } from "../TabList";
+import TabsWithContext, { TabsContextProvider } from "../Tabs";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ReactNode, useState } from "react";
@@ -9,37 +9,37 @@ const ControlledTabWrapper = ({ children, defaultActiveTab }: {
     defaultActiveTab: string;
 }) => {
     const [activeTab, setActiveTab] = useState(defaultActiveTab);
-    return <TabList activeTab={activeTab} onActiveTabChange={setActiveTab}>{children}</TabList>
+    return <TabsWithContext activeTab={activeTab} onActiveTabChange={setActiveTab}>{children}</TabsWithContext>
 }
 
-describe('TabList', () => {
+describe('TabsWithContext', () => {
     it('should render', () => {
-        render(<TabList>
+        render(<TabsWithContext>
             <Tab>Tab1</Tab>
             <Tab>Tab2</Tab>
-        </TabList>);
+        </TabsWithContext>);
         expect(screen.getByRole('tab', { name: 'Tab1' })).toBeInTheDocument();
         expect(screen.getByRole('tab', { name: 'Tab2' })).toBeInTheDocument();
     });
 
     describe('uncontrolled', () => {
         it('should render with default active tab', () => {
-            render(<TabList defaultActiveTab="tab2">
+            render(<TabsWithContext defaultActiveTab="tab2">
                 <Tab value="tab1">Tab1</Tab>
                 <Tab value="tab2">Tab2</Tab>
                 <Tab value="tab3">Tab3</Tab>
                 <Tab value="tab4">Tab4</Tab>
-            </TabList>)
+            </TabsWithContext>)
             expect(screen.getByRole('tab', { name: 'Tab2' })).toBeSelected();
         })
 
         it('should handle tab selection uncontrolled', async () => {
-            render(<TabList defaultActiveTab="tab2">
+            render(<TabsWithContext defaultActiveTab="tab2">
                 <Tab value="tab1">Tab1</Tab>
                 <Tab value="tab2">Tab2</Tab>
                 <Tab value="tab3">Tab3</Tab>
                 <Tab value="tab4">Tab4</Tab>
-            </TabList>)
+            </TabsWithContext>)
             await userEvent.click(screen.getByRole('tab', { name: 'Tab3' }));
 
             expect(screen.getByRole('tab', { name: 'Tab3' })).toBeSelected();
@@ -49,23 +49,23 @@ describe('TabList', () => {
 
     describe('controlled', () => {
         it('should render with active tab', () => {
-            render(<TabList activeTab="tab3" onActiveTabChange={vi.fn()}>
+            render(<TabsWithContext activeTab="tab3" onActiveTabChange={vi.fn()}>
                 <Tab value="tab1">Tab1</Tab>
                 <Tab value="tab2">Tab2</Tab>
                 <Tab value="tab3">Tab3</Tab>
                 <Tab value="tab4">Tab4</Tab>
-            </TabList>)
+            </TabsWithContext>)
             expect(screen.getByRole('tab', { name: 'Tab3' })).toBeSelected();
         })
 
         it('should handle tab selection controlled', async () => {
             const onActiveTabChangeSpy = vi.fn();
-            render(<TabList activeTab="tab3" onActiveTabChange={onActiveTabChangeSpy}>
+            render(<TabsWithContext activeTab="tab3" onActiveTabChange={onActiveTabChangeSpy}>
                 <Tab value="tab1">Tab1</Tab>
                 <Tab value="tab2">Tab2</Tab>
                 <Tab value="tab3">Tab3</Tab>
                 <Tab value="tab4">Tab4</Tab>
-            </TabList>)
+            </TabsWithContext>)
             await userEvent.click(screen.getByRole('tab', { name: 'Tab2' }));
 
             expect(onActiveTabChangeSpy).toHaveBeenCalledWith('tab2');
@@ -91,16 +91,16 @@ describe('TabList', () => {
     })
 });
 
-describe('TabListContextProvider standalone', () => {
+describe('TabsContextProvider standalone', () => {
     it('should handle tab selection uncontrolled', async () => {
-        render(<TabListContextProvider defaultActiveTab="tab2">
+        render(<TabsContextProvider defaultActiveTab="tab2">
             <div>
                 <Tab value="tab1">Tab1</Tab>
                 <Tab value="tab2">Tab2</Tab>
                 <Tab value="tab3">Tab3</Tab>
                 <Tab value="tab4">Tab4</Tab>
             </div>
-        </TabListContextProvider>)
+        </TabsContextProvider>)
         expect(screen.getByRole('tab', { name: 'Tab2' })).toBeSelected();
 
         await userEvent.click(screen.getByRole('tab', { name: 'Tab3' }));
@@ -110,14 +110,14 @@ describe('TabListContextProvider standalone', () => {
     })
     it('should render with active tab', async () => {
         const onActiveTabChangeSpy = vi.fn();
-        render(<TabListContextProvider activeTab="tab3" onActiveTabChange={onActiveTabChangeSpy}>
+        render(<TabsContextProvider activeTab="tab3" onActiveTabChange={onActiveTabChangeSpy}>
             <div>
                 <Tab value="tab1">Tab1</Tab>
                 <Tab value="tab2">Tab2</Tab>
                 <Tab value="tab3">Tab3</Tab>
                 <Tab value="tab4">Tab4</Tab>
             </div>
-        </TabListContextProvider>)
+        </TabsContextProvider>)
         expect(screen.getByRole('tab', { name: 'Tab3' })).toBeSelected();
 
         await userEvent.click(screen.getByRole('tab', { name: 'Tab2' }));

@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
-import { TabListContextType, UseTabListContextProviderProps, UseTabListProps } from "./types";
+import { TabsContextType, UseTabsContextProviderProps, UseTabsWithContextProps } from "./types";
 
 
-export function useTabListContextProvider(props: UseTabListContextProviderProps): TabListContextType {
+export function useTabsContextProvider(props: UseTabsContextProviderProps): TabsContextType {
     const [activeTab, setActiveTab] = useState(props.defaultActiveTab ?? '');
     const contextValue = useMemo(() => ({
         activeTab: props.activeTab ?? activeTab ?? '',
@@ -12,6 +12,6 @@ export function useTabListContextProvider(props: UseTabListContextProviderProps)
     return contextValue;
 }
 
-export default function useTabList (_props: UseTabListProps = {}) {
+export default function useTabsWithContext (_props: UseTabsWithContextProps = {}) {
     return {};
 };

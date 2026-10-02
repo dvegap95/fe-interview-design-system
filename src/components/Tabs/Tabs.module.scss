@@ -1,7 +1,8 @@
 @use '@/styles/typography' as *;
 @use '@/styles/_tokens.scss';
 
-.tabListLayout {
+
+.tabs {
     // TODO: implement styles from design
     display: flex;
     flex-direction: row;

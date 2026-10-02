@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import TabList from '../TabList';
+import TabsWithContext from '../Tabs';
 import Tab from '@/components/Tab/Tab';
 import { useState } from 'react';
-import { TabListProps } from '../types';
+import { TabsWithContextProps } from '../types';
 
 const meta = {
-  title: 'Components/TabList',
-  component: TabList,
-} satisfies Meta<typeof TabList>;
+  title: 'Components/Tabs',
+  component: TabsWithContext,
+} satisfies Meta<typeof TabsWithContext>;
 
 export default meta;
 
@@ -37,9 +37,9 @@ export const Controlled: Story = {
   },
 }
 
-const ControlledTemplate = (args: TabListProps) => {
+const ControlledTemplate = (args: TabsWithContextProps) => {
   const [activeTab, setActiveTab] = useState('tab1');
-  return <TabList {...args} activeTab={activeTab} onActiveTabChange={setActiveTab} />
+  return <TabsWithContext {...args} activeTab={activeTab} onActiveTabChange={setActiveTab} />
 }
 export const ControlledWired: Story = {
   render: ControlledTemplate,
