@@ -1,7 +1,7 @@
 import { BaseComponentProps } from "@/types/baseComponentTypes";
 
 export type TabProps = BaseComponentProps & {
-    variant?: 'pill' | 'outline';
+    variant?: 'pill' | 'underline';
     selected?: boolean;
     size?: 'sm' | 'md'; // sm = mobile:True
     value?: string;

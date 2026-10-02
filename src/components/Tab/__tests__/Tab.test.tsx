@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import styles from '../Tab.module.scss';
 import { TabsContextProvider } from "@/components/Tabs";
 import { CONFLICT_WARNING } from "../constants";
+import { TabProps } from "../types";
 
 describe('Tab', () => {
     it('should render', () => {
@@ -11,10 +12,10 @@ describe('Tab', () => {
         expect(tab).toBeInTheDocument();
         expect(tab).toHaveTextContent('Tab Text');
     });
-    it.each(['pill', 'outline'])('should render with variant %s', (variant) => {
-        render(<Tab variant={variant as 'pill' | 'outline'}>Tab Text</Tab>);
+    it.each<TabProps['variant']>(['pill', 'underline'])('should render with variant %s', (variant) => {
+        render(<Tab variant={variant}>Tab Text</Tab>);
         const tab = screen.getByRole('tab');
-        expect(tab).toHaveClass(styles[variant]);
+        expect(tab).toHaveClass(styles[variant as string]);
     });
     it('should default to pill md not selected', () => {
         render(<Tab>Tab Text</Tab>);

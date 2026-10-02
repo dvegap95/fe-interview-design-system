@@ -10,9 +10,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const hoverIds = ['#default-pill-hover', '#selected-pill-hover', '#default-outline-hover', '#selected-outline-hover'];
-const focusIds = ['#default-pill-focus', '#selected-pill-focus', '#default-outline-focus', '#selected-outline-focus'];
-const activeIds = ['#default-pill-active', '#selected-pill-active', '#default-outline-active', '#selected-outline-active'];
+const hoverIds = ['#default-pill-hover', '#selected-pill-hover', '#default-underline-hover', '#selected-underline-hover'];
+const focusIds = ['#default-pill-focus', '#selected-pill-focus', '#default-underline-focus', '#selected-underline-focus'];
+const activeIds = ['#default-pill-active', '#selected-pill-active', '#default-underline-active', '#selected-underline-active'];
 const pseudo = {
     hover: hoverIds,
     focusVisible: focusIds,

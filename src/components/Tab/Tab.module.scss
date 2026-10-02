@@ -86,7 +86,7 @@
         }
     }
 
-    &.outline {
+    &.underline {
         border-radius: var(--spacing-4xs); // chosen over 2xs spec to match the appearance
         padding-bottom: 3px;
 

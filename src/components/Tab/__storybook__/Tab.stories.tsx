@@ -23,17 +23,17 @@ export const SelectedPill: Story = {
   },
 };
 
-export const DefaultOutline: Story = {
+export const DefaultUnderline: Story = {
   args: {
     children: 'Label',
-    variant: 'outline',
+    variant: 'underline',
   },
 };
 
-export const SelectedOutline: Story = {
+export const SelectedUnderline: Story = {
   args: {
     children: 'Label',
-    variant: 'outline',
+    variant: 'underline',
     selected: true,
   },
 };

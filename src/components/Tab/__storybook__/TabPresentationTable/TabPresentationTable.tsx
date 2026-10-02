@@ -34,8 +34,8 @@ export default function TabPresentationTable(props: Partial<TabProps>) {
             </div>
             <TabPresentationColumn columnId="selected-pill" columnName="Pill Selected" {...props} selected={true} variant="pill" />
             <TabPresentationColumn columnId="default-pill" columnName="Pill" {...props} selected={false} variant="pill" />
-            <TabPresentationColumn columnId="selected-outline" columnName="Outline Selected" {...props} selected={true} variant="outline" />
-            <TabPresentationColumn columnId="default-outline" columnName="Outline" {...props} selected={false} variant="outline" />
+            <TabPresentationColumn columnId="selected-underline" columnName="Underline Selected" {...props} selected={true} variant="underline" />
+            <TabPresentationColumn columnId="default-underline" columnName="Underline" {...props} selected={false} variant="underline" />
         </div>
     )
 }
