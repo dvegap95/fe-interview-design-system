@@ -1,4 +1,5 @@
-import type { ComponentPropsWithRef, ReactNode } from "react";
+import type { ComponentPropsWithRef } from "react";
+import type { ActiveTabContextProviderProps } from "@/context/activeTabContext";
 import type { Size } from "@/context/sizeContext";
 import type { TabVariant } from "@/context/tabVariantContext";
 import type { BaseComponentProps } from "@/types/baseComponentTypes";
@@ -8,13 +9,6 @@ export type TabsContextType = {
   setActiveTab: (tab: string) => void;
 };
 
-export type TabsContextProviderProps = {
-  children?: ReactNode;
-  activeTab?: string;
-  onActiveTabChange?: (tab: string) => void;
-  defaultActiveTab?: string;
-};
-
 export type TabsProps = ComponentPropsWithRef<"div"> &
   BaseComponentProps & {
     variant?: TabVariant;
@@ -22,7 +16,7 @@ export type TabsProps = ComponentPropsWithRef<"div"> &
     autoScrollBehavior?: ScrollIntoViewOptions["behavior"] | "none";
   };
 
-export type TabsWithContextProps = BaseComponentProps & TabsContextProviderProps & TabsProps;
+export type TabsWithContextProps = BaseComponentProps & ActiveTabContextProviderProps & TabsProps;
 
-export type UseTabsContextProviderProps = Omit<TabsContextProviderProps, "children">;
+export type UseTabsContextProviderProps = Omit<ActiveTabContextProviderProps, "children">;
 export type UseTabsProps = Omit<TabsProps, "children">;

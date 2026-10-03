@@ -1,29 +1,10 @@
-import { createContext, useContext } from "react";
+import { ActiveTabContextProvider } from "@/context/activeTabContext";
 import { SizeProvider, useResolvedSize } from "@/context/sizeContext";
 import { TabVariantProvider, useResolvedTabVariant } from "@/context/tabVariantContext";
 import { cn } from "@/lib/utils";
 import styles from "./Tabs.module.scss";
-import type {
-  TabsContextProviderProps,
-  TabsContextType,
-  TabsProps,
-  TabsWithContextProps,
-} from "./types";
-import { useTabs, useTabsContextProvider } from "./useTabs";
-
-export const TabsContext = createContext<TabsContextType>({
-  activeTab: "",
-  setActiveTab: () => {},
-});
-
-export function useOptionalTabsContext() {
-  return useContext(TabsContext);
-}
-
-export function TabsContextProvider(props: TabsContextProviderProps) {
-  const contextValue = useTabsContextProvider(props);
-  return <TabsContext.Provider value={contextValue}>{props.children}</TabsContext.Provider>;
-}
+import type { TabsProps, TabsWithContextProps } from "./types";
+import { useTabs } from "./useTabs";
 
 export function Tabs({
   children,
@@ -72,12 +53,12 @@ export function TabsWithContext({
   ...props
 }: TabsWithContextProps) {
   return (
-    <TabsContextProvider
+    <ActiveTabContextProvider
       activeTab={activeTab}
       onActiveTabChange={onActiveTabChange}
       defaultActiveTab={defaultActiveTab}
     >
       <Tabs {...props}>{children}</Tabs>
-    </TabsContextProvider>
+    </ActiveTabContextProvider>
   );
 }

@@ -1,33 +1,16 @@
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import { useOptionalTabsContext } from "./Tabs";
-import type { TabsContextType, UseTabsContextProviderProps, UseTabsProps } from "./types";
-
-export function useTabsContextProvider(props: UseTabsContextProviderProps): TabsContextType {
-  const [activeTab, setActiveTab] = useState(props.defaultActiveTab ?? "");
-  const contextValue = useMemo(
-    () => ({
-      activeTab: props.activeTab ?? activeTab ?? "",
-      setActiveTab: props.onActiveTabChange ?? setActiveTab,
-    }),
-    [
-      props.activeTab,
-      props.onActiveTabChange,
-      activeTab,
-    ],
-  );
-
-  return contextValue;
-}
+import { useLayoutEffect, useRef } from "react";
+import { useActiveTabContext } from "@/context/activeTabContext";
+import type { UseTabsProps } from "./types";
 
 export function useTabs({ autoScrollBehavior }: UseTabsProps) {
   const listRef = useRef<HTMLDivElement>(null);
   const hasMountedRef = useRef(false);
-  const tabsContext = useOptionalTabsContext();
+  const tabValueContext = useActiveTabContext();
 
   useLayoutEffect(() => {
     if (autoScrollBehavior === "none") return;
     const list = listRef.current;
-    if (!list || !tabsContext?.activeTab) return;
+    if (!list || !tabValueContext?.activeTab) return;
     const tab = list.querySelector<HTMLElement>(`[role="tab"][aria-selected="true"]`);
     if (!tab) return;
     tab.scrollIntoView({
@@ -36,7 +19,7 @@ export function useTabs({ autoScrollBehavior }: UseTabsProps) {
     });
     hasMountedRef.current = true;
   }, [
-    tabsContext?.activeTab,
+    tabValueContext?.activeTab,
     autoScrollBehavior,
   ]);
 

@@ -4,7 +4,8 @@ import { type ReactNode, useState } from "react";
 import Tab from "@/components/Tab";
 import tabStyles from "@/components/Tab/Tab.module.scss";
 import tabsStyles from "@/components/Tabs/Tabs.module.scss";
-import { TabsContextProvider, TabsWithContext } from "../Tabs";
+import { ActiveTabContextProvider } from "@/context/activeTabContext";
+import { TabsWithContext } from "../Tabs";
 
 const ControlledTabWrapper = ({
   children,
@@ -234,17 +235,17 @@ describe("TabsWithContext", () => {
   });
 });
 
-describe("TabsContextProvider standalone", () => {
+describe("ActiveTabContextProvider standalone", () => {
   it("should handle tab selection uncontrolled", async () => {
     render(
-      <TabsContextProvider defaultActiveTab="tab2">
+      <ActiveTabContextProvider defaultActiveTab="tab2">
         <div>
           <Tab value="tab1">Tab1</Tab>
           <Tab value="tab2">Tab2</Tab>
           <Tab value="tab3">Tab3</Tab>
           <Tab value="tab4">Tab4</Tab>
         </div>
-      </TabsContextProvider>,
+      </ActiveTabContextProvider>,
     );
     expect(
       screen.getByRole("tab", {
@@ -272,7 +273,7 @@ describe("TabsContextProvider standalone", () => {
   it("should render with active tab", async () => {
     const onActiveTabChangeSpy = vi.fn();
     render(
-      <TabsContextProvider
+      <ActiveTabContextProvider
         activeTab="tab3"
         onActiveTabChange={onActiveTabChangeSpy}
       >
@@ -282,7 +283,7 @@ describe("TabsContextProvider standalone", () => {
           <Tab value="tab3">Tab3</Tab>
           <Tab value="tab4">Tab4</Tab>
         </div>
-      </TabsContextProvider>,
+      </ActiveTabContextProvider>,
     );
     expect(
       screen.getByRole("tab", {

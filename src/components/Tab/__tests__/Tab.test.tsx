@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { Tabs, TabsContextProvider } from "@/components/Tabs";
+import { Tabs } from "@/components/Tabs";
+import { ActiveTabContextProvider } from "@/context/activeTabContext";
 import { CONFLICT_WARNING } from "../constants";
 import Tab from "../Tab";
 import styles from "../Tab.module.scss";
@@ -51,7 +52,7 @@ describe("Tab", () => {
       ({ value }) => {
         console.warn = vi.fn();
         render(
-          <TabsContextProvider
+          <ActiveTabContextProvider
             activeTab={value}
             onActiveTabChange={vi.fn()}
           >
@@ -61,7 +62,7 @@ describe("Tab", () => {
             >
               Tab Text
             </Tab>
-          </TabsContextProvider>,
+          </ActiveTabContextProvider>,
         );
         expect(console.warn).toHaveBeenCalledWith(CONFLICT_WARNING);
       },
@@ -69,7 +70,7 @@ describe("Tab", () => {
 
     it("should prioritize uncontrolled props over controlled props", () => {
       render(
-        <TabsContextProvider
+        <ActiveTabContextProvider
           activeTab="tab2"
           onActiveTabChange={vi.fn()}
         >
@@ -80,7 +81,7 @@ describe("Tab", () => {
             Tab1
           </Tab>
           <Tab value="tab2">Tab2</Tab>
-        </TabsContextProvider>,
+        </ActiveTabContextProvider>,
       );
       // both tabs should be selected tab1 state overrides unselected context
       expect(

@@ -1,28 +1,28 @@
 import { useCallback, useEffect } from "react";
-import { useOptionalTabsContext } from "@/components/Tabs";
+import { useActiveTabContext } from "@/context/activeTabContext";
 import { CONFLICT_WARNING } from "./constants";
 import type { UseTabProps } from "./types";
 
 export default function useTab({ selected = false, value }: UseTabProps) {
-  const tabsContext = useOptionalTabsContext();
+  const activeTabContext = useActiveTabContext();
   const isSelected = Boolean(
-    selected || (tabsContext?.activeTab && tabsContext?.activeTab === value),
+    selected || (activeTabContext?.activeTab && activeTabContext?.activeTab === value),
   );
   const handleClick = useCallback(() => {
     if (!value) return;
-    tabsContext?.setActiveTab(value);
+    activeTabContext?.setActiveTab?.(value);
   }, [
-    tabsContext?.setActiveTab,
+    activeTabContext?.setActiveTab,
     value,
   ]);
 
   useEffect(() => {
-    if (selected && tabsContext?.activeTab) {
+    if (selected && activeTabContext?.activeTab) {
       console.warn(CONFLICT_WARNING);
     }
   }, [
     selected,
-    tabsContext?.activeTab,
+    activeTabContext?.activeTab,
   ]);
   return {
     isSelected,
