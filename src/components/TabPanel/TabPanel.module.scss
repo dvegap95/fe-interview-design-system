@@ -1,0 +1,10 @@
+@use '@/styles/typography' as *;
+@use '@/styles/_tokens.scss';
+
+.tabPanel {
+    @include body-medium;
+
+    &[aria-hidden="true"] {
+        display: none;
+    }
+}
