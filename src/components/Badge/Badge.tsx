@@ -17,11 +17,11 @@ export default function Badge({
     styles[`size-${size}`],
   );
   return (
-    <div
+    <span
       {...props}
       className={className}
     >
       {children}
-    </div>
+    </span>
   );
 }
