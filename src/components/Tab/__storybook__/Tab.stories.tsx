@@ -41,9 +41,10 @@ export const SelectedUnderline: Story = {
 
 export const WithBadge: Story = {
   args: {
-    children: "Label",
+    children: "Files",
     slots: {
-      end: <Badge variant="positive">BADGE</Badge>,
+      end: <Badge variant="negative" size="md">Warning</Badge>,
     },
+    size: "sm",
   },
 };

@@ -1,3 +1,4 @@
+import { useResolvedSize } from "@/context/sizeContext";
 import { cn } from "@/lib/utils";
 import styles from "./Badge.module.scss";
 import type { BadgeProps } from "./types";
@@ -5,9 +6,10 @@ import type { BadgeProps } from "./types";
 export default function Badge({
   children,
   variant = "neutral",
-  size = "sm",
+  size: sizeProp,
   ...props
 }: BadgeProps) {
+  const size = useResolvedSize(sizeProp);
   const className = cn(
     props.className,
     styles.badge,
