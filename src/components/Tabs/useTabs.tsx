@@ -1,10 +1,6 @@
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useOptionalTabsContext } from "./Tabs";
-import type {
-  TabsContextType,
-  UseTabsContextProviderProps,
-  UseTabsProps,
-} from "./types";
+import type { TabsContextType, UseTabsContextProviderProps, UseTabsProps } from "./types";
 
 export function useTabsContextProvider(props: UseTabsContextProviderProps): TabsContextType {
   const [activeTab, setActiveTab] = useState(props.defaultActiveTab ?? "");

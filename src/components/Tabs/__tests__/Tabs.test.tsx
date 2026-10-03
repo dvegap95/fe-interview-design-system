@@ -218,14 +218,19 @@ describe("TabsWithContext", () => {
 
     it("should render tab list with specified variant and size", () => {
       render(
-        <TabsWithContext variant="pill" size="sm">
+        <TabsWithContext
+          variant="pill"
+          size="sm"
+        >
           <Tab value="tab1">Tab1</Tab>
           <Tab value="tab2">Tab2</Tab>
         </TabsWithContext>,
       );
-      expect(screen.getByRole("tablist")).toHaveClass(tabsStyles["variant-pill"], tabsStyles["size-sm"]);
+      expect(screen.getByRole("tablist")).toHaveClass(
+        tabsStyles["variant-pill"],
+        tabsStyles["size-sm"],
+      );
     });
-
   });
 });
 

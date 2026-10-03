@@ -43,7 +43,14 @@ export const WithBadge: Story = {
   args: {
     children: "Files",
     slots: {
-      end: <Badge variant="negative" size="md">Warning</Badge>,
+      end: (
+        <Badge
+          variant="negative"
+          size="md"
+        >
+          Warning
+        </Badge>
+      ),
     },
     size: "sm",
   },

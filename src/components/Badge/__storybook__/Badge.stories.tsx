@@ -11,7 +11,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const BadgeVariantsRow = ({ size, gap }: { size: "sm" | "md", gap: CSSProperties['gap'] }) => {
+const BadgeVariantsRow = ({ size, gap }: { size: "sm" | "md"; gap: CSSProperties["gap"] }) => {
   return (
     <div
       style={{
@@ -46,9 +46,19 @@ export const Default: Story = {
 };
 
 export const AllVariantsSm: Story = {
-  render: () => <BadgeVariantsRow size="sm" gap="28px" />,
+  render: () => (
+    <BadgeVariantsRow
+      size="sm"
+      gap="28px"
+    />
+  ),
 };
 
 export const AllVariantsMd: Story = {
-  render: () => <BadgeVariantsRow size="md" gap="20px" />,
+  render: () => (
+    <BadgeVariantsRow
+      size="md"
+      gap="20px"
+    />
+  ),
 };
