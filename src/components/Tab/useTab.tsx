@@ -24,8 +24,15 @@ export default function useTab({ selected = false, value }: UseTabProps) {
     selected,
     activeTabContext?.activeTab,
   ]);
+
+  const isOutsideActiveTabContext = activeTabContext == null;
+  const hasActiveTab = Boolean(activeTabContext?.activeTab);
+  const belongsInTabOrder = isOutsideActiveTabContext || isSelected || !hasActiveTab;
+  const tabIndex = belongsInTabOrder ? 0 : -1;
+
   return {
     isSelected,
     handleClick,
+    tabIndex,
   };
 }

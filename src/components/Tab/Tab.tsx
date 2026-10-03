@@ -15,7 +15,7 @@ export default function Tab({
   slots,
   ...props
 }: TabProps) {
-  const { isSelected, handleClick } = useTab({
+  const { isSelected, handleClick, tabIndex } = useTab({
     selected,
     value,
   });
@@ -31,11 +31,11 @@ export default function Tab({
   return (
     <button
       role="tab"
-      tabIndex={0}
       id={id}
       aria-selected={isSelected ? "true" : "false"}
       onClick={handleClick}
       {...props}
+      tabIndex={tabIndex}
       className={className}
     >
       <SizeProvider size={size}>

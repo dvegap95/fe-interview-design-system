@@ -12,10 +12,12 @@ export function Tabs({
   variant: variantProp,
   size: sizeProp,
   autoScrollBehavior = "smooth",
+  orientation = "horizontal",
   ...props
 }: TabsProps) {
-  const { listRef } = useTabs({
+  const { listRef, handleKeyDown } = useTabs({
     autoScrollBehavior,
+    orientation,
   });
   const variant = useResolvedTabVariant(variantProp);
   const size = useResolvedSize(sizeProp);
@@ -28,8 +30,13 @@ export function Tabs({
   return (
     <div
       role="tablist"
+      aria-orientation={orientation}
       {...props}
       className={className}
+      onKeyDown={(event) => {
+        handleKeyDown(event);
+        props.onKeyDown?.(event);
+      }}
       ref={(node) => {
         listRef.current = node;
         if (typeof props.ref === "function") {

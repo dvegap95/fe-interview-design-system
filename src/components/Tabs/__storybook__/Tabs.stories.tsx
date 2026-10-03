@@ -112,3 +112,11 @@ export const Overflow: Story = {
     viewport: "small",
   },
 };
+
+export const Vertical: Story = {
+  args: {
+    children: DEFAULT_CHILDREN,
+    defaultActiveTab: "tab1",
+    orientation: "vertical",
+  },
+};
