@@ -5,7 +5,7 @@ import Tab from "@/components/Tab";
 import tabStyles from "@/components/Tab/Tab.module.scss";
 import tabsStyles from "@/components/Tabs/Tabs.module.scss";
 import { ActiveTabContextProvider } from "@/context/activeTabContext";
-import { TabsWithContext } from "../Tabs";
+import { ManagedTabs } from "../Tabs";
 
 const ControlledTabWrapper = ({
   children,
@@ -16,22 +16,22 @@ const ControlledTabWrapper = ({
 }) => {
   const [activeTab, setActiveTab] = useState(defaultActiveTab);
   return (
-    <TabsWithContext
+    <ManagedTabs
       activeTab={activeTab}
       onActiveTabChange={setActiveTab}
     >
       {children}
-    </TabsWithContext>
+    </ManagedTabs>
   );
 };
 
-describe("TabsWithContext", () => {
+describe("ManagedTabs", () => {
   it("should render", () => {
     render(
-      <TabsWithContext>
+      <ManagedTabs>
         <Tab>Tab1</Tab>
         <Tab>Tab2</Tab>
-      </TabsWithContext>,
+      </ManagedTabs>,
     );
     expect(
       screen.getByRole("tab", {
@@ -48,12 +48,12 @@ describe("TabsWithContext", () => {
   describe("uncontrolled", () => {
     it("should render with default active tab", () => {
       render(
-        <TabsWithContext defaultActiveTab="tab2">
+        <ManagedTabs defaultActiveTab="tab2">
           <Tab value="tab1">Tab1</Tab>
           <Tab value="tab2">Tab2</Tab>
           <Tab value="tab3">Tab3</Tab>
           <Tab value="tab4">Tab4</Tab>
-        </TabsWithContext>,
+        </ManagedTabs>,
       );
       expect(
         screen.getByRole("tab", {
@@ -64,12 +64,12 @@ describe("TabsWithContext", () => {
 
     it("should handle tab selection uncontrolled", async () => {
       render(
-        <TabsWithContext defaultActiveTab="tab2">
+        <ManagedTabs defaultActiveTab="tab2">
           <Tab value="tab1">Tab1</Tab>
           <Tab value="tab2">Tab2</Tab>
           <Tab value="tab3">Tab3</Tab>
           <Tab value="tab4">Tab4</Tab>
-        </TabsWithContext>,
+        </ManagedTabs>,
       );
       await userEvent.click(
         screen.getByRole("tab", {
@@ -93,7 +93,7 @@ describe("TabsWithContext", () => {
   describe("controlled", () => {
     it("should render with active tab", () => {
       render(
-        <TabsWithContext
+        <ManagedTabs
           activeTab="tab3"
           onActiveTabChange={vi.fn()}
         >
@@ -101,7 +101,7 @@ describe("TabsWithContext", () => {
           <Tab value="tab2">Tab2</Tab>
           <Tab value="tab3">Tab3</Tab>
           <Tab value="tab4">Tab4</Tab>
-        </TabsWithContext>,
+        </ManagedTabs>,
       );
       expect(
         screen.getByRole("tab", {
@@ -113,7 +113,7 @@ describe("TabsWithContext", () => {
     it("should handle tab selection controlled", async () => {
       const onActiveTabChangeSpy = vi.fn();
       render(
-        <TabsWithContext
+        <ManagedTabs
           activeTab="tab3"
           onActiveTabChange={onActiveTabChangeSpy}
         >
@@ -121,7 +121,7 @@ describe("TabsWithContext", () => {
           <Tab value="tab2">Tab2</Tab>
           <Tab value="tab3">Tab3</Tab>
           <Tab value="tab4">Tab4</Tab>
-        </TabsWithContext>,
+        </ManagedTabs>,
       );
       await userEvent.click(
         screen.getByRole("tab", {
@@ -196,13 +196,13 @@ describe("TabsWithContext", () => {
       ],
     ])("should render tabs with specified variant and size for tabs", (variant, size) => {
       render(
-        <TabsWithContext
+        <ManagedTabs
           variant={variant as "pill" | "underline"}
           size={size as "sm" | "md"}
         >
           <Tab value="tab1">Tab1</Tab>
           <Tab value="tab2">Tab2</Tab>
-        </TabsWithContext>,
+        </ManagedTabs>,
       );
 
       expect(
@@ -219,13 +219,13 @@ describe("TabsWithContext", () => {
 
     it("should render tab list with specified variant and size", () => {
       render(
-        <TabsWithContext
+        <ManagedTabs
           variant="pill"
           size="sm"
         >
           <Tab value="tab1">Tab1</Tab>
           <Tab value="tab2">Tab2</Tab>
-        </TabsWithContext>,
+        </ManagedTabs>,
       );
       expect(screen.getByRole("tablist")).toHaveClass(
         tabsStyles["variant-pill"],

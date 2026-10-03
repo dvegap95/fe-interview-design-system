@@ -12,10 +12,7 @@ export type ActiveTabContextProviderProps = {
   defaultActiveTab?: string;
 };
 
-export const ActiveTabContext = createContext<ActiveTabContextType>({
-  activeTab: "",
-  setActiveTab: () => {},
-});
+export const ActiveTabContext = createContext<ActiveTabContextType | null>(null);
 
 export function useActiveTabContext() {
   return useContext(ActiveTabContext);

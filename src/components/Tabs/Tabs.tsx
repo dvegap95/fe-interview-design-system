@@ -3,7 +3,8 @@ import { SizeProvider, useResolvedSize } from "@/context/sizeContext";
 import { TabVariantProvider, useResolvedTabVariant } from "@/context/tabVariantContext";
 import { cn } from "@/lib/utils";
 import styles from "./Tabs.module.scss";
-import type { TabsProps, TabsWithContextProps } from "./types";
+import type { ManagedTabsProps, TabsProps } from "./types";
+
 import { useTabs } from "./useTabs";
 
 export function Tabs({
@@ -45,13 +46,13 @@ export function Tabs({
   );
 }
 
-export function TabsWithContext({
+export function ManagedTabs({
   activeTab,
   onActiveTabChange,
   defaultActiveTab,
   children,
   ...props
-}: TabsWithContextProps) {
+}: ManagedTabsProps) {
   return (
     <ActiveTabContextProvider
       activeTab={activeTab}

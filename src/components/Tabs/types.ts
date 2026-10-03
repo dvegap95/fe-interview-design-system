@@ -16,7 +16,6 @@ export type TabsProps = ComponentPropsWithRef<"div"> &
     autoScrollBehavior?: ScrollIntoViewOptions["behavior"] | "none";
   };
 
-export type TabsWithContextProps = BaseComponentProps & ActiveTabContextProviderProps & TabsProps;
+export type ManagedTabsProps = BaseComponentProps & ActiveTabContextProviderProps & TabsProps;
 
-export type UseTabsContextProviderProps = Omit<ActiveTabContextProviderProps, "children">;
 export type UseTabsProps = Omit<TabsProps, "children">;
