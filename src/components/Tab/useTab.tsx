@@ -1,11 +1,10 @@
 import { useCallback, useEffect } from "react";
-import { useOptionalTabListContext, useOptionalTabsContext } from "@/components/Tabs";
+import { useOptionalTabsContext } from "@/components/Tabs";
 import { CONFLICT_WARNING } from "./constants";
 import type { UseTabProps } from "./types";
 
-export default function useTab({ selected = false, value, variant, size }: UseTabProps) {
+export default function useTab({ selected = false, value }: UseTabProps) {
   const tabsContext = useOptionalTabsContext();
-  const tabListContext = useOptionalTabListContext();
   const isSelected = Boolean(
     selected || (tabsContext?.activeTab && tabsContext?.activeTab === value),
   );
@@ -25,14 +24,8 @@ export default function useTab({ selected = false, value, variant, size }: UseTa
     selected,
     tabsContext?.activeTab,
   ]);
-
-  const computedVariant = variant ?? tabListContext?.variant ?? "pill";
-  const computedSize = size ?? tabListContext?.size ?? "md";
-
   return {
     isSelected,
     handleClick,
-    computedVariant,
-    computedSize,
   };
 }

@@ -1,8 +1,9 @@
 import { createContext, useContext } from "react";
+import { SizeProvider, useResolvedSize } from "@/context/sizeContext";
+import { TabVariantProvider, useResolvedTabVariant } from "@/context/tabVariantContext";
 import { cn } from "@/lib/utils";
 import styles from "./Tabs.module.scss";
 import type {
-  TabListContextType,
   TabsContextProviderProps,
   TabsContextType,
   TabsProps,
@@ -15,17 +16,8 @@ export const TabsContext = createContext<TabsContextType>({
   setActiveTab: () => {},
 });
 
-export const TabListContext = createContext<TabListContextType>({
-  variant: "pill",
-  size: "md",
-});
-
 export function useOptionalTabsContext() {
   return useContext(TabsContext);
-}
-
-export function useOptionalTabListContext() {
-  return useContext(TabListContext);
 }
 
 export function TabsContextProvider(props: TabsContextProviderProps) {
@@ -35,16 +27,16 @@ export function TabsContextProvider(props: TabsContextProviderProps) {
 
 export function Tabs({
   children,
-  variant,
-  size,
+  variant: variantProp,
+  size: sizeProp,
   autoScrollBehavior = "smooth",
   ...props
 }: TabsProps) {
-  const { tabListContext, listRef } = useTabs({
-    variant,
-    size,
+  const { listRef } = useTabs({
     autoScrollBehavior,
   });
+  const variant = useResolvedTabVariant(variantProp);
+  const size = useResolvedSize(sizeProp);
   const className = cn(
     props.className,
     styles.tabs,
@@ -52,23 +44,23 @@ export function Tabs({
     styles[`size-${size}`],
   );
   return (
-    <TabListContext.Provider value={tabListContext}>
-      <div
-        role="tablist"
-        {...props}
-        className={className}
-        ref={(node) => {
-          listRef.current = node;
-          if (typeof props.ref === "function") {
-            props.ref(node);
-          } else if (props.ref) {
-            props.ref.current = node;
-          }
-        }}
-      >
-        {children}
-      </div>
-    </TabListContext.Provider>
+    <div
+      role="tablist"
+      {...props}
+      className={className}
+      ref={(node) => {
+        listRef.current = node;
+        if (typeof props.ref === "function") {
+          props.ref(node);
+        } else if (props.ref) {
+          props.ref.current = node;
+        }
+      }}
+    >
+      <SizeProvider size={size}>
+        <TabVariantProvider variant={variant}>{children}</TabVariantProvider>
+      </SizeProvider>
+    </div>
   );
 }
 

@@ -1,3 +1,5 @@
+import { SizeProvider, useResolvedSize } from "@/context/sizeContext";
+import { useResolvedTabVariant } from "@/context/tabVariantContext";
 import { cn } from "@/lib/utils";
 import styles from "./Tab.module.scss";
 import type { TabProps } from "./types";
@@ -5,26 +7,26 @@ import useTab from "./useTab";
 
 export default function Tab({
   children,
-  variant,
+  size: sizeProp,
+  variant: variantProp,
   selected = false,
-  size,
   id,
   value,
   slots,
   ...props
 }: TabProps) {
-  const { isSelected, handleClick, computedVariant, computedSize } = useTab({
+  const { isSelected, handleClick } = useTab({
     selected,
     value,
-    variant,
-    size,
   });
+  const variant = useResolvedTabVariant(variantProp);
+  const size = useResolvedSize(sizeProp);
   const className = cn(
     props.className,
     styles.tab,
     isSelected && styles.selected,
-    styles[`variant-${computedVariant}`],
-    styles[`size-${computedSize}`],
+    styles[`variant-${variant}`],
+    styles[`size-${size}`],
   );
   return (
     <button
@@ -36,8 +38,10 @@ export default function Tab({
       {...props}
       className={className}
     >
-      {children}
-      {slots?.end && <span className={styles.endSlot}>{slots.end}</span>}
+      <SizeProvider size={size}>
+        {children}
+        {slots?.end && <span className={styles.endSlot}>{slots.end}</span>}
+      </SizeProvider>
     </button>
   );
 }
