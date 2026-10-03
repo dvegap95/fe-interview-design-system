@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { type ReactNode, useState } from "react";
-import Tab from "@/components/Tab/Tab";
+import Tab from "@/components/Tab";
 import tabStyles from "@/components/Tab/Tab.module.scss";
 import tabsStyles from "@/components/Tabs/Tabs.module.scss";
 import { TabsContextProvider, TabsWithContext } from "../Tabs";

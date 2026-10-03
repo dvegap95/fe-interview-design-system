@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import Tab from "@/components/Tab/Tab";
+import Tab from "@/components/Tab";
 import { TabsWithContext } from "../Tabs";
 import type { TabsWithContextProps } from "../types";
 

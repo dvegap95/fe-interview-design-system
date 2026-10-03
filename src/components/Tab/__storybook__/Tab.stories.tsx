@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import Badge from "@/components/Badge/Badge";
+import Badge from "@/components/Badge";
 import Tab from "../Tab";
 
 const meta = {
