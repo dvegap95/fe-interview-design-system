@@ -2,25 +2,22 @@
 
 Hey 👋
 
-This is the base repository for the home test. The repository is created with `vite` and is empty, but contains some packages already installed, in particular:
-
-- `react`
-- `storybook`
-- `vitest`
+Accessible Tabs design-system package (Badge, Tab, Tabs, TabPanel) built for the Prima take-home. Primary showcase and docs: **Storybook**.
 
 ## Install and run
 
 ```bash
-# Install dependencies
-# This project use `pnpm` as package manager, but you can use also `npm` or `yarn`.
+# Install dependencies (pnpm is the package manager for this repo)
 pnpm install
 
-# And run the project
-pnpm dev
-
-# Optional: Run Storybook
+# Storybook (docs + interactive stories)
 pnpm storybook
+
+# Optional: Vite app shell
+pnpm dev
 ```
+
+Contributor conventions (scripts, Plop templates, dumb-view + hook layout): see [DEV.md](./DEV.md).
 
 ## Figma file
 
