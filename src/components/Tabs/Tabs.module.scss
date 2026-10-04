@@ -5,15 +5,9 @@
 .tabs {
     display: flex;
     flex-direction: row;
-    overflow-x: auto;
-    overflow-y: visible;
-    padding: 4px;
 
     &[aria-orientation="vertical"] {
         flex-direction: column;
-        overflow-x: visible;
-        overflow-y: auto;
-        width: fit-content;
     }
 
     &,

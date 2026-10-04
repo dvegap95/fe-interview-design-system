@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
+import Badge from "@/components/Badge";
 import Tab from "@/components/Tab";
 import { ManagedTabs } from "../Tabs";
 import type { ManagedTabsProps } from "../types";
-import Badge from "@/components/Badge";
+import styles from "./TabsStories.module.scss";
 
 const meta = {
   title: "Components/Tabs",
@@ -93,6 +94,7 @@ export const UnderlineSm: Story = {
 
 export const Overflow: Story = {
   args: {
+    className: styles.overflowTabs,
     children: (
       <>
         <Tab value="tab1">Tab 1</Tab>
@@ -109,6 +111,7 @@ export const Overflow: Story = {
     variant: "pill",
     size: "md",
     defaultActiveTab: "tab8",
+    autoScrollBehavior: "smooth",
   },
   globals: {
     viewport: "small",

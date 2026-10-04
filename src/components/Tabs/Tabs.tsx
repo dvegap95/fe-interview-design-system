@@ -11,7 +11,7 @@ export function Tabs({
   children,
   variant: variantProp,
   size: sizeProp,
-  autoScrollBehavior = "smooth",
+  autoScrollBehavior = "none",
   orientation = "horizontal",
   ...props
 }: TabsProps) {
