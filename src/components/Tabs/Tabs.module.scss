@@ -13,26 +13,26 @@
     }
 
     &,
-    &.variant-pill {
+    &[data-variant="pill"] {
 
         &,
-        &.size-md {
+        &[data-size="md"] {
             gap: var(--spacing-xs);
         }
 
-        &.size-sm {
+        &[data-size="sm"] {
             gap: var(--spacing-2xs);
         }
     }
 
-    &.variant-underline {
+    &[data-variant="underline"] {
 
         &,
-        &.size-md {
+        &[data-size="md"] {
             gap: var(--spacing-xl);
         }
 
-        &.size-sm {
+        &[data-size="sm"] {
             gap: var(--spacing-l);
         }
     }

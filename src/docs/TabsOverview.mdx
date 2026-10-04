@@ -177,18 +177,49 @@ Color / spacing tokens follow the same pattern (e.g. `--color-surface-inverse`, 
 
 ## Custom styling
 
-Every root accepts `className` (merged with internal styles via `cn`). This demo intentionally breaks the default look on the tablist, tabs, badge, and panels. Prop-driven states (`variant` / `size`) use CSS-module class names (hashed), so hosts should restyle via `className` on the roots rather than targeting those internal state classes.
+Every root accepts `className` (merged with internal styles via `cn`). This demo intentionally breaks the default look on the tablist, tabs, badge, and panels.
+
+Prop-driven visual state is exposed as **stable data attributes** on those roots (not hashed CSS-module class names):
+
+| Attribute | On | Values |
+| --- | --- | --- |
+| `data-variant` | `Tabs`, `Tab`, `Badge` | Tab/Tabs: `pill` \| `underline`; Badge: `neutral` \| `positive` \| `negative` |
+| `data-size` | `Tabs`, `Tab`, `Badge` | `sm` \| `md` |
+| `aria-selected` | `Tab` | `"true"` \| `"false"` (selection; prefer this over inventing a parallel hook) |
+
+Use `className` for structural restyles, and attribute selectors when you need to branch on variant/size/selection.
 
 ### Escape-hatch demo
 
-Pass your own classes into each root. Shape is up to you — for example:
+Pass your own classes into each root, then key off the public hooks:
 
 ```scss
 .myTabs {
   gap: 12px;
+
+  &[data-variant="pill"] {
+    gap: 16px;
+  }
 }
+
 .myTab {
   text-transform: uppercase;
+
+  &[data-variant="underline"] {
+    letter-spacing: 0.12em;
+  }
+
+  &[data-size="sm"] {
+    padding: 6px 10px;
+  }
+
+  &[aria-selected="true"] {
+    box-shadow: 4px 4px 0 currentColor;
+  }
+}
+
+.myBadge[data-variant="negative"] {
+  border-color: #5a1010;
 }
 ```
 

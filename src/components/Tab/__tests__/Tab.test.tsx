@@ -3,7 +3,6 @@ import { Tabs } from "@/components/Tabs";
 import { ActiveTabContextProvider } from "@/context/activeTabContext";
 import { CONFLICT_WARNING } from "../constants";
 import Tab from "../Tab";
-import styles from "../Tab.module.scss";
 import type { TabProps } from "../types";
 
 describe("Tab", () => {
@@ -19,18 +18,18 @@ describe("Tab", () => {
   ])("should render with variant %s", (variant) => {
     render(<Tab variant={variant}>Tab Text</Tab>);
     const tab = screen.getByRole("tab");
-    expect(tab).toHaveClass(styles[`variant-${variant}`]);
+    expect(tab).toHaveAttribute("data-variant", variant);
   });
   it("should default to pill md not selected", () => {
     render(<Tab>Tab Text</Tab>);
     const tab = screen.getByRole("tab");
-    expect(tab).toHaveClass(styles["variant-pill"], styles["size-md"]);
+    expect(tab).toHaveAttribute("data-variant", "pill");
+    expect(tab).toHaveAttribute("data-size", "md");
     expect(tab).not.toBeSelected();
   });
   it("should be selected and render with selected styles if selected is true", () => {
     render(<Tab selected>Tab Text</Tab>);
     const tab = screen.getByRole("tab");
-    expect(tab).toHaveClass(styles.selected);
     expect(tab).toBeSelected();
   });
 
@@ -110,23 +109,20 @@ describe("Tab", () => {
         name: "Tab1",
       });
       // stated underline overrides context pill
-      expect(tab1).toHaveClass(styles["variant-underline"]);
-      expect(tab1).not.toHaveClass(styles.pill);
+      expect(tab1).toHaveAttribute("data-variant", "underline");
+      expect(tab1).not.toHaveAttribute("data-variant", "pill");
 
       // context size since no size was provided through props
-      expect(tab1).toHaveClass(styles["size-sm"]);
-      expect(tab1).not.toHaveClass(styles["size-md"]);
+      expect(tab1).toHaveAttribute("data-size", "sm");
 
       const tab2 = screen.getByRole("tab", {
         name: "Tab2",
       });
       // context pill since no variant was provided through props
-      expect(tab2).toHaveClass(styles["variant-pill"]);
-      expect(tab2).not.toHaveClass(styles.underline);
+      expect(tab2).toHaveAttribute("data-variant", "pill");
 
       // stated size overrides context size
-      expect(tab2).toHaveClass(styles["size-md"]);
-      expect(tab2).not.toHaveClass(styles["size-sm"]);
+      expect(tab2).toHaveAttribute("data-size", "md");
     });
   });
 });

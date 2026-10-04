@@ -11,16 +11,12 @@ export default function Badge({
   ...props
 }: BadgeProps) {
   const size = useResolvedSize(sizeProp);
-  const className = cn(
-    props.className,
-    styles.badge,
-    styles[`variant-${variant}`],
-    styles[`size-${size}`],
-  );
   return (
     <span
       {...props}
-      className={className}
+      data-variant={variant}
+      data-size={size}
+      className={cn(styles.badge, props.className)}
     >
       {children}
     </span>

@@ -1,11 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import Tab from "@/components/Tab";
-import tabStyles from "@/components/Tab/Tab.module.scss";
 import { Tabs } from "@/components/Tabs";
-import tabsStyles from "@/components/Tabs/Tabs.module.scss";
 import type { Size } from "@/context/sizeContext";
 import Badge from "../Badge";
-import badgeStyles from "../Badge.module.scss";
 
 type TestCase = {
   sizeProps: (Size | undefined)[];
@@ -54,13 +51,13 @@ describe("Badge", () => {
         </Tabs>,
       );
       const badge = screen.getByText("Badge Text");
-      expect(badge).toHaveClass(badgeStyles[`size-${expectedSizes[2]}`]);
+      expect(badge).toHaveAttribute("data-size", expectedSizes[2]);
 
       const tab = screen.getByRole("tab");
-      expect(tab).toHaveClass(tabStyles[`size-${expectedSizes[1]}`]);
+      expect(tab).toHaveAttribute("data-size", expectedSizes[1]);
 
       const tabs = screen.getByRole("tablist");
-      expect(tabs).toHaveClass(tabsStyles[`size-${expectedSizes[0]}`]);
+      expect(tabs).toHaveAttribute("data-size", expectedSizes[0]);
     },
   );
 });

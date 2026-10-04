@@ -2,8 +2,6 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { type ReactNode, useState } from "react";
 import Tab from "@/components/Tab";
-import tabStyles from "@/components/Tab/Tab.module.scss";
-import tabsStyles from "@/components/Tabs/Tabs.module.scss";
 import { ActiveTabContextProvider } from "@/context/activeTabContext";
 import { ManagedTabs } from "../Tabs";
 
@@ -209,12 +207,22 @@ describe("ManagedTabs", () => {
         screen.getByRole("tab", {
           name: "Tab1",
         }),
-      ).toHaveClass(tabStyles[`variant-${variant}`], tabStyles[`size-${size}`]);
+      ).toHaveAttribute("data-variant", variant);
+      expect(
+        screen.getByRole("tab", {
+          name: "Tab1",
+        }),
+      ).toHaveAttribute("data-size", size);
       expect(
         screen.getByRole("tab", {
           name: "Tab2",
         }),
-      ).toHaveClass(tabStyles[`variant-${variant}`], tabStyles[`size-${size}`]);
+      ).toHaveAttribute("data-variant", variant);
+      expect(
+        screen.getByRole("tab", {
+          name: "Tab2",
+        }),
+      ).toHaveAttribute("data-size", size);
     });
 
     it("should render tab list with specified variant and size", () => {
@@ -227,10 +235,9 @@ describe("ManagedTabs", () => {
           <Tab value="tab2">Tab2</Tab>
         </ManagedTabs>,
       );
-      expect(screen.getByRole("tablist")).toHaveClass(
-        tabsStyles["variant-pill"],
-        tabsStyles["size-sm"],
-      );
+      const tablist = screen.getByRole("tablist");
+      expect(tablist).toHaveAttribute("data-variant", "pill");
+      expect(tablist).toHaveAttribute("data-size", "sm");
     });
   });
 });

@@ -8,26 +8,26 @@
     display: inline-flex;
 
     &,
-    &.size-sm {
+    &[data-size="sm"] {
         padding: var(--spacing-4xs) var(--spacing-3xs);
         border-radius: 8px;
     }
 
-    &.size-md {
+    &[data-size="md"] {
         padding: var(--spacing-3xs) var(--spacing-2xs);
         border-radius: 12px;
     }
 
     &,
-    &.variant-neutral {
+    &[data-variant="neutral"] {
         background-color: var(--color-surface-high);
     }
 
-    &.variant-positive {
+    &[data-variant="positive"] {
         background-color: var(--color-surface-positive);
     }
 
-    &.variant-negative {
+    &[data-variant="negative"] {
         background-color: var(--color-surface-negative);
     }
 }

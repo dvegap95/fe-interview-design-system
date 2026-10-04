@@ -22,13 +22,6 @@ export default function Tab({
   });
   const variant = useResolvedTabVariant(variantProp);
   const size = useResolvedSize(sizeProp);
-  const className = cn(
-    props.className,
-    styles.tab,
-    isSelected && styles.selected,
-    styles[`variant-${variant}`],
-    styles[`size-${size}`],
-  );
   return (
     <button
       role="tab"
@@ -37,7 +30,9 @@ export default function Tab({
       onClick={handleClick}
       {...props}
       tabIndex={tabIndex}
-      className={className}
+      className={cn(styles.tab, props.className)}
+      data-variant={variant}
+      data-size={size}
     >
       <SizeProvider size={size}>
         {children}

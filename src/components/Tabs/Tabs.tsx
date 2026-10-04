@@ -22,18 +22,14 @@ export function Tabs({
   });
   const variant = useResolvedTabVariant(variantProp);
   const size = useResolvedSize(sizeProp);
-  const className = cn(
-    props.className,
-    styles.tabs,
-    styles[`variant-${variant}`],
-    styles[`size-${size}`],
-  );
   return (
     <div
       role="tablist"
       aria-orientation={orientation}
       {...props}
-      className={className}
+      className={cn(styles.tabs, props.className)}
+      data-variant={variant}
+      data-size={size}
       onKeyDown={(event) => {
         handleKeyDown(event);
         props.onKeyDown?.(event);

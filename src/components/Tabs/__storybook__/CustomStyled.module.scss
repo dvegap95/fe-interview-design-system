@@ -9,6 +9,10 @@
       #ffe4b8 16px);
   border-radius: 0;
 
+  &[data-variant="pill"] {
+    gap: 16px;
+  }
+
   .tab.tab {
     height: auto;
     padding: 10px 14px;
@@ -20,6 +24,14 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     box-shadow: none;
+
+    &[data-variant="pill"] {
+      border-radius: 0;
+    }
+
+    &[data-size="md"] {
+      letter-spacing: 0.04em;
+    }
 
     &[aria-selected="true"] {
       background: #1b4d3e;
@@ -63,6 +75,14 @@
   background: #ffd0d0;
   color: #7a1f1f;
   transform: rotate(-6deg);
+
+  &[data-variant="neutral"] {
+    background: #ffd0d0;
+  }
+
+  &[data-size="md"] {
+    transform: rotate(-6deg);
+  }
 }
 
 .panel {
