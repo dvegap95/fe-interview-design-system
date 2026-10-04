@@ -36,7 +36,7 @@ export default function Tab({
     >
       <SizeProvider size={size}>
         {children}
-        {slots?.end && <span className={styles.endSlot}>{slots.end}</span>}
+        {slots?.end}
       </SizeProvider>
     </button>
   );
