@@ -36,13 +36,15 @@ Also available: `fe-interview-design-system/context/sizeContext`, `.../tabVarian
 
 ## Mental model
 
-- **`Tabs`** — visual tablist (`role="tablist"`). Pushes `variant` / `size` via context. Does **not** own selection.
-- **`ManagedTabs`** — `ActiveTabContextProvider` + `Tabs`. Use for a selectable tablist **without** sibling panels.
+- **`Tabs`** — visual tablist (`role="tablist"`) only. Pushes `variant` / `size` via context. Does **not** own selection.
+- **`ManagedTabs`** — `ActiveTabContextProvider` + `Tabs` for a selectable **tab list** when you do not need sibling panels under the same provider.
 - **`Tab`** — one tab. Selection from active-tab context; optional `selected` for standalone chrome. Under the provider, `value` is required for clicks to change selection.
-- **`TabPanel`** — content for a `value`. Requires `ActiveTabContextProvider`.
+- **`TabPanel`** — content for a `value`. Requires `ActiveTabContextProvider` (compose explicitly with `Tabs`, not `ManagedTabs`).
 - **`Badge`** — optional trailing UI via `Tab` `slots.end`.
 
-**Panels are siblings of the tablist under the provider** — not children of `ManagedTabs` / `Tabs`. The provider inside `ManagedTabs` does not wrap siblings outside that tree, so full tab + panel UIs should use the explicit composition below.
+**Panels are siblings of the tablist under the provider** — not children of `ManagedTabs` / `Tabs`. For tabs + panels, use `ActiveTabContextProvider` + `Tabs` + `TabPanel` as below.
+
+> **Warning:** Do **not** nest `ManagedTabs` inside an existing `ActiveTabContextProvider` (or expect outer selection/`value` state to flow into it). `ManagedTabs` mounts its **own** provider, so it will not inherit the surrounding active-tab context. Use presentational `Tabs` when you already own the provider.
 
 ## Recommended composition
 
@@ -120,7 +122,7 @@ When composing panels, wire the WAI-ARIA tabs pattern:
 
 `aria-selected`, `role`, and `aria-orientation` are handled by the components.
 
-`ManagedTabs` playgrounds name the tablist with `aria-label`. Full tab↔panel linkage is shown in Composition / CustomStyled (panels cannot sit under `ManagedTabs`’s internal provider).
+`ManagedTabs` playgrounds name the tablist with `aria-label` (list-only demos). Full tab↔panel linkage belongs on the explicit provider + `Tabs` composition (Composition / CustomStyled) — that split is intentional, not a missing feature.
 
 ## Overflow
 

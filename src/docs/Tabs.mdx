@@ -11,7 +11,11 @@ import * as TabsStories from "../components/Tabs/__storybook__/Tabs.stories";
 
 This page documents **`ManagedTabs`** (selection context + visual tablist). For panels, full composition, imports, and keyboard/a11y contracts, start at [Tabs overview](?path=/docs/docs-tabs-overview--docs).
 
-Import the presentational list as `Tabs` when you compose with `ActiveTabContextProvider` yourself; use `ManagedTabs` when you only need a selectable tablist.
+`ManagedTabs` / `Tabs` are for the **tab list** only. For panels, compose `ActiveTabContextProvider` + `Tabs` + `TabPanel` yourself.
+
+Import the presentational list as `Tabs` when you already have (or need) `ActiveTabContextProvider`; use `ManagedTabs` only when you want a self-contained selectable list with no sibling panels under that provider.
+
+> **Warning:** Do not nest `ManagedTabs` inside an existing `ActiveTabContextProvider` expecting shared selection — it creates its own provider and will not inherit the outer active-tab `value` context.
 
 ## Playground
 
