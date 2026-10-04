@@ -9,7 +9,7 @@ import * as TabStories from "../components/Tab/__storybook__/Tab.stories";
 
 # Tab
 
-Single tab control for `Tabs` / `ManagedTabs`. Selection normally comes from active-tab context. Prefer not to pass `selected` while also participating in that context (it forces appearance and can conflict). Resolved `variant` / `size` are exposed as `data-variant` / `data-size`; selection via `aria-selected`. System contracts and token theming: [Tabs overview](?path=/docs/docs-tabs-overview--docs).
+Single tab control for `Tabs` / `ManagedTabs`. Selection normally comes from active-tab context. Resolved `variant` / `size` are exposed as `data-variant` / `data-size`; selection via `aria-selected`. System contracts and token theming: [Tabs overview](?path=/docs/docs-tabs-overview--docs).
 
 ## Playground
 
@@ -27,6 +27,16 @@ Trailing content via `slots.end`:
 Per-tab `variant` / `size` win over values pushed by the parent `Tabs` context (`prop ?? context ?? default`):
 
 <Canvas of={TabStories.PropOverridesContext} />
+
+## `selected` vs context (console warning)
+
+Use `selected` for **standalone** chrome (Storybook tables, static previews) **outside** `ActiveTabContextProvider`.
+
+Under a provider that already has an active tab, also passing `selected` is a conflict: the tab still treats `selected` as selected (`selected || contextMatch`), and development logs:
+
+> Both controlled and uncontrolled props are provided for Tab component. Controlled props will take precedence over context.
+
+**What to do:** drop `selected` and drive appearance via `value` + the provider; or keep `selected` and render the tab outside the provider.
 
 ## API
 

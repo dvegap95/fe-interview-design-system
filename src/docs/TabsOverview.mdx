@@ -119,6 +119,8 @@ Demos: [Tabs — Controlled](?path=/docs/docs-tabs--docs#controlled).
 
 Visual props resolve as **`prop ?? context ?? default`**. A Tab can override list-level `variant` / `size` — demo on [Tab — Prop overrides context](?path=/docs/docs-tab--docs#prop-overrides-context).
 
+Do **not** pass `selected` on `Tab` while it also sits under `ActiveTabContextProvider` with an active value — that mix logs a console warning. Details: [Tab — selected vs context](?path=/docs/docs-tab--docs#selected-vs-context-console-warning).
+
 ## Badge on a tab
 
 Any node via `Tab` `slots.end` (typically `Badge`) — demos on [Tab](?path=/docs/docs-tab--docs#with-badge) and [Tabs](?path=/docs/docs-tabs--docs#with-badge).
