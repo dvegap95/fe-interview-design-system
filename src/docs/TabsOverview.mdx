@@ -99,8 +99,8 @@ Live example (a11y wired):
 | `CssBaseline` | package root | Optional once-per-app mount for Inter + global baseline + default `:root` tokens. Skip if the host DS already owns fonts/baseline and only needs `style.css` + token overrides. |
 | `ActiveTabContextProvider` / `useActiveTabContext` | `…/context/activeTabContext` | Own selection when composing `Tabs` + sibling `TabPanel`s (or any custom chrome that must share the same active value). Prefer this over `ManagedTabs` whenever panels (or other siblings) need the same provider. |
 | `ManagedTabs` | package root | Convenience only: provider + `Tabs` for a **list-only** selectable tab strip. Do not nest it inside another active-tab provider. |
-| `SizeProvider` / `useResolvedSize` | `…/context/sizeContext` | Advanced: push or read `sm` \| `md` outside a `Tabs` tree (e.g. host layout that sizes nested `Badge`s the same way). Everyday size comes from `Tabs` / `Tab` props. |
-| `TabVariantProvider` / `useResolvedTabVariant` | `…/context/tabVariantContext` | Advanced: push or read `pill` \| `underline` outside a `Tabs` tree. Everyday variant comes from `Tabs` / `Tab` props. |
+| `SizeProvider` / `useResolvedSize` | `…/context/sizeContext` | Advanced: push or read `sm` / `md` outside a `Tabs` tree (e.g. host layout that sizes nested `Badge`s the same way). Everyday size comes from `Tabs` / `Tab` props. |
+| `TabVariantProvider` / `useResolvedTabVariant` | `…/context/tabVariantContext` | Advanced: push or read `pill` / `underline` outside a `Tabs` tree. Everyday variant comes from `Tabs` / `Tab` props. |
 
 Resolution for visual tokens is always **`prop ?? nearest context ?? default`**. Selection is separate: only `ActiveTabContextProvider` (or `ManagedTabs`) owns active value.
 
@@ -215,9 +215,9 @@ Prop-driven visual state is exposed as **stable data attributes** on those roots
 
 | Attribute | On | Values |
 | --- | --- | --- |
-| `data-variant` | `Tabs`, `Tab`, `Badge` | Tab/Tabs: `pill` \| `underline`; Badge: `neutral` \| `positive` \| `negative` |
-| `data-size` | `Tabs`, `Tab`, `Badge` | `sm` \| `md` |
-| `aria-selected` | `Tab` | `"true"` \| `"false"` (selection; prefer this over inventing a parallel hook) |
+| `data-variant` | `Tabs`, `Tab`, `Badge` | Tab/Tabs: `pill` / `underline`; Badge: `neutral` / `positive` / `negative` |
+| `data-size` | `Tabs`, `Tab`, `Badge` | `sm` / `md` |
+| `aria-selected` | `Tab` | `"true"` / `"false"` (selection; prefer this over inventing a parallel hook) |
 
 Use `className` for structural restyles, and attribute selectors when you need to branch on variant/size/selection.
 

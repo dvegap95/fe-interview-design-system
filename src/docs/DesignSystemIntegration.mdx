@@ -77,9 +77,9 @@ Every public root accepts `className` (merged internally with `cn`). Prop-driven
 
 | Attribute | On | Values |
 | --- | --- | --- |
-| `data-variant` | `Tabs`, `Tab`, `Badge` | Tab/Tabs: `pill` \| `underline`; Badge: `neutral` \| `positive` \| `negative` |
-| `data-size` | `Tabs`, `Tab`, `Badge` | `sm` \| `md` |
-| `aria-selected` | `Tab` | `"true"` \| `"false"` |
+| `data-variant` | `Tabs`, `Tab`, `Badge` | Tab/Tabs: `pill` / `underline`; Badge: `neutral` / `positive` / `negative` |
+| `data-size` | `Tabs`, `Tab`, `Badge` | `sm` / `md` |
+| `aria-selected` | `Tab` | `"true"` / `"false"` |
 
 Escape-hatch demo (intentionally loud host styling):
 
@@ -118,7 +118,7 @@ Advanced context exports (`SizeProvider`, `TabVariantProvider`, `cn`, …): [Tab
 
 1. Import `style.css` once; put host token CSS after it (or prefer a scoped theme class).
 2. Decide whether the host mounts `CssBaseline` or supplies its own fonts/baseline.
-3. Prefer token overrides for brand; use `className` + `data-*` for structural look.
+3. Prefer token overrides for brand; use `className` plus data/aria attribute hooks for structural look.
 4. Compose `ActiveTabContextProvider` + `Tabs` + `TabPanel` at the product boundary.
-5. Allow host wrappers under the tablist; keep a11y `id` / `aria-*` on the tab and panel elements.
+5. Allow host wrappers under the tablist; keep a11y `id` / aria wiring on the tab and panel elements.
 6. Avoid nesting `ManagedTabs` inside an existing active-tab provider.
