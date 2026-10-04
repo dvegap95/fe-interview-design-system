@@ -1,7 +1,15 @@
 import type { Preview } from "@storybook/react-vite";
-import "../src/styles/fonts";
+import CssBaseline from "../src/components/CssBaseline";
 
 const preview: Preview = {
+  decorators: [
+    (Story) => (
+      <>
+        <CssBaseline />
+        <Story />
+      </>
+    ),
+  ],
   parameters: {
     controls: {
       matchers: {
