@@ -162,7 +162,23 @@ When composing panels, wire the WAI-ARIA tabs pattern:
 
 ## Overflow
 
-For narrow viewports, set `autoScrollBehavior` to a `ScrollBehavior` (`auto` / `smooth` / `instant`) so the selected tab scrolls into view within the tablist. `"none"` (default) disables auto-scroll entirely — see [Tabs — Overflow](?path=/docs/docs-tabs--docs#overflow). Scrolling uses `block: "nearest"` so the page does not jump vertically when only the tablist needs to move.
+`Tabs` does **not** set `overflow-x` on the tablist. A native scrollport clips descendants, including `:focus-visible` outlines on tabs, and recovering that ring usually means host-specific padding or size hacks. Overflow chrome is therefore left to the host via `className` (or a wrapper); the package only owns **scroll-into-view when selection changes**.
+
+**Host scrollport** (example — same idea as the Overflow story):
+
+```css
+.overflowTabs {
+  overflow-x: auto;
+  overflow-y: visible;
+  width: 100%;
+  /* room so focus rings are not clipped by the scrollport */
+  padding: 4px;
+}
+```
+
+**Auto-scroll selected tab:** set `autoScrollBehavior` to a `ScrollBehavior` (`auto` / `smooth` / `instant`). `"none"` (default) leaves scrolling entirely to the user/host. When enabled, `scrollIntoView` uses `inline: "center"` and `block: "nearest"` so the page does not jump vertically when only the tablist needs to move.
+
+Demo: [Tabs — Overflow](?path=/docs/docs-tabs--docs#overflow) (narrow viewport + host `overflow-x` + `autoScrollBehavior="smooth"`).
 
 ## Theming (CSS tokens)
 

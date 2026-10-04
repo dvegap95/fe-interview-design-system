@@ -42,7 +42,7 @@ Disabled tabs are not focusable via arrow keys / Home / End, and are skipped for
 
 ## Overflow
 
-When `autoScrollBehavior` is not `"none"`, the selected tab scrolls into view in an overflowing list. The value is passed to `scrollIntoView` as `behavior` (`auto` / `smooth` / `instant`).
+`Tabs` does not apply `overflow-x` itself — a scrollport would clip tab `:focus-visible` outlines, so the host owns overflow (and any padding that keeps focus chrome visible) via `className`. This story uses that pattern plus `autoScrollBehavior="smooth"` so the selected tab scrolls into view. Default `autoScrollBehavior` is `"none"` (opt-in). Rationale and host CSS: [Tabs overview — Overflow](?path=/docs/docs-tabs-overview--docs#overflow).
 
 <Canvas of={TabsStories.Overflow} />
 

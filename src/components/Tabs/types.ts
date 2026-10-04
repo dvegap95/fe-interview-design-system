@@ -18,7 +18,8 @@ export type TabsProps = ComponentPropsWithRef<"div"> &
     /** Size pushed to child tabs (and nested badges) via context. @default "md" */
     size?: Size;
     /**
-     * Scroll the selected tab into view within an overflowing list.
+     * Scroll the selected tab into view when the host provides an overflowing list.
+     * Overflow CSS is host-owned (native `overflow-x` on `Tabs` would clip focus rings).
      * `"none"` disables auto-scroll; any other value is passed to `scrollIntoView`
      * as `behavior` (`auto` / `smooth` / `instant`).
      * @default "none"

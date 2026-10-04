@@ -49,7 +49,7 @@ export const tabsControls = {
       "instant",
     ],
     description:
-      '`"none"` disables auto-scroll; otherwise the value is passed to `scrollIntoView` as `behavior`.',
+      'Opt-in scroll-into-view for the selected tab. Host must own overflow CSS (see Overflow docs). `"none"` disables auto-scroll; otherwise passed to `scrollIntoView` as `behavior`.',
     table: {
       type: {
         summary: 'ScrollBehavior | "none"',
