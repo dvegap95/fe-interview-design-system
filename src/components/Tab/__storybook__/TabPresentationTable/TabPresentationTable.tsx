@@ -1,82 +1,39 @@
+import { cn } from "@/lib/utils";
 import Tab from "../../Tab";
 import type { TabProps } from "../../types";
 import styles from "./TabPresentationTable.module.scss";
 
-type TabPresentationColumnProps = Partial<TabProps> & {
-  columnId: string;
-  columnName: string;
-};
+const STATES = ["default", "hover", "active", "focus"] as const;
 
-function TabPresentationColumn(props: TabPresentationColumnProps) {
-  return (
-    <div className={styles.tabPresentationColumn}>
-      <div className={styles.headerName}>{props.columnName}</div>
-      <Tab
-        {...props}
-        id={`${props.columnId}-default`}
-      >
-        Label
-      </Tab>
-      <Tab
-        {...props}
-        id={`${props.columnId}-hover`}
-      >
-        Label
-      </Tab>
-      <Tab
-        {...props}
-        id={`${props.columnId}-active`}
-      >
-        Label
-      </Tab>
-      <Tab
-        {...props}
-        id={`${props.columnId}-focus`}
-      >
-        Label
-      </Tab>
-    </div>
-  );
-}
+const COLUMNS = [
+  { columnId: "selected-pill", selected: true, variant: "pill" },
+  { columnId: "default-pill", selected: false, variant: "pill" },
+  { columnId: "selected-underline", selected: true, variant: "underline" },
+  { columnId: "default-underline", selected: false, variant: "underline" },
+] as const;
 
 export default function TabPresentationTable(props: Partial<TabProps>) {
   return (
-    <div className={styles.tabPresentationTable}>
-      <div className={styles.tabPresentationColumn}>
-        <div> </div>
-        <div>Default</div>
-        <div>Hover</div>
-        <div>Active</div>
-        <div>Focus</div>
-      </div>
-      <TabPresentationColumn
-        columnId="selected-pill"
-        columnName="Pill Selected"
-        {...props}
-        selected={true}
-        variant="pill"
-      />
-      <TabPresentationColumn
-        columnId="default-pill"
-        columnName="Pill"
-        {...props}
-        selected={false}
-        variant="pill"
-      />
-      <TabPresentationColumn
-        columnId="selected-underline"
-        columnName="Underline Selected"
-        {...props}
-        selected={true}
-        variant="underline"
-      />
-      <TabPresentationColumn
-        columnId="default-underline"
-        columnName="Underline"
-        {...props}
-        selected={false}
-        variant="underline"
-      />
+    <div
+      className={cn(
+        styles.tabPresentationTable,
+        props.size && styles[`size-${props.size}`],
+      )}
+    >
+      {STATES.map((state) =>
+        COLUMNS.map(({ columnId, selected, variant }) => (
+          <div key={`${columnId}-${state}`} className={styles.cell}>
+            <Tab
+              {...props}
+              id={`${columnId}-${state}`}
+              selected={selected}
+              variant={variant}
+            >
+              Label
+            </Tab>
+          </div>
+        )),
+      )}
     </div>
   );
 }

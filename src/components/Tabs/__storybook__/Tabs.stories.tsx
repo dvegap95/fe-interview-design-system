@@ -3,6 +3,7 @@ import { useState } from "react";
 import Tab from "@/components/Tab";
 import { ManagedTabs } from "../Tabs";
 import type { ManagedTabsProps } from "../types";
+import Badge from "@/components/Badge";
 
 const meta = {
   title: "Components/Tabs",
@@ -19,6 +20,7 @@ const DEFAULT_CHILDREN = (
     <Tab value="tab2">Label</Tab>
     <Tab value="tab3">Label</Tab>
     <Tab value="tab4">Label</Tab>
+    <Tab value="tab5">Label</Tab>
   </>
 );
 
@@ -58,7 +60,7 @@ export const PillMd: Story = {
     children: DEFAULT_CHILDREN,
     variant: "pill",
     size: "md",
-    defaultActiveTab: "tab2",
+    defaultActiveTab: "tab1",
   },
 };
 
@@ -67,7 +69,7 @@ export const UnderlineMd: Story = {
     children: DEFAULT_CHILDREN,
     variant: "underline",
     size: "md",
-    defaultActiveTab: "tab2",
+    defaultActiveTab: "tab1",
   },
 };
 
@@ -76,7 +78,7 @@ export const PillSm: Story = {
     children: DEFAULT_CHILDREN,
     variant: "pill",
     size: "sm",
-    defaultActiveTab: "tab2",
+    defaultActiveTab: "tab1",
   },
 };
 
@@ -85,7 +87,7 @@ export const UnderlineSm: Story = {
     children: DEFAULT_CHILDREN,
     variant: "underline",
     size: "sm",
-    defaultActiveTab: "tab2",
+    defaultActiveTab: "tab1",
   },
 };
 
@@ -118,5 +120,67 @@ export const Vertical: Story = {
     children: DEFAULT_CHILDREN,
     defaultActiveTab: "tab1",
     orientation: "vertical",
+  },
+};
+
+export const Example1: Story = {
+  args: {
+    children: (
+      <>
+        <Tab value="emails">Emails</Tab>
+        <Tab
+          value="files"
+          slots={{
+            end: (
+              <Badge
+                variant="negative"
+                size="md"
+              >
+                Warning
+              </Badge>
+            ),
+          }}
+        >
+          Files
+        </Tab>
+        <Tab value="edits">Edits</Tab>
+        <Tab value="dashboard">Dashboard</Tab>
+        <Tab value="messages">Messages</Tab>
+      </>
+    ),
+    variant: "pill",
+    size: "sm",
+    defaultActiveTab: "emails",
+  },
+};
+
+export const Example2: Story = {
+  args: {
+    children: (
+      <>
+        <Tab value="emails">Emails</Tab>
+        <Tab
+          value="files"
+          slots={{
+            end: (
+              <Badge
+                variant="negative"
+                size="md"
+              >
+                Warning
+              </Badge>
+            ),
+          }}
+        >
+          Files
+        </Tab>
+        <Tab value="edits">Edits</Tab>
+        <Tab value="dashboard">Dashboard</Tab>
+        <Tab value="messages">Messages</Tab>
+      </>
+    ),
+    variant: "underline",
+    size: "sm",
+    defaultActiveTab: "emails",
   },
 };

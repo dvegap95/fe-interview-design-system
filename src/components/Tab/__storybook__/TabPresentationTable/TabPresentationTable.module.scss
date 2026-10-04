@@ -1,18 +1,21 @@
 .tabPresentationTable {
-    display: flex;
-    flex-direction: row;
-    gap: 45px;
+    display: grid;
+    // c2c 115 · 129 · 115 => (Wᵢ + Wᵢ₊₁) / 2 = Dᵢ
+    grid-template-columns: 101px 129px 129px 101px;
+    grid-template-rows: repeat(4, 65px);
+    justify-items: center;
+    align-items: center;
+    width: max-content;
+
+    &.size-sm {
+        // c2c 115 · 133 · 115
+        grid-template-columns: 97px 133px 133px 97px;
+    }
 }
 
-.tabPresentationColumn {
+.cell {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-    justify-content: space-around;
     align-items: center;
-
-    .headerName {
-        margin: 0 -30%;
-        white-space: nowrap;
-    }
+    justify-content: center;
+    height: 100%;
 }
