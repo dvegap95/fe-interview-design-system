@@ -31,6 +31,7 @@ const preview: Preview = {
           "Docs",
           [
             "Tabs overview",
+            "Design system integration",
             "Badge",
             "Tab",
             "Tabs",

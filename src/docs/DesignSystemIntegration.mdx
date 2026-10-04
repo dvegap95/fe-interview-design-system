@@ -1,0 +1,124 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import * as TabsStories from "../components/Tabs/__storybook__/Tabs.stories";
+import * as TabPanelStories from "../components/TabPanel/__storybook__/TabPanel.stories";
+
+<Meta title="Docs/Design system integration" />
+
+# Design system integration
+
+The take-home brief asks for a Tabs system that can live inside a **larger design system**. This page is the host-DS playbook: how to consume the package without forking SCSS, how to theme it with your tokens, and how to restyle structure when tokens are not enough.
+
+For API contracts, keyboard, and a11y wiring, start at [Tabs overview](?path=/docs/docs-tabs-overview--docs).
+
+## What “embeddable” means here
+
+| Concern | Approach |
+| --- | --- |
+| Brand values (color, type, spacing) | CSS custom properties on a host scope or `:root` |
+| Structural look (radius, layout chrome) | `className` on roots + stable `data-*` / `aria-*` hooks |
+| Composition with host layout | Context + role queries — wrappers between `Tabs` and `Tab` are fine |
+| Selection shared with host chrome | Explicit `ActiveTabContextProvider` (not nested `ManagedTabs`) |
+| Class merging in host code | Public `cn` helper from the package root |
+
+You should not need to reach into CSS modules or rewrite component internals for a host theme.
+
+## 1. Install once in the host app / DS
+
+```tsx
+import {
+  Badge,
+  CssBaseline,
+  Tab,
+  TabPanel,
+  Tabs,
+  cn,
+} from "fe-interview-design-system";
+import { ActiveTabContextProvider } from "fe-interview-design-system/context/activeTabContext";
+import "fe-interview-design-system/style.css";
+// Host theme AFTER package CSS when overriding the same :root variables:
+import "./acme-theme.css";
+
+// Optional if the host does not already own fonts / box-sizing / default tokens:
+// <CssBaseline />
+```
+
+Peer deps: `react` and `react-dom` ^19.
+
+## 2. Theme with tokens (preferred)
+
+Components read shared values through CSS variables (colors, spacing, typography). Defaults ship on `:root` via `style.css` / `CssBaseline`.
+
+**Scoped host theme** (recommended — no fight over global load order):
+
+```css
+.acme-theme {
+  --color-surface-inverse: #0b3d2a;
+  --color-surface-inverse-hover: #145c40;
+  --color-surface-inverse-active: #1e7a56;
+  --font-size-body-sm: 10px;
+  --line-height-body-sm: 150%;
+}
+```
+
+```tsx
+<div className="acme-theme">
+  <ActiveTabContextProvider defaultActiveTab="a">
+    <Tabs aria-label="Sections">{/* … */}</Tabs>
+    {/* sibling TabPanels … */}
+  </ActiveTabContextProvider>
+</div>
+```
+
+Token tables and more examples: [Tabs overview — Theming](?path=/docs/docs-tabs-overview--docs#theming-css-tokens).
+
+## 3. Structural restyle when tokens are not enough
+
+Every public root accepts `className` (merged internally with `cn`). Prop-driven state is exposed as **stable** attributes — not hashed CSS-module class names:
+
+| Attribute | On | Values |
+| --- | --- | --- |
+| `data-variant` | `Tabs`, `Tab`, `Badge` | Tab/Tabs: `pill` \| `underline`; Badge: `neutral` \| `positive` \| `negative` |
+| `data-size` | `Tabs`, `Tab`, `Badge` | `sm` \| `md` |
+| `aria-selected` | `Tab` | `"true"` \| `"false"` |
+
+Escape-hatch demo (intentionally loud host styling):
+
+<Canvas of={TabsStories.CustomStyled} />
+
+Full selector patterns: [Tabs overview — Custom styling](?path=/docs/docs-tabs-overview--docs#custom-styling).
+
+## 4. Compose with host wrappers
+
+Because visuals and selection travel through context (and keyboard code queries `[role="tab"]` inside the tablist), the host may insert layout nodes:
+
+```tsx
+<Tabs aria-label="Sections" className={cn(hostStyles.tablist, className)}>
+  <div className={hostStyles.cluster}>
+    <Tab value="a">A</Tab>
+    <span className={hostStyles.wrap}>
+      <Tab value="b">B</Tab>
+    </span>
+  </div>
+</Tabs>
+```
+
+Details: [Tabs overview — DOM wrappers](?path=/docs/docs-tabs-overview--docs#dom-wrappers-context-not-hierarchy).
+
+## 5. Own selection at the host boundary
+
+For tabs **and** panels (or any sibling host chrome that must share the active value), mount **one** `ActiveTabContextProvider` at the host boundary and use presentational `Tabs` — not `ManagedTabs` (which creates its own provider).
+
+Canonical composition:
+
+<Canvas of={TabPanelStories.Composition} />
+
+Advanced context exports (`SizeProvider`, `TabVariantProvider`, `cn`, …): [Tabs overview — Public helpers and contexts](?path=/docs/docs-tabs-overview--docs#public-helpers-and-contexts).
+
+## Checklist for a host design system
+
+1. Import `style.css` once; put host token CSS after it (or prefer a scoped theme class).
+2. Decide whether the host mounts `CssBaseline` or supplies its own fonts/baseline.
+3. Prefer token overrides for brand; use `className` + `data-*` for structural look.
+4. Compose `ActiveTabContextProvider` + `Tabs` + `TabPanel` at the product boundary.
+5. Allow host wrappers under the tablist; keep a11y `id` / `aria-*` on the tab and panel elements.
+6. Avoid nesting `ManagedTabs` inside an existing active-tab provider.
