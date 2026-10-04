@@ -1,0 +1,26 @@
+import { Meta, Canvas, Controls, ArgTypes } from "@storybook/addon-docs/blocks";
+import Badge from "../components/Badge";
+import * as BadgeStories from "../components/Badge/__storybook__/Badge.stories";
+import * as TabStories from "../components/Tab/__storybook__/Tab.stories";
+
+<Meta
+  title="Docs/Badge"
+  component={Badge}
+/>
+
+# Badge
+
+Compact status label. In the Tabs system it usually appears in a Tab’s `slots.end`. Composition and imports: [Tabs overview](?path=/docs/docs-tabs-overview--docs).
+
+## Playground
+
+<Canvas of={BadgeStories.Playground} />
+<Controls of={BadgeStories.Playground} />
+
+## Used in a Tab
+
+<Canvas of={TabStories.WithBadge} />
+
+## API
+
+<ArgTypes of={Badge} />

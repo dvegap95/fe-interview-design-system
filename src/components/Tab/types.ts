@@ -11,7 +11,10 @@ export type TabProps = ComponentPropsWithRef<"button"> &
     selected?: boolean;
     /** Size; inherits from nearest `SizeProvider` when omitted. */
     size?: Size;
-    /** Value matched against the active tab from context. */
+    /**
+     * Value matched against the active tab from context.
+     * Required for selection under the provider — without it, clicks are a no-op.
+     */
     value?: string;
     /** Optional trailing content (typically a `Badge`). */
     slots?: {

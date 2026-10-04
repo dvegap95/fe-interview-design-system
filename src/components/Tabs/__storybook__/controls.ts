@@ -48,7 +48,8 @@ export const tabsControls = {
       "smooth",
       "instant",
     ],
-    description: "Scroll the selected tab into view within an overflowing list.",
+    description:
+      '`"none"` off; otherwise scrolls the selected tab into view. First paint uses `instant`; later changes use this value.',
     table: {
       type: {
         summary: 'ScrollBehavior | "none"',

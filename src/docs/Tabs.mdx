@@ -1,0 +1,69 @@
+import { Meta, Canvas, Controls, ArgTypes } from "@storybook/addon-docs/blocks";
+import { ManagedTabs } from "../components/Tabs";
+import * as TabsStories from "../components/Tabs/__storybook__/Tabs.stories";
+
+<Meta
+  title="Docs/Tabs"
+  component={ManagedTabs}
+/>
+
+# Tabs
+
+This page documents **`ManagedTabs`** (selection context + visual tablist). For panels, full composition, imports, and keyboard/a11y contracts, start at [Tabs overview](?path=/docs/docs-tabs-overview--docs).
+
+Import the presentational list as `Tabs` when you compose with `ActiveTabContextProvider` yourself; use `ManagedTabs` when you only need a selectable tablist.
+
+## Playground
+
+Uncontrolled selection with `defaultActiveTab`. Tablist is named with `aria-label` (panels are not part of `ManagedTabs` — see overview composition for full WAI-ARIA linkage).
+
+<Canvas of={TabsStories.Playground} />
+<Controls of={TabsStories.Playground} />
+
+## Controlled
+
+Value owned by the parent. Without wiring state, the callback fires but the UI stays put:
+
+<Canvas of={TabsStories.Controlled} />
+
+Wired local state — selection updates and logs Actions:
+
+<Canvas of={TabsStories.ControlledWired} />
+
+## Disabled tabs
+
+Disabled tabs are not focusable via arrow keys / Home / End, and are skipped for activation:
+
+<Canvas of={TabsStories.Disabled} />
+
+## Overflow
+
+When `autoScrollBehavior` is not `"none"`, the selected tab scrolls into view in an overflowing list. After the first paint, the value is passed through to `scrollIntoView` (`auto` / `smooth` / `instant`).
+
+<Canvas of={TabsStories.Overflow} />
+
+## Vertical
+
+Orientation for layout and arrow-key navigation:
+
+<Canvas of={TabsStories.Vertical} />
+
+## With badge
+
+Badge on a tab via `slots.end`:
+
+<Canvas of={TabsStories.WithBadge} />
+
+Underline variant:
+
+<Canvas of={TabsStories.UnderlineWithBadge} />
+
+## Custom styling
+
+Escape hatch via `className` on implicated roots — see [Tabs overview — Custom styling](?path=/docs/docs-tabs-overview--docs#custom-styling) (single system demo).
+
+## API
+
+Props for `ManagedTabs` (selection + tablist visuals). Presentational `Tabs` shares the visual props (`variant`, `size`, `orientation`, `autoScrollBehavior`, …) without the selection props.
+
+<ArgTypes of={ManagedTabs} />

@@ -10,7 +10,9 @@ const distReady =
 
 const config: StorybookConfig = {
   stories: [
-    "../src/**/*.mdx",
+    // Interview brief stays at src root as originally placed.
+    "../src/Introduction.mdx",
+    "../src/docs/**/*.mdx",
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
     ...(distReady
       ? [

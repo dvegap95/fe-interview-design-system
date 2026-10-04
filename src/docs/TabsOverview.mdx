@@ -1,0 +1,155 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import * as TabPanelStories from "../components/TabPanel/__storybook__/TabPanel.stories";
+import * as TabsStories from "../components/Tabs/__storybook__/Tabs.stories";
+
+<Meta title="Docs/Tabs overview" />
+
+# Tabs overview
+
+Public entry point for the Tabs system: composition, imports, accessibility, and escape hatches. Per-component docs (playgrounds + API) live under **Docs**; interactive CSF stories also appear under **Components**.
+
+## Install and import
+
+Peer deps: `react` and `react-dom` ^19. Import components and helpers from the package root, context helpers from subpaths, and styles once:
+
+```tsx
+import {
+  Badge,
+  CssBaseline,
+  ManagedTabs,
+  Tab,
+  TabPanel,
+  Tabs,
+  cn,
+} from "fe-interview-design-system";
+import { ActiveTabContextProvider } from "fe-interview-design-system/context/activeTabContext";
+import "fe-interview-design-system/style.css";
+
+// Optional app-wide font/baseline used by this package’s stories:
+// <CssBaseline />
+
+// Class merge helper (same idea as clsx):
+// cn(styles.root, condition && styles.active, className)
+```
+
+Also available: `fe-interview-design-system/context/sizeContext`, `.../tabVariantContext`.
+
+## Mental model
+
+- **`Tabs`** — visual tablist (`role="tablist"`). Pushes `variant` / `size` via context. Does **not** own selection.
+- **`ManagedTabs`** — `ActiveTabContextProvider` + `Tabs`. Use for a selectable tablist **without** sibling panels.
+- **`Tab`** — one tab. Selection from active-tab context; optional `selected` for standalone chrome. Under the provider, `value` is required for clicks to change selection.
+- **`TabPanel`** — content for a `value`. Requires `ActiveTabContextProvider`.
+- **`Badge`** — optional trailing UI via `Tab` `slots.end`.
+
+**Panels are siblings of the tablist under the provider** — not children of `ManagedTabs` / `Tabs`. The provider inside `ManagedTabs` does not wrap siblings outside that tree, so full tab + panel UIs should use the explicit composition below.
+
+## Recommended composition
+
+```tsx
+<ActiveTabContextProvider defaultActiveTab="a">
+  <Tabs aria-label="Sections">
+    <Tab
+      id="tab-a"
+      value="a"
+      aria-controls="panel-a"
+    >
+      A
+    </Tab>
+    <Tab
+      id="tab-b"
+      value="b"
+      aria-controls="panel-b"
+    >
+      B
+    </Tab>
+  </Tabs>
+  <TabPanel
+    id="panel-a"
+    value="a"
+    aria-labelledby="tab-a"
+  >
+    …
+  </TabPanel>
+  <TabPanel
+    id="panel-b"
+    value="b"
+    aria-labelledby="tab-b"
+  >
+    …
+  </TabPanel>
+</ActiveTabContextProvider>
+```
+
+Live example (a11y wired):
+
+<Canvas of={TabPanelStories.Composition} />
+
+## Selection
+
+- **Uncontrolled:** `defaultActiveTab` on the provider / `ManagedTabs`.
+- **Controlled:** `activeTab` + `onActiveTabChange`. If the parent does not update `activeTab`, the UI will not move (callback still fires).
+
+Demos: [Tabs — Controlled](?path=/docs/docs-tabs--docs#controlled).
+
+## Prop vs context
+
+Visual props resolve as **`prop ?? context ?? default`**. A Tab can override list-level `variant` / `size` — demo on [Tab — Prop overrides context](?path=/docs/docs-tab--docs#prop-overrides-context).
+
+## Badge on a tab
+
+Any node via `Tab` `slots.end` (typically `Badge`) — demos on [Tab](?path=/docs/docs-tab--docs#with-badge) and [Tabs](?path=/docs/docs-tabs--docs#with-badge).
+
+## Keyboard
+
+Built into the tablist:
+
+- Roving `tabIndex` — when the active-tab provider has a selected value, only that tab is in the tab order. Outside the provider, or while `activeTab` is still empty, every tab uses `tabIndex={0}`.
+- Arrow keys move focus (horizontal vs vertical follows `orientation`)
+- `Home` / `End` jump to first / last enabled tab
+- `Enter` / `Space` activate the focused tab
+- `disabled` tabs are skipped — demo on [Tabs — Disabled](?path=/docs/docs-tabs--docs#disabled-tabs)
+
+## Accessibility
+
+When composing panels, wire the WAI-ARIA tabs pattern:
+
+- Tablist name: `aria-label` or `aria-labelledby` on `Tabs`
+- Tab: `id` + `aria-controls={panelId}`
+- Panel: `id` + `aria-labelledby={tabId}`
+
+`aria-selected`, `role`, and `aria-orientation` are handled by the components.
+
+`ManagedTabs` playgrounds name the tablist with `aria-label`. Full tab↔panel linkage is shown in Composition / CustomStyled (panels cannot sit under `ManagedTabs`’s internal provider).
+
+## Overflow
+
+For narrow viewports, set `autoScrollBehavior` to a `ScrollBehavior` (`auto` / `smooth` / `instant`) so the selected tab scrolls into view within the tablist. `"none"` (default) disables scrolling. The first paint always uses `instant`; later selection changes use the prop value — see [Tabs — Overflow](?path=/docs/docs-tabs--docs#overflow).
+
+> **Known limitation:** `scrollIntoView` currently omits `block: "nearest"`, so the page may also jump vertically to bring the tab to the top. Do not treat that as intended API.
+
+## Custom styling
+
+Every root accepts `className` (merged with internal styles via `cn`). This demo intentionally breaks the default look on the tablist, tabs, badge, and panels. Prop-driven states (`variant` / `size`) use CSS-module class names (hashed), so hosts should restyle via `className` on the roots rather than targeting those internal state classes.
+
+### Escape-hatch demo
+
+Pass your own classes into each root. Shape is up to you — for example:
+
+```scss
+.myTabs {
+  gap: 12px;
+}
+.myTab {
+  text-transform: uppercase;
+}
+```
+
+<Canvas of={TabsStories.CustomStyled} />
+
+## Component reference
+
+- [Badge](?path=/docs/docs-badge--docs) — playground, used-in-Tab, API
+- [Tab](?path=/docs/docs-tab--docs) — playground, badge slot, prop overrides, API
+- [Tabs](?path=/docs/docs-tabs--docs) — `ManagedTabs` playground, controlled, disabled, overflow, vertical, badge examples, API
+- [TabPanel](?path=/docs/docs-tabpanel--docs) — composition + a11y, API

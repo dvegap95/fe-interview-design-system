@@ -1,0 +1,75 @@
+.tabs {
+  gap: 12px;
+  padding: 12px;
+  border: 3px dashed #c45c26;
+  background: repeating-linear-gradient(-45deg,
+      #fff7e8,
+      #fff7e8 8px,
+      #ffe4b8 8px,
+      #ffe4b8 16px);
+  border-radius: 0;
+
+  .tab.tab {
+    height: auto;
+    padding: 10px 14px;
+    border: 2px solid #1b4d3e;
+    border-radius: 0;
+    background: #e8fff6;
+    color: #1b4d3e;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: none;
+
+    &[aria-selected="true"] {
+      background: #1b4d3e;
+      color: #e8fff6;
+      border-color: #1b4d3e;
+      box-shadow: 4px 4px 0 #c45c26;
+    }
+
+    // Distinct from rest (mint) and selected (deep green).
+    &:hover:not([aria-selected="true"]) {
+      background: #c45c26;
+      color: #fff7e8;
+      border-color: #c45c26;
+      box-shadow: 4px 4px 0 #1b4d3e;
+    }
+
+    &[aria-selected="true"]:hover {
+      background: #2f6f5a;
+      color: #e8fff6;
+      border-color: #2f6f5a;
+      box-shadow: 4px 4px 0 #c45c26;
+    }
+
+    &:active:not([aria-selected="true"]) {
+      background: #a34a1c;
+      color: #fff7e8;
+      border-color: #a34a1c;
+    }
+
+    &[aria-selected="true"]:active {
+      background: #163d32;
+      color: #e8fff6;
+      border-color: #163d32;
+    }
+  }
+}
+
+.badge {
+  border-radius: 0;
+  border: 2px solid #7a1f1f;
+  background: #ffd0d0;
+  color: #7a1f1f;
+  transform: rotate(-6deg);
+}
+
+.panel {
+  margin-top: 16px;
+  padding: 16px;
+  border: 3px solid #3b2f6b;
+  background: #f3efff;
+  color: #3b2f6b;
+  font-family: "Comic Sans MS", "Chalkboard SE", cursive;
+}

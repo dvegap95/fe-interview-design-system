@@ -1,0 +1,24 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import TabPanel from "../components/TabPanel";
+import * as TabPanelStories from "../components/TabPanel/__storybook__/TabPanel.stories";
+
+<Meta
+  title="Docs/TabPanel"
+  component={TabPanel}
+/>
+
+# TabPanel
+
+Panel shown when `value` matches the active tab. Always render under `ActiveTabContextProvider`. For imports, keyboard, and the system entry point, see [Tabs overview](?path=/docs/docs-tabs-overview--docs).
+
+## Composition
+
+Provider + `Tabs` + `TabPanel` with WAI-ARIA linkage (`aria-label` on the list, tab `id` / `aria-controls`, panel `id` / `aria-labelledby`):
+
+<Canvas of={TabPanelStories.Composition} />
+
+Throws if rendered outside the provider.
+
+## API
+
+<ArgTypes of={TabPanel} />

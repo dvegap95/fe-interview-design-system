@@ -1,0 +1,35 @@
+import { Meta, Canvas, Controls, ArgTypes } from "@storybook/addon-docs/blocks";
+import Tab from "../components/Tab";
+import * as TabStories from "../components/Tab/__storybook__/Tab.stories";
+
+<Meta
+  title="Docs/Tab"
+  component={Tab}
+/>
+
+# Tab
+
+Single tab control for `Tabs` / `ManagedTabs`. Selection normally comes from active-tab context. Prefer not to pass `selected` while also participating in that context (it forces appearance and can conflict). System contracts: [Tabs overview](?path=/docs/docs-tabs-overview--docs).
+
+## Playground
+
+<Canvas of={TabStories.Playground} />
+<Controls of={TabStories.Playground} />
+
+## With badge
+
+Trailing content via `slots.end`:
+
+<Canvas of={TabStories.WithBadge} />
+
+## Prop overrides context
+
+Per-tab `variant` / `size` win over values pushed by the parent `Tabs` context (`prop ?? context ?? default`):
+
+<Canvas of={TabStories.PropOverridesContext} />
+
+## API
+
+`value` is required for selection under the active-tab provider — without it, clicks do not change the active tab.
+
+<ArgTypes of={Tab} />

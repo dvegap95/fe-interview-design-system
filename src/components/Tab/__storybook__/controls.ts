@@ -28,7 +28,8 @@ export const tabControls = {
   },
   value: {
     control: "text",
-    description: "Value matched against the active tab from context.",
+    description:
+      "Value matched against the active tab from context. Required for selection — without it, clicks do not change the active tab.",
     table: {
       type: {
         summary: "string",

@@ -12,7 +12,7 @@ const preview: Preview = {
   ],
   parameters: {
     controls: {
-      expanded: true,
+      expanded: false,
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
@@ -23,6 +23,24 @@ const preview: Preview = {
     },
     a11y: {
       test: "todo",
+    },
+    options: {
+      storySort: {
+        order: [
+          "Introduction",
+          "Docs",
+          [
+            "Tabs overview",
+            "Badge",
+            "Tab",
+            "Tabs",
+            "TabPanel",
+          ],
+          "Components",
+          "Package",
+          "*",
+        ],
+      },
     },
   },
 };

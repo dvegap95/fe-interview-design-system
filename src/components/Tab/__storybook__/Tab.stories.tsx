@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import Badge from "@/components/Badge";
+import { Tabs } from "@/components/Tabs";
 import Tab from "../Tab";
 import { tabControls } from "./controls";
 
@@ -37,4 +38,25 @@ export const WithBadge: Story = {
       ),
     },
   },
+};
+
+export const PropOverridesContext: Story = {
+  args: {
+    children: "Label",
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
+  },
+  render: () => (
+    <Tabs
+      variant="pill"
+      size="sm"
+    >
+      <Tab variant="underline">Underline override</Tab>
+      <Tab size="md">Md size override</Tab>
+      <Tab>Inherits pill sm</Tab>
+    </Tabs>
+  ),
 };
