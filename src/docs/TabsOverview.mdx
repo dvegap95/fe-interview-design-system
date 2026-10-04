@@ -24,8 +24,10 @@ import {
 } from "fe-interview-design-system";
 import { ActiveTabContextProvider } from "fe-interview-design-system/context/activeTabContext";
 import "fe-interview-design-system/style.css";
+// Host theme after package CSS when overriding :root tokens (see Theming):
+// import "./acme-theme.css";
 
-// Optional app-wide font/baseline used by this package’s stories:
+// Optional: mounts Inter + global baseline. Also emits default CSS tokens on :root.
 // <CssBaseline />
 
 // Class merge helper (same idea as clsx):
@@ -33,6 +35,8 @@ import "fe-interview-design-system/style.css";
 ```
 
 Also available: `fe-interview-design-system/context/sizeContext`, `.../tabVariantContext`.
+
+`style.css` is the built package stylesheet (component CSS + token defaults). If you also ship a host theme that redefines the same `:root` variables, **import the host theme after** `style.css` so it wins the cascade. Prefer a wrapper class (below) when you want to avoid load-order races.
 
 ## Mental model
 
@@ -127,6 +131,49 @@ When composing panels, wire the WAI-ARIA tabs pattern:
 ## Overflow
 
 For narrow viewports, set `autoScrollBehavior` to a `ScrollBehavior` (`auto` / `smooth` / `instant`) so the selected tab scrolls into view within the tablist. `"none"` (default) disables auto-scroll entirely — see [Tabs — Overflow](?path=/docs/docs-tabs--docs#overflow). Scrolling uses `block: "nearest"` so the page does not jump vertically when only the tablist needs to move.
+
+## Theming (CSS tokens)
+
+Components read shared values through CSS custom properties (colors, spacing, typography). Defaults live on `:root` and ship with `style.css` / `CssBaseline`. A larger design system can override them without forking component SCSS.
+
+**Scoped theme** (recommended — no fight over global `:root` order):
+
+```css
+.acme-theme {
+  --color-surface-inverse: #0b3d2a;
+  --color-surface-inverse-hover: #145c40;
+  --color-surface-inverse-active: #1e7a56;
+  --font-size-body-sm: 10px;
+  --line-height-body-sm: 150%;
+}
+```
+
+```tsx
+<div className="acme-theme">
+  <Tabs aria-label="Sections">…</Tabs>
+</div>
+```
+
+**Global `:root` override** (must load after `fe-interview-design-system/style.css`):
+
+```css
+:root {
+  --color-surface-inverse: #0b3d2a;
+  --font-size-body-sm: 10px;
+}
+```
+
+Typography mixins (`body-medium` / `body-small`) use:
+
+| Token | Default | Used by |
+| --- | --- | --- |
+| `--font-family` | Inter stack | both |
+| `--font-size-body-md` | `14px` | Tab, TabPanel |
+| `--line-height-body-md` | `150%` | Tab, TabPanel |
+| `--font-size-body-sm` | `12px` | Badge |
+| `--line-height-body-sm` | `150%` | Badge |
+
+Color / spacing tokens follow the same pattern (e.g. `--color-surface-inverse`, `--spacing-xs`). Use tokens when you want brand-wide value swaps; use `className` (below) when you need structural restyles tokens cannot express.
 
 ## Custom styling
 

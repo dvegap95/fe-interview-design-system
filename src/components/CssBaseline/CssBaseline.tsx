@@ -1,6 +1,6 @@
 import "@/styles/global.scss";
 
-/** Loads design-system global styles and the Inter font (400/700) into the document. */
+/** Loads design-system global styles (including :root CSS tokens), box-sizing baseline, and the Inter font (400/700). */
 export default function CssBaseline() {
   return (
     <>
