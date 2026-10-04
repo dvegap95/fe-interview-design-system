@@ -15,6 +15,7 @@ export function useTabs({ autoScrollBehavior, orientation = "horizontal" }: UseT
     tab.scrollIntoView({
       behavior: autoScrollBehavior,
       inline: "center",
+      block: "nearest",
     });
   }, [
     tabValueContext?.activeTab,
