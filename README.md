@@ -17,7 +17,18 @@ pnpm storybook
 pnpm dev
 ```
 
-Contributor conventions (scripts, Plop templates, dumb-view + hook layout): see [DEV.md](./DEV.md).
+## Scope and delivery
+
+This repo is a **component library** (build → `dist/`), not an SPA demo. What’s included and why (TabPanel as optional panels companion, pack/smoke/dist verification): [SCOPE.md](./SCOPE.md).
+
+```bash
+pnpm build          # library output
+pnpm test:smoke     # tests against dist/
+pnpm storybook:dist # Storybook stories that import the built package
+pnpm pack           # optional .tar.gz for install in a host app
+```
+
+Contributor conventions (scripts, Plop templates, dumb-view + hook layout): [DEV.md](./DEV.md).
 
 ## Figma file
 

@@ -68,7 +68,7 @@ Sidebar order is controlled in `.storybook/preview.tsx` (`storySort`).
 
 Public entry: `src/lib/index.ts` (built to `dist/`). Subpath exports and peer deps are declared in `package.json` `exports` / `peerDependencies`.
 
-When documenting host integration, prefer Storybook **Docs/Design system integration** over duplicating long setup in this file.
+Why the library shape, TabPanel, smoke, and dist stories exist: [SCOPE.md](./SCOPE.md). When documenting host integration, prefer Storybook **Docs/Design system integration** over duplicating long setup in this file.
 
 ## Checks before sharing
 
