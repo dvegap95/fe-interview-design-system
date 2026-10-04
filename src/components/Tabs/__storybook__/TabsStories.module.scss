@@ -1,6 +1,7 @@
 .overflowTabs {
-    overflow-x: auto;
+    overflow-x: scroll;
     overflow-y: visible;
     width: 100%;
+    max-width: 320px;
     padding: 4px;
 }
