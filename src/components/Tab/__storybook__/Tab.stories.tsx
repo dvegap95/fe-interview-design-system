@@ -13,37 +13,19 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const DefaultPill: Story = {
+export const Playground: Story = {
   args: {
     children: "Label",
-  },
-};
-
-export const SelectedPill: Story = {
-  args: {
-    children: "Label",
-    selected: true,
-  },
-};
-
-export const DefaultUnderline: Story = {
-  args: {
-    children: "Label",
-    variant: "underline",
-  },
-};
-
-export const SelectedUnderline: Story = {
-  args: {
-    children: "Label",
-    variant: "underline",
-    selected: true,
+    variant: "pill",
+    size: "md",
+    selected: false,
   },
 };
 
 export const WithBadge: Story = {
   args: {
     children: "Files",
+    size: "sm",
     slots: {
       end: (
         <Badge
@@ -54,6 +36,5 @@ export const WithBadge: Story = {
         </Badge>
       ),
     },
-    size: "sm",
   },
 };

@@ -13,6 +13,12 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const figmaQa = {
+  docs: {
+    disable: true,
+  },
+} as const;
+
 const BadgeVariantsRow = ({ size, gap }: { size: "sm" | "md"; gap: CSSProperties["gap"] }) => {
   return (
     <div
@@ -43,13 +49,16 @@ const BadgeVariantsRow = ({ size, gap }: { size: "sm" | "md"; gap: CSSProperties
   );
 };
 
-export const Default: Story = {
+export const Playground: Story = {
   args: {
     children: "Badge",
+    variant: "neutral",
+    size: "md",
   },
 };
 
 export const AllVariantsSm: Story = {
+  parameters: figmaQa,
   render: () => (
     <BadgeVariantsRow
       size="sm"
@@ -59,6 +68,7 @@ export const AllVariantsSm: Story = {
 };
 
 export const AllVariantsMd: Story = {
+  parameters: figmaQa,
   render: () => (
     <BadgeVariantsRow
       size="md"

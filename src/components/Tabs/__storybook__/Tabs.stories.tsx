@@ -28,10 +28,12 @@ const DEFAULT_CHILDREN = (
   </>
 );
 
-export const Uncontrolled: Story = {
+export const Playground: Story = {
   args: {
     children: DEFAULT_CHILDREN,
     defaultActiveTab: "tab1",
+    variant: "pill",
+    size: "md",
   },
 };
 
@@ -65,7 +67,14 @@ export const ControlledWired: Story = {
   },
 };
 
+const figmaQa = {
+  docs: {
+    disable: true,
+  },
+} as const;
+
 export const PillMd: Story = {
+  parameters: figmaQa,
   args: {
     children: DEFAULT_CHILDREN,
     variant: "pill",
@@ -75,6 +84,7 @@ export const PillMd: Story = {
 };
 
 export const UnderlineMd: Story = {
+  parameters: figmaQa,
   args: {
     children: DEFAULT_CHILDREN,
     variant: "underline",
@@ -84,6 +94,7 @@ export const UnderlineMd: Story = {
 };
 
 export const PillSm: Story = {
+  parameters: figmaQa,
   args: {
     children: DEFAULT_CHILDREN,
     variant: "pill",
@@ -93,6 +104,7 @@ export const PillSm: Story = {
 };
 
 export const UnderlineSm: Story = {
+  parameters: figmaQa,
   args: {
     children: DEFAULT_CHILDREN,
     variant: "underline",
@@ -135,7 +147,7 @@ export const Vertical: Story = {
   },
 };
 
-export const Example1: Story = {
+export const WithBadge: Story = {
   args: {
     children: (
       <>
@@ -166,7 +178,7 @@ export const Example1: Story = {
   },
 };
 
-export const Example2: Story = {
+export const UnderlineWithBadge: Story = {
   args: {
     children: (
       <>

@@ -15,10 +15,15 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const WithTabs: Story = {
+export const Composition: Story = {
   args: {
     children: null,
     value: "tab1",
+  },
+  parameters: {
+    controls: {
+      disable: true,
+    },
   },
   render: () => (
     <ActiveTabContextProvider defaultActiveTab="tab1">
