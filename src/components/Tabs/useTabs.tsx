@@ -2,10 +2,7 @@ import { type KeyboardEvent, useCallback, useLayoutEffect, useRef } from "react"
 import { useActiveTabContext } from "@/context/activeTabContext";
 import type { UseTabsProps } from "./types";
 
-export function useTabs({
-  autoScrollBehavior,
-  orientation = "horizontal",
-}: UseTabsProps) {
+export function useTabs({ autoScrollBehavior, orientation = "horizontal" }: UseTabsProps) {
   const listRef = useRef<HTMLDivElement>(null);
   const hasMountedRef = useRef(false);
   const tabValueContext = useActiveTabContext();

@@ -1,7 +1,7 @@
 import { ActiveTabContextProvider } from "@/context/activeTabContext";
 import { SizeProvider, useResolvedSize } from "@/context/sizeContext";
 import { TabVariantProvider, useResolvedTabVariant } from "@/context/tabVariantContext";
-import { cn } from "@/lib/utils";
+import cn from "@/utils/cn";
 import styles from "./Tabs.module.scss";
 import type { ManagedTabsProps, TabsProps } from "./types";
 

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import cn from "@/utils/cn";
 import styles from "./TabPanel.module.scss";
 import type { TabPanelProps } from "./types";
 import useTabPanel from "./useTabPanel";

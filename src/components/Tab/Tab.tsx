@@ -1,6 +1,6 @@
 import { SizeProvider, useResolvedSize } from "@/context/sizeContext";
 import { useResolvedTabVariant } from "@/context/tabVariantContext";
-import { cn } from "@/lib/utils";
+import cn from "@/utils/cn";
 import styles from "./Tab.module.scss";
 import type { TabProps } from "./types";
 import useTab from "./useTab";

@@ -1,5 +1,5 @@
 import { useResolvedSize } from "@/context/sizeContext";
-import { cn } from "@/lib/utils";
+import cn from "@/utils/cn";
 import styles from "./Badge.module.scss";
 import type { BadgeProps } from "./types";
 
