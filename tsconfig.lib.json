@@ -1,0 +1,31 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "allowImportingTsExtensions": false,
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": [
+    "src/lib/**/*",
+    "src/components/**/*",
+    "src/context/**/*",
+    "src/utils/**/*",
+    "src/types/baseComponentTypes.ts",
+    "src/types/styles.d.ts",
+    "src/styles/**/*"
+  ],
+  "exclude": [
+    "src/**/__tests__/**",
+    "src/**/__storybook__/**",
+    "src/**/*.test.*",
+    "src/**/*.stories.*",
+    "src/index.tsx",
+    "src/setupTests.ts",
+    "src/appStyles.css",
+    "src/Introduction.mdx"
+  ]
+}

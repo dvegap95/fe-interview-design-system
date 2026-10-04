@@ -1,2 +1,2 @@
-export * from "./Tab";
 export { default } from "./Tab";
+export type { TabProps } from "./types";
