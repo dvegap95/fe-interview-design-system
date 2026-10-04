@@ -4,6 +4,8 @@ import type { BaseComponentProps } from "@/types/baseComponentTypes";
 
 export type BadgeProps = ComponentPropsWithRef<"span"> &
   BaseComponentProps & {
+    /** Visual tone. @default "neutral" */
     variant?: "neutral" | "positive" | "negative";
+    /** Size; inherits from nearest `SizeProvider` when omitted. */
     size?: Size;
   };

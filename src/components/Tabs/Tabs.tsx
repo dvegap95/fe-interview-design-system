@@ -7,6 +7,7 @@ import type { ManagedTabsProps, TabsProps } from "./types";
 
 import { useTabs } from "./useTabs";
 
+/** Visual tab list (`role="tablist"`). Does not own selection state. */
 export function Tabs({
   children,
   variant: variantProp,
@@ -53,6 +54,7 @@ export function Tabs({
   );
 }
 
+/** `ActiveTabContextProvider` + `Tabs` for selection and visuals together. */
 export function ManagedTabs({
   activeTab,
   onActiveTabChange,

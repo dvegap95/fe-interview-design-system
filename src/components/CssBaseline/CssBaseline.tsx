@@ -1,10 +1,6 @@
-/**
- * Installs the Google Fonts Inter face used by Figma
- * (https://fonts.google.com/specimen/Inter) via declarative link tags.
- * Static 400/700 cuts (not the variable opsz axis). React 19 hoists these into document.head.
- */
 import "@/styles/global.scss";
 
+/** Loads design-system global styles and the Inter font (400/700) into the document. */
 export default function CssBaseline() {
   return (
     <>

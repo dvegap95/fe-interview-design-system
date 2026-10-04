@@ -16,15 +16,19 @@ export const DEFAULT_SIZE: Size = "md";
 export const SizeContext = createContext<SizeContextType>({
   size: DEFAULT_SIZE,
 });
+
+/** Reads the nearest size context value. */
 export const useSizeContext = () => {
   return useContext(SizeContext);
 };
 
+/** Resolves size from prop, then context, then the default (`md`). */
 export function useResolvedSize(size?: Size): Size {
   const inherited = useSizeContext()?.size;
   return size ?? inherited ?? DEFAULT_SIZE;
 }
 
+/** Provides a size token to descendants (e.g. nested badges). */
 export function SizeProvider({ size, children }: SizeContextProviderProps) {
   const value = useMemo(
     () => ({

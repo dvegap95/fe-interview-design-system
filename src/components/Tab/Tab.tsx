@@ -5,6 +5,7 @@ import styles from "./Tab.module.scss";
 import type { TabProps } from "./types";
 import useTab from "./useTab";
 
+/** Single tab control for use inside `Tabs` / `ManagedTabs`. */
 export default function Tab({
   children,
   size: sizeProp,
