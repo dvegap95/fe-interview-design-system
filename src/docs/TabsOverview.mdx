@@ -91,6 +91,23 @@ Live example (a11y wired):
 
 <Canvas of={TabPanelStories.Composition} />
 
+## DOM wrappers (context, not hierarchy)
+
+`Tabs` / `Tab` / `TabPanel` coordinate through React context and role queries — they do **not** require a fixed child tree under the tablist. Host layout wrappers are fine:
+
+```tsx
+<Tabs aria-label="Sections">
+  <div className="host-cluster">
+    <Tab value="a">A</Tab>
+    <span className="host-wrap">
+      <Tab value="b">B</Tab>
+    </span>
+  </div>
+</Tabs>
+```
+
+Variant / size still flow from `Tabs` → descendants, selection still flows from `ActiveTabContextProvider`, and keyboard navigation finds `[role="tab"]` inside the tablist (including nested ones). Use wrappers for host layout; keep WAI-ARIA `id` / `aria-controls` / `aria-labelledby` wiring on the tab and panel elements themselves.
+
 ## Selection
 
 - **Uncontrolled:** `defaultActiveTab` on the provider / `ManagedTabs`.
