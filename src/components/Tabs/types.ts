@@ -19,8 +19,8 @@ export type TabsProps = ComponentPropsWithRef<"div"> &
     size?: Size;
     /**
      * Scroll the selected tab into view within an overflowing list.
-     * `"none"` disables scrolling; any other value enables it (motion is not
-     * differentiated by value yet).
+     * `"none"` disables auto-scroll; any other value is passed to `scrollIntoView`
+     * as `behavior` (`auto` / `smooth` / `instant`).
      * @default "none"
      */
     autoScrollBehavior?: ScrollIntoViewOptions["behavior"] | "none";

@@ -124,7 +124,7 @@ When composing panels, wire the WAI-ARIA tabs pattern:
 
 ## Overflow
 
-For narrow viewports, set `autoScrollBehavior` to a `ScrollBehavior` (`auto` / `smooth` / `instant`) so the selected tab scrolls into view within the tablist. `"none"` (default) disables scrolling. The first paint always uses `instant`; later selection changes use the prop value — see [Tabs — Overflow](?path=/docs/docs-tabs--docs#overflow).
+For narrow viewports, set `autoScrollBehavior` to a `ScrollBehavior` (`auto` / `smooth` / `instant`) so the selected tab scrolls into view within the tablist. `"none"` (default) disables auto-scroll entirely — see [Tabs — Overflow](?path=/docs/docs-tabs--docs#overflow).
 
 > **Known limitation:** `scrollIntoView` currently omits `block: "nearest"`, so the page may also jump vertically to bring the tab to the top. Do not treat that as intended API.
 

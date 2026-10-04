@@ -38,7 +38,7 @@ Disabled tabs are not focusable via arrow keys / Home / End, and are skipped for
 
 ## Overflow
 
-When `autoScrollBehavior` is not `"none"`, the selected tab scrolls into view in an overflowing list. After the first paint, the value is passed through to `scrollIntoView` (`auto` / `smooth` / `instant`).
+When `autoScrollBehavior` is not `"none"`, the selected tab scrolls into view in an overflowing list. The value is passed to `scrollIntoView` as `behavior` (`auto` / `smooth` / `instant`).
 
 <Canvas of={TabsStories.Overflow} />
 

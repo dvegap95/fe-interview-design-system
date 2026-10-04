@@ -49,7 +49,7 @@ export const tabsControls = {
       "instant",
     ],
     description:
-      '`"none"` off; otherwise scrolls the selected tab into view. First paint uses `instant`; later changes use this value.',
+      '`"none"` disables auto-scroll; otherwise the value is passed to `scrollIntoView` as `behavior`.',
     table: {
       type: {
         summary: 'ScrollBehavior | "none"',

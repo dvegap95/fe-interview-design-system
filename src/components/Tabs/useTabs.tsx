@@ -4,7 +4,6 @@ import type { UseTabsProps } from "./types";
 
 export function useTabs({ autoScrollBehavior, orientation = "horizontal" }: UseTabsProps) {
   const listRef = useRef<HTMLDivElement>(null);
-  const hasMountedRef = useRef(false);
   const tabValueContext = useActiveTabContext();
 
   useLayoutEffect(() => {
@@ -14,10 +13,9 @@ export function useTabs({ autoScrollBehavior, orientation = "horizontal" }: UseT
     const tab = list.querySelector<HTMLElement>(`[role="tab"][aria-selected="true"]`);
     if (!tab) return;
     tab.scrollIntoView({
-      behavior: hasMountedRef.current ? "smooth" : "instant",
+      behavior: autoScrollBehavior,
       inline: "center",
     });
-    hasMountedRef.current = true;
   }, [
     tabValueContext?.activeTab,
     autoScrollBehavior,
