@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import Badge from "@/components/Badge";
 import Tab from "../Tab";
+import { tabControls } from "./controls";
 
 const meta = {
   title: "Components/Tab",
   component: Tab,
+  argTypes: tabControls,
 } satisfies Meta<typeof Tab>;
 
 export default meta;

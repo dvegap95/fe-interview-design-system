@@ -1,14 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
+import { fn } from "storybook/test";
 import Badge from "@/components/Badge";
 import Tab from "@/components/Tab";
 import { ManagedTabs } from "../Tabs";
 import type { ManagedTabsProps } from "../types";
+import { tabsControls } from "./controls";
 import styles from "./TabsStories.module.scss";
 
 const meta = {
   title: "Components/Tabs",
   component: ManagedTabs,
+  argTypes: tabsControls,
 } satisfies Meta<typeof ManagedTabs>;
 
 export default meta;
@@ -36,6 +39,7 @@ export const Controlled: Story = {
   args: {
     children: DEFAULT_CHILDREN,
     activeTab: "tab3",
+    onActiveTabChange: fn(),
   },
 };
 
@@ -45,14 +49,19 @@ const ControlledTemplate = (args: ManagedTabsProps) => {
     <ManagedTabs
       {...args}
       activeTab={activeTab}
-      onActiveTabChange={setActiveTab}
+      onActiveTabChange={(value) => {
+        args.onActiveTabChange?.(value);
+        setActiveTab(value);
+      }}
     />
   );
 };
+
 export const ControlledWired: Story = {
   render: ControlledTemplate,
   args: {
     children: DEFAULT_CHILDREN,
+    onActiveTabChange: fn(),
   },
 };
 

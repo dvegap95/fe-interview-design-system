@@ -19,13 +19,17 @@ const config: StorybookConfig = {
       : []),
   ],
   addons: [
-    "@storybook/addon-links",
     "@storybook/addon-docs",
+    "@storybook/addon-a11y",
     "storybook-addon-pseudo-states",
   ],
   framework: {
     name: "@storybook/react-vite",
     options: {},
+  },
+  docs: {
+    // Curated MDX only — do not auto-generate docs pages from CSF.
+    autodocs: false,
   },
 };
 

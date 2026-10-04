@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { CSSProperties } from "react";
 import Badge from "../Badge";
+import { badgeControls } from "./controls";
 
 const meta = {
   title: "Components/Badge",
   component: Badge,
+  argTypes: badgeControls,
 } satisfies Meta<typeof Badge>;
 
 export default meta;
@@ -42,7 +44,9 @@ const BadgeVariantsRow = ({ size, gap }: { size: "sm" | "md"; gap: CSSProperties
 };
 
 export const Default: Story = {
-  render: () => <Badge>Badge</Badge>,
+  args: {
+    children: "Badge",
+  },
 };
 
 export const AllVariantsSm: Story = {
