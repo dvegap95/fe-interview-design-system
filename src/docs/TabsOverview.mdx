@@ -48,7 +48,7 @@ Also available: `fe-interview-design-system/context/sizeContext`, `.../tabVarian
 
 **Panels are siblings of the tablist under the provider** — not children of `ManagedTabs` / `Tabs`. For tabs + panels, use `ActiveTabContextProvider` + `Tabs` + `TabPanel` as below.
 
-> **Warning:** Do **not** nest `ManagedTabs` inside an existing `ActiveTabContextProvider` (or expect outer selection/`value` state to flow into it). `ManagedTabs` mounts its **own** provider, so it will not inherit the surrounding active-tab context. Use presentational `Tabs` when you already own the provider.
+> **Warning:** Do **not** nest `ManagedTabs` inside an existing `ActiveTabContextProvider` (or expect outer `activeTab` state to flow into it). `ManagedTabs` mounts its **own** provider, so it will not inherit the surrounding active-tab context. Use presentational `Tabs` when you already own the provider.
 
 ## Recommended composition
 
@@ -97,12 +97,12 @@ Live example (a11y wired):
 | --- | --- | --- |
 | `cn` | package root | Merge class names on host wrappers or when forwarding `className` into roots (same idea as `clsx`). |
 | `CssBaseline` | package root | Optional once-per-app mount for Inter + global baseline + default `:root` tokens. Skip if the host DS already owns fonts/baseline and only needs `style.css` + token overrides. |
-| `ActiveTabContextProvider` / `useActiveTabContext` | `…/context/activeTabContext` | Own selection when composing `Tabs` + sibling `TabPanel`s (or any custom chrome that must share the same active value). Prefer this over `ManagedTabs` whenever panels (or other siblings) need the same provider. |
+| `ActiveTabContextProvider` / `useActiveTabContext` | `…/context/activeTabContext` | Own selection when composing `Tabs` + sibling `TabPanel`s (or any custom chrome that must share the same `activeTab`). Prefer this over `ManagedTabs` whenever panels (or other siblings) need the same provider. |
 | `ManagedTabs` | package root | Convenience only: provider + `Tabs` for a **list-only** selectable tab strip. Do not nest it inside another active-tab provider. |
 | `SizeProvider` / `useResolvedSize` | `…/context/sizeContext` | Advanced: push or read `sm` / `md` outside a `Tabs` tree (e.g. host layout that sizes nested `Badge`s the same way). Everyday size comes from `Tabs` / `Tab` props. |
 | `TabVariantProvider` / `useResolvedTabVariant` | `…/context/tabVariantContext` | Advanced: push or read `pill` / `underline` outside a `Tabs` tree. Everyday variant comes from `Tabs` / `Tab` props. |
 
-Resolution for visual tokens is always **`prop ?? nearest context ?? default`**. Selection is separate: only `ActiveTabContextProvider` (or `ManagedTabs`) owns active value.
+Resolution for visual props is always **`prop ?? nearest context ?? default`**. Selection is separate: only `ActiveTabContextProvider` (or `ManagedTabs`) owns `activeTab`.
 
 ## DOM wrappers (context, not hierarchy)
 
@@ -132,7 +132,7 @@ Demos: [Tabs — Controlled](?path=/docs/docs-tabs--docs#controlled).
 
 Visual props resolve as **`prop ?? context ?? default`**. A Tab can override list-level `variant` / `size` — demo on [Tab — Prop overrides context](?path=/docs/docs-tab--docs#prop-overrides-context).
 
-Do **not** pass `selected` on `Tab` while it also sits under `ActiveTabContextProvider` with an active value — that mix logs a console warning. Details: [Tab — selected vs context](?path=/docs/docs-tab--docs#selected-vs-context-console-warning).
+Do **not** pass `selected` on `Tab` while it also sits under `ActiveTabContextProvider` with an `activeTab` — `selected` only forces that tab and can leave two tabs selected. Details: [Tab — selected vs context](?path=/docs/docs-tab--docs#selected-vs-context-console-warning).
 
 ## Badge on a tab
 

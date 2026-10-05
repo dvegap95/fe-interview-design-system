@@ -40,14 +40,14 @@ describe("Tab", () => {
     }>([
       {
         value: "tab1",
-        description: "controlled = uncontrolled",
+        description: "selected matches activeTab",
       },
       {
         value: "tab2",
-        description: "controlled != uncontrolled",
+        description: "selected differs from activeTab",
       },
     ])(
-      "should warn when both controlled and uncontrolled props are provided ({description})",
+      "should warn when selected is used under an active-tab context ({description})",
       ({ value }) => {
         console.warn = vi.fn();
         render(
@@ -67,7 +67,7 @@ describe("Tab", () => {
       },
     );
 
-    it("should prioritize uncontrolled props over controlled props", () => {
+    it("should keep both tabs selected when selected forces one tab and context selects another", () => {
       render(
         <ActiveTabContextProvider
           activeTab="tab2"
@@ -82,7 +82,7 @@ describe("Tab", () => {
           <Tab value="tab2">Tab2</Tab>
         </ActiveTabContextProvider>,
       );
-      // both tabs should be selected tab1 state overrides unselected context
+      // selected forces Tab1; context still selects Tab2
       expect(
         screen.getByRole("tab", {
           name: "Tab1",

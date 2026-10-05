@@ -19,7 +19,8 @@ export const tabControls = {
   size: sizeArgType,
   selected: {
     control: "boolean",
-    description: "Forces selected appearance when used outside active-tab context.",
+    description:
+      "Forces selected appearance on this Tab only. Prefer outside the provider; mixing with context can select two tabs.",
     table: {
       type: {
         summary: "boolean",

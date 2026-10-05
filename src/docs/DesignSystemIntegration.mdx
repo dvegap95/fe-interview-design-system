@@ -106,7 +106,7 @@ Details: [Tabs overview — DOM wrappers](?path=/docs/docs-tabs-overview--docs#d
 
 ## 5. Own selection at the host boundary
 
-For tabs **and** panels (or any sibling host chrome that must share the active value), mount **one** `ActiveTabContextProvider` at the host boundary and use presentational `Tabs` — not `ManagedTabs` (which creates its own provider).
+For tabs **and** panels (or any sibling host chrome that must share `activeTab`), mount **one** `ActiveTabContextProvider` at the host boundary and use presentational `Tabs` — not `ManagedTabs` (which creates its own provider).
 
 Canonical composition:
 

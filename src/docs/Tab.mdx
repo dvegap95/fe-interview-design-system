@@ -32,9 +32,9 @@ Per-tab `variant` / `size` win over values pushed by the parent `Tabs` context (
 
 Use `selected` for **standalone** chrome (Storybook tables, static previews) **outside** `ActiveTabContextProvider`.
 
-Under a provider that already has an active tab, also passing `selected` is a conflict: the tab still treats `selected` as selected (`selected || contextMatch`), and development logs:
+`selected` only forces selected appearance on **that** Tab (`selected || contextMatch`). It does **not** replace active-tab context for the rest of the list. Under a provider that already has an `activeTab`, also passing `selected` can leave **two** tabs selected, and development logs:
 
-> Both controlled and uncontrolled props are provided for Tab component. Controlled props will take precedence over context.
+> `selected` forces selected appearance on this Tab only; it does not replace active-tab context for the list. Mixing `selected` with an activeTab can leave two tabs selected.
 
 **What to do:** drop `selected` and drive appearance via `value` + the provider; or keep `selected` and render the tab outside the provider.
 

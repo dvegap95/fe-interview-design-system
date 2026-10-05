@@ -15,7 +15,7 @@ This page documents **`ManagedTabs`** (selection context + visual tablist). For 
 
 Import the presentational list as `Tabs` when you already have (or need) `ActiveTabContextProvider`; use `ManagedTabs` only when you want a self-contained selectable list with no sibling panels under that provider.
 
-> **Warning:** Do not nest `ManagedTabs` inside an existing `ActiveTabContextProvider` expecting shared selection — it creates its own provider and will not inherit the outer active-tab `value` context.
+> **Warning:** Do not nest `ManagedTabs` inside an existing `ActiveTabContextProvider` expecting shared selection — it creates its own provider and will not inherit the outer `activeTab` context.
 
 ## Playground
 

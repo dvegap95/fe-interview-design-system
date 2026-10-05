@@ -7,7 +7,10 @@ export type TabProps = ComponentPropsWithRef<"button"> &
   BaseComponentProps & {
     /** Visual style; inherits from nearest `TabVariantProvider` when omitted. */
     variant?: TabVariant;
-    /** Forces selected appearance when used outside active-tab context. */
+    /**
+     * Forces selected appearance on this Tab only (does not replace active-tab context).
+     * Prefer for standalone chrome outside the provider; mixing with context can select two tabs.
+     */
     selected?: boolean;
     /** Size; inherits from nearest `SizeProvider` when omitted. */
     size?: Size;
