@@ -45,6 +45,13 @@ const config: StorybookConfig = {
     // Curated MDX only — do not auto-generate docs pages from CSF.
     autodocs: false,
   },
+  async viteFinal(config) {
+    const base = process.env.STORYBOOK_BASE_PATH;
+    if (base) {
+      config.base = base;
+    }
+    return config;
+  },
 };
 
 export default config;

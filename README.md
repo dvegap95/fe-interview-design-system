@@ -2,7 +2,7 @@
 
 Hey 👋
 
-Accessible Tabs design-system package (Badge, Tab, Tabs, TabPanel) built for the Prima take-home. Primary showcase and docs: **Storybook**.
+Accessible Tabs design-system package (Badge, Tab, Tabs, TabPanel) built for the Prima take-home. Primary showcase and docs: **[Storybook](https://dvegap95.github.io/fe-interview-design-system/)**.
 
 ## Install and run
 
@@ -19,7 +19,7 @@ pnpm dev
 
 ## Review path (~5 minutes)
 
-With Storybook running (`pnpm storybook`):
+Use the [hosted Storybook](https://dvegap95.github.io/fe-interview-design-system/) or run it locally (`pnpm storybook`):
 
 1. **Docs → Tabs overview** — composition model, a11y, tokens, overflow
 2. **Docs → Tabs** — playground (variants / sizes / `activation`)
