@@ -1,15 +1,31 @@
-import { type KeyboardEvent, useCallback, useLayoutEffect, useRef } from "react";
+import { type KeyboardEvent, useCallback, useLayoutEffect, useRef, useState } from "react";
 import { useActiveTabContext } from "@/context/activeTabContext";
 import type { UseTabsProps } from "./types";
 
 export function useTabs({ autoScrollBehavior, orientation = "horizontal" }: UseTabsProps) {
   const listRef = useRef<HTMLDivElement>(null);
   const tabValueContext = useActiveTabContext();
+  const [isListInView, setIsListInView] = useState(false);
+
+  useLayoutEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsListInView(entry.isIntersecting);
+    });
+    observer.observe(list);
+    return () => {
+      observer.disconnect();
+      setIsListInView(false);
+    };
+  }, []);
 
   useLayoutEffect(() => {
     if (autoScrollBehavior === "none") return;
     const list = listRef.current;
     if (!list || !tabValueContext?.activeTab) return;
+    if (!isListInView) return;
     const tab = list.querySelector<HTMLElement>(`[role="tab"][aria-selected="true"]`);
     if (!tab) return;
     tab.scrollIntoView({
@@ -20,6 +36,7 @@ export function useTabs({ autoScrollBehavior, orientation = "horizontal" }: UseT
   }, [
     tabValueContext?.activeTab,
     autoScrollBehavior,
+    isListInView,
   ]);
 
   const handleKeyDown = useCallback(
