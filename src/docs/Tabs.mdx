@@ -75,6 +75,14 @@ Underline variant:
 
 Brand-wide value swaps (colors, spacing, type scale): [Tabs overview — Theming](?path=/docs/docs-tabs-overview--docs#theming-css-tokens). Structural escape hatch via `className`, plus stable `data-variant` / `data-size` hooks: [Tabs overview — Custom styling](?path=/docs/docs-tabs-overview--docs#custom-styling). Embedding in a larger design system: [Design system integration](?path=/docs/docs-design-system-integration--docs).
 
+## Root element
+
+`Tabs` is internally a `<div role="tablist">`, so you can pass native div props (`id`, `className`, `aria-label`, `aria-labelledby`, …) and they land on that root.
+
+`data-variant` and `data-size` are set from the `variant` / `size` props — values you pass for those attributes are overwritten. `orientation` maps to `aria-orientation`; `autoScrollBehavior` is not a DOM attribute.
+
+`ManagedTabs` adds no extra DOM node: selection props go to the provider; everything else forwards to `Tabs`.
+
 ## API
 
 Tablist props for `Tabs` / `ManagedTabs` (`variant`, `size`, `orientation`, `autoScrollBehavior`, …). Selection props are listed under [Extended from context](#extended-from-context).

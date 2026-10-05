@@ -229,7 +229,9 @@ Color / spacing tokens follow the same pattern (e.g. `--color-surface-inverse`, 
 
 ## Custom styling
 
-Every root accepts `className` (merged with internal styles via `cn`). This demo intentionally breaks the default look on the tablist, tabs, badge, and panels.
+Every public root accepts `className` (merged with internal styles via `cn`). Each Docs page notes the internal root element (so you know which native props apply) and that `data-variant` / `data-size` come from the component props.
+
+This demo intentionally breaks the default look on the tablist, tabs, badge, and panels.
 
 Prop-driven visual state is exposed as **stable data attributes** on those roots (not hashed CSS-module class names):
 

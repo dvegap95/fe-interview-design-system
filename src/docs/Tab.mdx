@@ -38,6 +38,12 @@ Use `selected` for **standalone** chrome (Storybook tables, static previews) **o
 
 **What to do:** drop `selected` and drive appearance via `value` + the provider; or keep `selected` and render the tab outside the provider.
 
+## Root element
+
+Internally a `<button>`, so you can pass native button props (`id`, `className`, `disabled`, `aria-controls`, …) and they land on that root.
+
+`data-variant` and `data-size` are set from the `variant` / `size` props — values you pass for those attributes are overwritten. Selection API props (`value`, `selected`) and `slots` are not DOM attributes.
+
 ## API
 
 `value` is required for selection under the active-tab provider — without it, clicks do not change the active tab.

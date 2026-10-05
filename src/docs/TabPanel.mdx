@@ -21,6 +21,12 @@ Provider + `Tabs` + `TabPanel` with WAI-ARIA linkage (`aria-label` on the list, 
 
 Throws `TabPanel must be used within an ActiveTabContextProvider.` if rendered outside the provider.
 
+## Root element
+
+Internally a `<section role="tabpanel">`, so you can pass native section props (`id`, `className`, `aria-labelledby`, …) and they land on that root.
+
+`value` is not a DOM attribute (it matches against active-tab context). Visibility is driven by the HTML `hidden` attribute from that match.
+
 ## API
 
 <ArgTypes of={TabPanel} />

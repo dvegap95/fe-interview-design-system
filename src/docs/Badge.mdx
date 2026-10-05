@@ -21,6 +21,12 @@ Compact status label. In the Tabs system it usually appears in a Tab’s `slots.
 
 <Canvas of={TabStories.WithBadge} />
 
+## Root element
+
+Internally a `<span>`, so you can pass native span props (`id`, `className`, `style`, `aria-*`, …) and they land on that root.
+
+`data-variant` and `data-size` are set from the `variant` / `size` props — values you pass for those attributes are overwritten.
+
 ## API
 
 <ArgTypes of={Badge} />
