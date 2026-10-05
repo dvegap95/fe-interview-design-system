@@ -79,7 +79,7 @@ Brand-wide value swaps (colors, spacing, type scale): [Tabs overview — Theming
 
 `Tabs` is internally a `<div role="tablist">`, so you can pass native div props (`id`, `className`, `aria-label`, `aria-labelledby`, …) and they land on that root.
 
-`data-variant` and `data-size` are set from the `variant` / `size` props — values you pass for those attributes are overwritten. `orientation` maps to `aria-orientation`; `autoScrollBehavior` is not a DOM attribute.
+`data-variant`, `data-size`, and `data-activation` are set from the `variant` / `size` / `activation` props — values you pass for those attributes are overwritten. `orientation` maps to `aria-orientation`; `autoScrollBehavior` is not a DOM attribute. Keyboard modes: [Tabs overview — Keyboard](?path=/docs/docs-tabs-overview--docs#keyboard).
 
 `ManagedTabs` adds no extra DOM node: selection props go to the provider; everything else forwards to `Tabs`.
 
@@ -94,6 +94,7 @@ Tablist props for `Tabs` / `ManagedTabs` (`variant`, `size`, `orientation`, `aut
     "size",
     "orientation",
     "autoScrollBehavior",
+    "activation",
     "className",
     "children",
     "id",

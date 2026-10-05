@@ -2,7 +2,11 @@ import { type KeyboardEvent, useCallback, useLayoutEffect, useRef, useState } fr
 import { useActiveTabContext } from "@/context/activeTabContext";
 import type { UseTabsProps } from "./types";
 
-export function useTabs({ autoScrollBehavior, orientation = "horizontal" }: UseTabsProps) {
+export function useTabs({
+  autoScrollBehavior,
+  orientation = "horizontal",
+  activation = "manual",
+}: UseTabsProps) {
   const listRef = useRef<HTMLDivElement>(null);
   const tabValueContext = useActiveTabContext();
   const [isListInView, setIsListInView] = useState(false);
@@ -37,6 +41,21 @@ export function useTabs({ autoScrollBehavior, orientation = "horizontal" }: UseT
     tabValueContext?.activeTab,
     autoScrollBehavior,
     isListInView,
+  ]);
+
+  // Automatic activation: keep keyboard focus on the active tab when selection changes
+  // while focus is already inside the tablist (e.g. controlled `activeTab` updates).
+  useLayoutEffect(() => {
+    if (activation !== "automatic") return;
+    const list = listRef.current;
+    if (!list || !tabValueContext?.activeTab) return;
+    if (!list.contains(document.activeElement)) return;
+    const selected = list.querySelector<HTMLElement>(`[role="tab"][aria-selected="true"]`);
+    if (!selected || selected === document.activeElement) return;
+    selected.focus();
+  }, [
+    activation,
+    tabValueContext?.activeTab,
   ]);
 
   const handleKeyDown = useCallback(
@@ -83,10 +102,15 @@ export function useTabs({ autoScrollBehavior, orientation = "horizontal" }: UseT
       }
 
       event.preventDefault();
-      tabs[nextIndex].focus();
+      const nextTab = tabs[nextIndex];
+      nextTab.focus();
+      if (activation === "automatic") {
+        nextTab.click();
+      }
     },
     [
       orientation,
+      activation,
     ],
   );
 

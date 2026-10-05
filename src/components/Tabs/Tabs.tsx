@@ -14,11 +14,13 @@ export function Tabs({
   size: sizeProp,
   autoScrollBehavior = "none",
   orientation = "horizontal",
+  activation = "manual",
   ...props
 }: TabsProps) {
   const { listRef, handleKeyDown } = useTabs({
     autoScrollBehavior,
     orientation,
+    activation,
   });
   const variant = useResolvedTabVariant(variantProp);
   const size = useResolvedSize(sizeProp);
@@ -30,6 +32,7 @@ export function Tabs({
       className={cn(styles.tabs, props.className)}
       data-variant={variant}
       data-size={size}
+      data-activation={activation}
       onKeyDown={(event) => {
         handleKeyDown(event);
         props.onKeyDown?.(event);

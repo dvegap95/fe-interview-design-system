@@ -59,6 +59,23 @@ export const tabsControls = {
       },
     },
   },
+  activation: {
+    control: "inline-radio",
+    options: [
+      "manual",
+      "automatic",
+    ],
+    description:
+      'WAI-ARIA keyboard activation. `"manual"`: arrows move focus; Enter/Space activate. `"automatic"`: arrows also activate so focus stays on the active tab.',
+    table: {
+      type: {
+        summary: '"manual" | "automatic"',
+      },
+      defaultValue: {
+        summary: "manual",
+      },
+    },
+  },
   defaultActiveTab: {
     control: "text",
     description: "Initial active tab for uncontrolled usage.",

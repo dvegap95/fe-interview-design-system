@@ -8,6 +8,7 @@ export {
   ManagedTabs,
   type ManagedTabsProps,
   Tabs,
+  type TabsActivation,
   type TabsOrientation,
   type TabsProps,
 } from "../components/Tabs";

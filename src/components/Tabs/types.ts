@@ -6,6 +6,9 @@ import type { BaseComponentProps } from "@/types/baseComponentTypes";
 
 export type TabsOrientation = "horizontal" | "vertical";
 
+/** WAI-ARIA tabs keyboard activation: manual (default) or automatic (selection follows focus). */
+export type TabsActivation = "manual" | "automatic";
+
 export type TabsContextType = {
   activeTab: string;
   setActiveTab: (tab: string) => void;
@@ -36,6 +39,15 @@ export type TabsProps = ComponentPropsWithRef<"div"> &
      * @default "horizontal"
      */
     orientation?: TabsOrientation;
+    /**
+     * WAI-ARIA keyboard activation pattern.
+     * - `"manual"`: arrows / Home / End move focus only; Enter / Space activate.
+     * - `"automatic"`: arrows / Home / End also activate so focus stays on the active tab
+     *   (selection follows focus). While focus is inside the tablist, external `activeTab`
+     *   changes also move focus to the selected tab.
+     * @default "manual"
+     */
+    activation?: TabsActivation;
   };
 
 /** `Tabs` visuals plus active-tab selection state (`ActiveTabContextProvider`). */
