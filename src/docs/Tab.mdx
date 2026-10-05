@@ -18,7 +18,7 @@ Single tab control for `Tabs` / `ManagedTabs`. Selection normally comes from act
 
 ## With badge
 
-Trailing content via `slots.end`. Matches the Figma spec (`Badge` `md` on a `sm` tab). For pure size inheritance, see **Components** → `BadgeInheritsSize`.
+Trailing content via `slots.end`. Badge **variants** are chosen on `Badge` itself, then composed into the tab — intentional so `Tab` stays Badge-agnostic and any node can fill the slot. Matches the Figma spec (`Badge` `md` on a `sm` tab). For pure size inheritance, see **Components** → `BadgeInheritsSize`.
 
 <Canvas of={TabStories.WithBadge} />
 
