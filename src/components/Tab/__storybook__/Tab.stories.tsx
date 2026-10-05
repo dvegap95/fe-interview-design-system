@@ -40,6 +40,17 @@ export const WithBadge: Story = {
   },
 };
 
+/** Components-only: omit Badge `size` so it inherits from the Tab / Tabs size context. */
+export const BadgeInheritsSize: Story = {
+  args: {
+    children: "Files",
+    size: "sm",
+    slots: {
+      end: <Badge variant="negative">Warning</Badge>,
+    },
+  },
+};
+
 export const PropOverridesContext: Story = {
   args: {
     children: "Label",

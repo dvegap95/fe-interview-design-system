@@ -136,7 +136,7 @@ Do **not** pass `selected` on `Tab` while it also sits under `ActiveTabContextPr
 
 ## Badge on a tab
 
-Any node via `Tab` `slots.end` (typically `Badge`) — demos on [Tab](?path=/docs/docs-tab--docs#with-badge) and [Tabs](?path=/docs/docs-tabs--docs#with-badge).
+Any node via `Tab` `slots.end` (typically `Badge`). Docs demos match the Figma spec (`Badge` `md` on a `sm` list); for pure size inheritance see **Components** `BadgeInheritsSize`. Demos: [Tab](?path=/docs/docs-tab--docs#with-badge) and [Tabs](?path=/docs/docs-tabs--docs#with-badge).
 
 ## Keyboard
 
@@ -158,7 +158,7 @@ When composing panels, wire the WAI-ARIA tabs pattern:
 - Tab: `id` + `aria-controls={panelId}`
 - Panel: `id` + `aria-labelledby={tabId}`
 
-`aria-selected`, `role`, and `aria-orientation` are handled by the components.
+`aria-selected`, `role`, and `aria-orientation` are handled by the components. Inactive `TabPanel`s use the HTML `hidden` attribute.
 
 `ManagedTabs` playgrounds name the tablist with `aria-label` (list-only demos). Full tab↔panel linkage belongs on the explicit provider + `Tabs` composition (Composition / CustomStyled) — that split is intentional, not a missing feature.
 

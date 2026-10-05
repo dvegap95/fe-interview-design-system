@@ -4,7 +4,7 @@
 .tabPanel {
     @include body-medium;
 
-    &[aria-hidden="true"] {
+    &[hidden] {
         display: none;
     }
 }

@@ -207,6 +207,32 @@ export const WithBadge: Story = {
   },
 };
 
+/** Components-only: Badge omits `size` and inherits from the `sm` tablist. */
+export const BadgeInheritsSize: Story = {
+  args: {
+    "aria-label": "Sections with inheriting badge",
+    children: (
+      <>
+        <Tab value="emails">Emails</Tab>
+        <Tab
+          value="files"
+          slots={{
+            end: <Badge variant="negative">Warning</Badge>,
+          }}
+        >
+          Files
+        </Tab>
+        <Tab value="edits">Edits</Tab>
+        <Tab value="dashboard">Dashboard</Tab>
+        <Tab value="messages">Messages</Tab>
+      </>
+    ),
+    variant: "pill",
+    size: "sm",
+    defaultActiveTab: "emails",
+  },
+};
+
 export const UnderlineWithBadge: Story = {
   args: {
     "aria-label": "Underline sections with badge",
