@@ -20,6 +20,10 @@ If scoped tighter for the brief alone, the minimum would be **Badge / Tab / Tabs
 
 The current API supports `disabled` as the native button disabled state, and disabled tabs remain compatible with keyboard navigation. Because the brief does not include a disabled visual design, the `disabled` prop is treated as **out of scope** for this delivery. Future work could design the disabled state and implement the corresponding styles.
 
+## Disclaimer: typography
+
+Colors, spacing, and layout were checked against Figma (pixel-perfect pass). Typography can differ slightly between Figma and browsers; remaining type metrics were left as-is within that variance rather than chasing sub-pixel parity.
+
 ## Delivery
 
 Typical path for reviewers or a host app:
