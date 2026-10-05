@@ -48,7 +48,7 @@ Peer deps: `react` and `react-dom` ^19.
 
 Components read shared values through CSS variables (colors, spacing, typography). Defaults ship once on `:root` via `style.css` (package entry). `CssBaseline` is only fonts + box-sizing — not the token source.
 
-**Scoped host theme** (recommended — no fight over global load order):
+**Scoped host theme** (recommended — no fight over global load order). Override the tokens your brand needs; full list: [Tabs overview — Theming](?path=/docs/docs-tabs-overview--docs#theming-css-tokens).
 
 ```css
 .acme-theme {
@@ -69,23 +69,13 @@ Components read shared values through CSS variables (colors, spacing, typography
 </div>
 ```
 
-Token tables and more examples: [Tabs overview — Theming](?path=/docs/docs-tabs-overview--docs#theming-css-tokens).
-
 ## 3. Structural restyle when tokens are not enough
 
-Every public root accepts `className` (merged internally with `cn`). Prop-driven state is exposed as **stable** attributes — not hashed CSS-module class names:
-
-| Attribute | On | Values |
-| --- | --- | --- |
-| `data-variant` | `Tabs`, `Tab`, `Badge` | Tab/Tabs: `pill` / `underline`; Badge: `neutral` / `positive` / `negative` |
-| `data-size` | `Tabs`, `Tab`, `Badge` | `sm` / `md` |
-| `aria-selected` | `Tab` | `"true"` / `"false"` |
+Every public root accepts `className` (merged internally with `cn`). Prop-driven state is exposed as stable `data-variant` / `data-size` / `aria-selected` hooks — not hashed CSS-module class names. Attribute table and selector patterns: [Tabs overview — Custom styling](?path=/docs/docs-tabs-overview--docs#custom-styling).
 
 Escape-hatch demo (intentionally loud host styling):
 
 <Canvas of={TabsStories.CustomStyled} />
-
-Full selector patterns: [Tabs overview — Custom styling](?path=/docs/docs-tabs-overview--docs#custom-styling).
 
 ## 4. Compose with host wrappers
 
@@ -106,7 +96,7 @@ Details: [Tabs overview — DOM wrappers](?path=/docs/docs-tabs-overview--docs#d
 
 ## 5. Own selection at the host boundary
 
-For tabs **and** panels (or any sibling host chrome that must share `activeTab`), mount **one** `ActiveTabContextProvider` at the host boundary and use presentational `Tabs` — not `ManagedTabs` (which creates its own provider).
+For tabs **and** panels (or any sibling host chrome that must share `activeTab`), mount **one** `ActiveTabContextProvider` at the host boundary and use presentational `Tabs` — not nested `ManagedTabs` ([ManagedTabs nesting](?path=/docs/docs-tabs-overview--docs#managedtabs-nesting)).
 
 Canonical composition:
 
@@ -121,4 +111,4 @@ Advanced context exports (`SizeProvider`, `TabVariantProvider`, `cn`, …): [Tab
 3. Prefer token overrides for brand; use `className` plus data/aria attribute hooks for structural look.
 4. Compose `ActiveTabContextProvider` + `Tabs` + `TabPanel` at the product boundary.
 5. Allow host wrappers under the tablist; keep a11y `id` / aria wiring on the tab and panel elements.
-6. Avoid nesting `ManagedTabs` inside an existing active-tab provider.
+6. Avoid nesting `ManagedTabs` inside an existing active-tab provider ([ManagedTabs nesting](?path=/docs/docs-tabs-overview--docs#managedtabs-nesting)).
