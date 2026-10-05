@@ -35,6 +35,7 @@ What’s in the package and why: [SCOPE.md](./SCOPE.md). Contributor conventions
 - **Overflow is host-owned** — `Tabs` does not set `overflow-x` (it clips `:focus-visible` rings). Hosts style the scrollport; `autoScrollBehavior` is opt-in scroll-into-view.
 - **Keyboard `activation`** — default `"manual"` (arrows move focus; Enter/Space select). `"automatic"` keeps focus on the active tab (selection follows focus).
 - **Size / variant context** — `size` and tab `variant` resolve as `prop ?? nearest provider ?? default`. Parents push values with `SizeProvider` / `TabVariantProvider` (e.g. from `Tabs`); children can still override per instance. Same providers are public for host trees outside `Tabs`.
+- **`size` (`sm` / `md`) over “mobile on/off”** — Figma’s handoff uses a mobile breakpoint flag; the API uses size tokens instead. That matches **container / density** control (host chooses `sm` in a narrow panel on desktop, or `md` on a large phone) better than baking in a device-centric philosophy.
 - **Tests focus on behavior** — coverage targets selection, keyboard/activation, context resolution, and composition contracts rather than snapshotting markup or styles.
 
 ## Scope and delivery

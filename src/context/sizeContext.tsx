@@ -1,6 +1,6 @@
 import { createContext, type ReactNode, useContext, useMemo } from "react";
 
-export type Size = "sm" | "md";
+export type Size = "sm" | "md"; // sm => Mobile: ON; md => Mobile: OFF
 
 export type SizeContextType = {
   size: Size;
