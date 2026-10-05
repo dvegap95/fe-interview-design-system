@@ -27,7 +27,9 @@ const config: StorybookConfig = {
       options: {
         mdxPluginOptions: {
           mdxCompileOptions: {
-            remarkPlugins: [remarkGfm],
+            remarkPlugins: [
+              remarkGfm,
+            ],
           },
         },
       },

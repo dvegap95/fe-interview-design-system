@@ -24,6 +24,13 @@ The current API supports `disabled` as the native button disabled state, and dis
 
 Colors, spacing, and layout were checked against Figma (pixel-perfect pass). Typography can differ slightly between Figma and browsers; remaining type metrics were left as-is within that variance rather than chasing sub-pixel parity.
 
+## Future work (optional)
+
+Intentionally out of scope for this take-home; useful if the package grew into a maintained DS:
+
+- **Automated a11y in CI** — Storybook **a11y addon** plus behavioral keyboard/selection tests cover the brief. Later: `jest-axe` / Storybook test-runner on Composition (and similar) stories.
+- **Visual regression** — colors/spacing/layout were checked manually (pixel-perfect pass). Later: Chromatic (or similar) on composed stories (Composition, Overflow, badge-on-tab variants) to catch regressions without re-running Figma diffs by hand.
+
 ## Delivery
 
 Typical path for reviewers or a host app:
