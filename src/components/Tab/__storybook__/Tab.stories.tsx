@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import Badge from "@/components/Badge";
 import { Tabs } from "@/components/Tabs";
 import Tab from "../Tab";
@@ -51,23 +51,19 @@ export const BadgeInheritsSize: Story = {
   },
 };
 
-export const PropOverridesContext: Story = {
-  args: {
-    children: "Label",
+// Function story: Docs "Show code" extracts this JSX instead of a CSF `render` object.
+export const PropOverridesContext: StoryFn = () => (
+  <Tabs
+    variant="pill"
+    size="sm"
+  >
+    <Tab variant="underline">Underline override</Tab>
+    <Tab size="md">Md size override</Tab>
+    <Tab>Inherits pill sm</Tab>
+  </Tabs>
+);
+PropOverridesContext.parameters = {
+  controls: {
+    disable: true,
   },
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
-  render: () => (
-    <Tabs
-      variant="pill"
-      size="sm"
-    >
-      <Tab variant="underline">Underline override</Tab>
-      <Tab size="md">Md size override</Tab>
-      <Tab>Inherits pill sm</Tab>
-    </Tabs>
-  ),
 };

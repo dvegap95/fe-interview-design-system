@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { fn } from "storybook/test";
 import Badge from "@/components/Badge";
@@ -50,7 +50,8 @@ export const Controlled: Story = {
   },
 };
 
-const ControlledTemplate = (args: ManagedTabsProps) => {
+// Function story: Docs "Show code" extracts this body instead of a CSF `render` object.
+export const ControlledWired: StoryFn<ManagedTabsProps> = (args) => {
   const [activeTab, setActiveTab] = useState("tab1");
   return (
     <ManagedTabs
@@ -63,14 +64,10 @@ const ControlledTemplate = (args: ManagedTabsProps) => {
     />
   );
 };
-
-export const ControlledWired: Story = {
-  render: ControlledTemplate,
-  args: {
-    "aria-label": "Demo sections",
-    children: DEFAULT_CHILDREN,
-    onActiveTabChange: fn(),
-  },
+ControlledWired.args = {
+  "aria-label": "Demo sections",
+  children: DEFAULT_CHILDREN,
+  onActiveTabChange: fn(),
 };
 
 const figmaQa = {
@@ -246,57 +243,53 @@ export const UnderlineWithBadge: Story = {
   },
 };
 
-export const CustomStyled: Story = {
-  args: {
-    children: null,
-  },
-  parameters: {
-    controls: {
-      disable: true,
-    },
-  },
-  render: () => (
-    <ActiveTabContextProvider defaultActiveTab="overview">
-      <Tabs
-        className={customStyles.tabs}
-        aria-label="Custom styled sections"
-      >
-        <Tab
-          className={customStyles.tab}
-          id="custom-tab-overview"
-          value="overview"
-          aria-controls="custom-panel-overview"
-        >
-          Overview
-        </Tab>
-        <Tab
-          className={customStyles.tab}
-          id="custom-tab-files"
-          value="files"
-          aria-controls="custom-panel-files"
-          slots={{
-            end: <Badge className={customStyles.badge}>Hot</Badge>,
-          }}
-        >
-          Files
-        </Tab>
-      </Tabs>
-      <TabPanel
-        className={customStyles.panel}
-        id="custom-panel-overview"
+// Function story: Docs "Show code" extracts this JSX instead of a CSF `render` object.
+export const CustomStyled: StoryFn = () => (
+  <ActiveTabContextProvider defaultActiveTab="overview">
+    <Tabs
+      className={customStyles.tabs}
+      aria-label="Custom styled sections"
+    >
+      <Tab
+        className={customStyles.tab}
+        id="custom-tab-overview"
         value="overview"
-        aria-labelledby="custom-tab-overview"
+        aria-controls="custom-panel-overview"
       >
-        Panels and tabs restyled only through className.
-      </TabPanel>
-      <TabPanel
-        className={customStyles.panel}
-        id="custom-panel-files"
+        Overview
+      </Tab>
+      <Tab
+        className={customStyles.tab}
+        id="custom-tab-files"
         value="files"
-        aria-labelledby="custom-tab-files"
+        aria-controls="custom-panel-files"
+        slots={{
+          end: <Badge className={customStyles.badge}>Hot</Badge>,
+        }}
       >
-        Badge in slots.end is restyled the same way.
-      </TabPanel>
-    </ActiveTabContextProvider>
-  ),
+        Files
+      </Tab>
+    </Tabs>
+    <TabPanel
+      className={customStyles.panel}
+      id="custom-panel-overview"
+      value="overview"
+      aria-labelledby="custom-tab-overview"
+    >
+      Panels and tabs restyled only through className.
+    </TabPanel>
+    <TabPanel
+      className={customStyles.panel}
+      id="custom-panel-files"
+      value="files"
+      aria-labelledby="custom-tab-files"
+    >
+      Badge in slots.end is restyled the same way.
+    </TabPanel>
+  </ActiveTabContextProvider>
+);
+CustomStyled.parameters = {
+  controls: {
+    disable: true,
+  },
 };
