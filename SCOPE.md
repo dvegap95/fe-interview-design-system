@@ -14,6 +14,8 @@ What this repository includes beyond a Storybook-only demo, and how the package 
 
 Storybook MDX / CSF is the primary showcase (brief allows Storybook; `Introduction.mdx` came from the starter). See Storybook **Docs** for API and integration detail; this file is only the “why these pieces exist” map.
 
+If scoped tighter for the brief alone, the minimum would be **Badge / Tab / Tabs + Storybook**. `TabPanel`, the library pack surface, smoke tests, and dist stories are delivery confidence for a real component package. Keep them when evaluating as a design-system artifact.
+
 ## Disclaimer: disabled state
 
 The current API supports `disabled` as the native button disabled state, and disabled tabs remain compatible with keyboard navigation. Because the brief does not include a disabled visual design, the `disabled` prop is treated as **out of scope** for this delivery. Future work could design the disabled state and implement the corresponding styles.
