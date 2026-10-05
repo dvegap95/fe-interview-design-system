@@ -1,4 +1,5 @@
 import { Meta, Canvas, Controls, ArgTypes } from "@storybook/addon-docs/blocks";
+import { ActiveTabContextProvider } from "../context/activeTabContext";
 import { ManagedTabs } from "../components/Tabs";
 import * as TabsStories from "../components/Tabs/__storybook__/Tabs.stories";
 
@@ -9,7 +10,7 @@ import * as TabsStories from "../components/Tabs/__storybook__/Tabs.stories";
 
 # Tabs / ManagedTabs
 
-This page documents **`ManagedTabs`** (selection context + visual tablist). For panels, full composition, imports, and keyboard/a11y contracts, start at [Tabs overview](?path=/docs/docs-tabs-overview--docs).
+This page documents **`Tabs`** as the presentational list of **`Tab`** elements and **`ManagedTabs`** as the selection context + visual tablist. For panels, full composition, imports, and keyboard/a11y contracts, start at [Tabs overview](?path=/docs/docs-tabs-overview--docs).
 
 `ManagedTabs` / `Tabs` are for the **tab list** only. For panels, compose `ActiveTabContextProvider` + `Tabs` + `TabPanel` yourself.
 
@@ -32,11 +33,21 @@ Wired local state — selection updates and logs Actions:
 
 <Canvas of={TabsStories.ControlledWired} />
 
-## Disabled tabs
+A common use case is when selection comes from outer context or the URL — resolve the value, pass it as `activeTab`, and write back on change:
 
-Disabled tabs are not focusable via arrow keys / Home / End, and are skipped for activation:
+```tsx
+const tab = searchParams.get("tab") ?? "overview";
 
-<Canvas of={TabsStories.Disabled} />
+<ManagedTabs
+  activeTab={tab}
+  onActiveTabChange={(next) => {
+    setSearchParams({ tab: next });
+  }}
+>
+  <Tab value="overview">Overview</Tab>
+  <Tab value="billing">Billing</Tab>
+</ManagedTabs>
+```
 
 ## Overflow
 
@@ -66,6 +77,25 @@ Brand-wide value swaps (colors, spacing, type scale): [Tabs overview — Theming
 
 ## API
 
-Props for `ManagedTabs` (selection + tablist visuals). Presentational `Tabs` shares the visual props (`variant`, `size`, `orientation`, `autoScrollBehavior`, …) without the selection props.
+Tablist props for `Tabs` / `ManagedTabs` (`variant`, `size`, `orientation`, `autoScrollBehavior`, …). Selection props are listed under [Extended from context](#extended-from-context).
 
-<ArgTypes of={ManagedTabs} />
+<ArgTypes
+  of={TabsStories}
+  include={[
+    "variant",
+    "size",
+    "orientation",
+    "autoScrollBehavior",
+    "className",
+    "children",
+    "id",
+    "aria-label",
+    "aria-labelledby",
+  ]}
+/>
+
+### Extended from context
+
+`ManagedTabs` extends `ActiveTabContextProvider` — selection props below are those inherited from active-tab context:
+
+<ArgTypes of={ActiveTabContextProvider} exclude={["children"]} />

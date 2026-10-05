@@ -73,25 +73,6 @@ export const ControlledWired: Story = {
   },
 };
 
-// biome-ignore format: compact declaration
-const DISABLED_CHILDREN = [
-  <Tab key="tab1" value="tab1">Label</Tab>,
-  <Tab key="tab2" value="tab2" disabled>Disabled</Tab>,
-  <Tab key="tab3" value="tab3">Label</Tab>,
-  <Tab key="tab4" value="tab4" disabled>Disabled</Tab>,
-  <Tab key="tab5" value="tab5">Label</Tab>,
-];
-
-export const Disabled: Story = {
-  args: {
-    "aria-label": "Sections with disabled tabs",
-    children: DISABLED_CHILDREN,
-    defaultActiveTab: "tab1",
-    variant: "pill",
-    size: "md",
-  },
-};
-
 const figmaQa = {
   docs: {
     disable: true,

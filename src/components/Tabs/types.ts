@@ -13,9 +13,15 @@ export type TabsContextType = {
 
 export type TabsProps = ComponentPropsWithRef<"div"> &
   BaseComponentProps & {
-    /** Visual style pushed to child tabs via context. @default "pill" */
+    /**
+     * Visual style pushed to child tabs via context.
+     * @default "pill"
+     */
     variant?: TabVariant;
-    /** Size pushed to child tabs (and nested badges) via context. @default "md" */
+    /**
+     * Size pushed to child tabs (and nested badges) via context.
+     * @default "md"
+     */
     size?: Size;
     /**
      * Scroll the selected tab into view when the host provides an overflowing list.
@@ -25,7 +31,10 @@ export type TabsProps = ComponentPropsWithRef<"div"> &
      * @default "none"
      */
     autoScrollBehavior?: ScrollIntoViewOptions["behavior"] | "none";
-    /** Tab list orientation for layout and arrow-key navigation. @default "horizontal" */
+    /**
+     * Tab list orientation for layout and arrow-key navigation.
+     * @default "horizontal"
+     */
     orientation?: TabsOrientation;
   };
 
