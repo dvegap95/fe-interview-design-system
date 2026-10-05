@@ -17,9 +17,29 @@ pnpm storybook
 pnpm dev
 ```
 
+## Review path (~5 minutes)
+
+With Storybook running (`pnpm storybook`):
+
+1. **Docs → Tabs overview** — composition model, a11y, tokens, overflow
+2. **Docs → Tabs** — playground (variants / sizes / `activation`)
+3. **Docs → TabPanel** — Composition story (full tab ↔ panel wiring)
+4. **Docs → Tabs → Overflow** — host-owned scrollport + opt-in auto-scroll
+5. **Docs → Design system integration** — embedding in a host DS
+
+What’s in the package and why: [SCOPE.md](./SCOPE.md). Contributor conventions: [DEV.md](./DEV.md).
+
+## Decisions
+
+- **Badge via `Tab` `slots.end`** — Badge variants live on `Badge`; Tab only composes trailing content so the list API stays Badge-agnostic.
+- **Overflow is host-owned** — `Tabs` does not set `overflow-x` (it clips `:focus-visible` rings). Hosts style the scrollport; `autoScrollBehavior` is opt-in scroll-into-view.
+- **Keyboard `activation`** — default `"manual"` (arrows move focus; Enter/Space select). `"automatic"` keeps focus on the active tab (selection follows focus).
+- **Size / variant context** — `size` and tab `variant` resolve as `prop ?? nearest provider ?? default`. Parents push values with `SizeProvider` / `TabVariantProvider` (e.g. from `Tabs`); children can still override per instance. Same providers are public for host trees outside `Tabs`.
+- **Tests focus on behavior** — coverage targets selection, keyboard/activation, context resolution, and composition contracts rather than snapshotting markup or styles.
+
 ## Scope and delivery
 
-This repo is a **component library** (build → `dist/`), not an SPA demo. What’s included and why (TabPanel as optional panels companion, pack/smoke/dist verification): [SCOPE.md](./SCOPE.md).
+This repo is a **component library** (build → `dist/`), not an SPA demo. Details: [SCOPE.md](./SCOPE.md).
 
 ```bash
 pnpm build          # library output
@@ -27,8 +47,6 @@ pnpm test:smoke     # tests against dist/
 pnpm storybook:dist # Storybook stories that import the built package
 pnpm pack           # optional .tar.gz for install in a host app
 ```
-
-Contributor conventions (scripts, Plop templates, dumb-view + hook layout): [DEV.md](./DEV.md).
 
 ## Figma file
 
