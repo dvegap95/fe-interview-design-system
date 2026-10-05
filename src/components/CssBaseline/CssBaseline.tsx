@@ -1,6 +1,6 @@
 import "@/styles/global.scss";
 
-/** Loads design-system global styles (including :root CSS tokens), box-sizing baseline, and the Inter font (400/700). */
+/** Optional once-per-app mount: box-sizing / font-family baseline (`global.scss`) and Inter (400/700). Default `:root` tokens ship with `style.css` via the package entry — not here. */
 export default function CssBaseline() {
   return (
     <>

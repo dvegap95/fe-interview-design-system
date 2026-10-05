@@ -33,7 +33,7 @@ src/components/Button/
   Button.tsx                 # dumb view — JSX + classNames + wiring only
   useButton.tsx              # behavior / state / effects (MVVM “view-model”)
   types.ts                   # public props + Use* props
-  Button.module.scss         # styles (tokens via @/styles/_tokens.scss)
+  Button.module.scss         # styles (consume tokens via var(--…); defaults in src/styles/tokens.scss)
   index.tsx                  # barrel re-exports
   __tests__/Button.test.tsx
   __storybook__/Button.stories.tsx
@@ -48,8 +48,10 @@ This repo keeps **presentation** and **behavior** split on purpose (same idea as
 - **`Component.tsx` (dumb view)** — resolve props/context for rendering, call the hook, return markup. Prefer no business branching beyond mapping hook output → DOM.
 - **`useComponent.tsx` (hook)** — selection, keyboard, warnings, derived state, event handlers.
 - **`types.ts`** — `ComponentProps` (extends shared `BaseComponentProps` where useful) and `UseComponentProps` (often `Omit<Props, "children">`).
-- **`*.module.scss`** — visual styles; theme through CSS variables from `_tokens.scss`, not hard-coded brand one-offs in components when a token exists.
+- **`*.module.scss`** — visual styles; theme through CSS variables (`var(--…)`), not hard-coded brand one-offs in components when a token exists. Do **not** `@use` `tokens.scss` in modules — defaults are injected once from `src/lib/index.ts` into `dist/style.css`.
 - **`cn`** (`src/utils/cn.ts`) — merge class names; also exported from the package root for hosts.
+
+**CSS layers:** `src/styles/tokens.scss` (`:root` defaults) is a side-effect import on the package entry (→ `dist/style.css`). `src/styles/global.scss` (box-sizing / font-family) is loaded by `CssBaseline` only. Storybook preview imports tokens separately (see `.storybook/preview.tsx` + `.storybook/env.d.ts`) because CSF stories do not go through `src/lib/index.ts`.
 
 Contexts that cross components live under `src/context/` and are published as subpath exports (`./context/activeTabContext`, `./context/sizeContext`, `./context/tabVariantContext`).
 

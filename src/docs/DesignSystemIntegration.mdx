@@ -38,7 +38,7 @@ import "fe-interview-design-system/style.css";
 // Host theme AFTER package CSS when overriding the same :root variables:
 import "./acme-theme.css";
 
-// Optional if the host does not already own fonts / box-sizing / default tokens:
+// Optional if the host does not already own fonts / box-sizing baseline:
 // <CssBaseline />
 ```
 
@@ -46,7 +46,7 @@ Peer deps: `react` and `react-dom` ^19.
 
 ## 2. Theme with tokens (preferred)
 
-Components read shared values through CSS variables (colors, spacing, typography). Defaults ship on `:root` via `style.css` / `CssBaseline`.
+Components read shared values through CSS variables (colors, spacing, typography). Defaults ship once on `:root` via `style.css` (package entry). `CssBaseline` is only fonts + box-sizing — not the token source.
 
 **Scoped host theme** (recommended — no fight over global load order):
 
@@ -116,8 +116,8 @@ Advanced context exports (`SizeProvider`, `TabVariantProvider`, `cn`, …): [Tab
 
 ## Checklist for a host design system
 
-1. Import `style.css` once; put host token CSS after it (or prefer a scoped theme class).
-2. Decide whether the host mounts `CssBaseline` or supplies its own fonts/baseline.
+1. Import `style.css` once (component CSS + default `:root` tokens); put host token CSS after it (or prefer a scoped theme class).
+2. Decide whether the host mounts `CssBaseline` (Inter + box-sizing) or supplies its own fonts/baseline.
 3. Prefer token overrides for brand; use `className` plus data/aria attribute hooks for structural look.
 4. Compose `ActiveTabContextProvider` + `Tabs` + `TabPanel` at the product boundary.
 5. Allow host wrappers under the tablist; keep a11y `id` / aria wiring on the tab and panel elements.

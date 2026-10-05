@@ -1,3 +1,5 @@
+import "../styles/tokens.scss";
+
 export { type BadgeProps, default as Badge } from "../components/Badge";
 export { default as CssBaseline } from "../components/CssBaseline";
 export { default as Tab, type TabProps } from "../components/Tab";

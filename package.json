@@ -34,7 +34,8 @@
     "dist"
   ],
   "sideEffects": [
-    "**/*.css"
+    "**/*.css",
+    "**/*.scss"
   ],
   "scripts": {
     "build": "vite build --config vite.lib.config.ts",

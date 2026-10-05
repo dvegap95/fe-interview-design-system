@@ -27,7 +27,7 @@ import "fe-interview-design-system/style.css";
 // Host theme after package CSS when overriding :root tokens (see Theming):
 // import "./acme-theme.css";
 
-// Optional: mounts Inter + global baseline. Also emits default CSS tokens on :root.
+// Optional: mounts Inter + box-sizing / font-family baseline (tokens already ship in style.css).
 // <CssBaseline />
 
 // Class merge helper (same idea as clsx):
@@ -96,7 +96,7 @@ Live example (a11y wired):
 | Export | From | When to use |
 | --- | --- | --- |
 | `cn` | package root | Merge class names on host wrappers or when forwarding `className` into roots (same idea as `clsx`). |
-| `CssBaseline` | package root | Optional once-per-app mount for Inter + global baseline + default `:root` tokens. Skip if the host DS already owns fonts/baseline and only needs `style.css` + token overrides. |
+| `CssBaseline` | package root | Optional once-per-app mount for Inter + box-sizing / font-family baseline. Skip if the host already owns fonts/baseline — default `:root` tokens still come from `style.css`. |
 | `ActiveTabContextProvider` / `useActiveTabContext` | `…/context/activeTabContext` | Own selection when composing `Tabs` + sibling `TabPanel`s (or any custom chrome that must share the same `activeTab`). Prefer this over `ManagedTabs` whenever panels (or other siblings) need the same provider. |
 | `ManagedTabs` | package root | Convenience only: provider + `Tabs` for a **list-only** selectable tab strip. Do not nest it inside another active-tab provider. |
 | `SizeProvider` / `useResolvedSize` | `…/context/sizeContext` | Advanced: push or read `sm` / `md` outside a `Tabs` tree (e.g. host layout that sizes nested `Badge`s the same way). Everyday size comes from `Tabs` / `Tab` props. |
@@ -185,7 +185,7 @@ Demo: [Tabs — Overflow](?path=/docs/docs-tabs--docs#overflow) (host `max-width
 
 ## Theming (CSS tokens)
 
-Components read shared values through CSS custom properties (colors, spacing, typography). Defaults live on `:root` and ship with `style.css` / `CssBaseline`. A larger design system can override them without forking component SCSS.
+Components read shared values through CSS custom properties (colors, spacing, typography). Defaults live on `:root` and ship once in `style.css` (wired from the package entry). A larger design system can override them without forking component SCSS.
 
 **Scoped theme** (recommended — no fight over global `:root` order):
 

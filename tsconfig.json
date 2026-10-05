@@ -26,5 +26,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "smoke"]
+  "include": ["src", "smoke", ".storybook"]
 }

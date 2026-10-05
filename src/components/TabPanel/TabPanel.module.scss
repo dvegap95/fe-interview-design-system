@@ -1,5 +1,4 @@
 @use '@/styles/typography' as *;
-@use '@/styles/_tokens.scss';
 
 .tabPanel {
     @include body-medium;
